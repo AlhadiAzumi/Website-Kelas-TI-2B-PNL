@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 type Member = {
   name: string
@@ -586,8 +586,11 @@ export default function App() {
   const [galleryFilter, setGalleryFilter] = useState<string>("All")
   const [projectFilter, setProjectFilter] = useState<string>("All")
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
+  const [selectedGalleryItem, setSelectedGalleryItem] = useState<GalleryItem | null>(null)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [isFollowing, setIsFollowing] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const modalRef = useRef<HTMLDivElement>(null)
 
   const showToast = (message: string) => {
     setToastMessage(message)
@@ -595,6 +598,87 @@ export default function App() {
       setToastMessage((current) => (current === message ? null : current))
     }, 2800)
   }
+
+  const copyToClipboard = async (text: string, description: string) => {
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error("Clipboard API is unavailable")
+      }
+      await navigator.clipboard.writeText(text)
+      showToast(`${description} disalin ke clipboard! 📋`)
+    } catch (error) {
+      console.error("Gagal menyalin ke clipboard:", error)
+      showToast("Gagal menyalin otomatis. Silakan salin secara manual.")
+    }
+  }
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+
+    const closeMobileMenu = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false)
+    }
+    const closeMenuOnDesktop = () => {
+      if (window.matchMedia("(min-width: 851px)").matches) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    document.addEventListener("keydown", closeMobileMenu)
+    window.addEventListener("resize", closeMenuOnDesktop)
+    return () => {
+      document.removeEventListener("keydown", closeMobileMenu)
+      window.removeEventListener("resize", closeMenuOnDesktop)
+    }
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    const activeModal = selectedMember || selectedProject || selectedGalleryItem
+    if (!activeModal) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    const focusableElements = () =>
+      modalRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )
+
+    focusableElements()?.[0]?.focus()
+
+    const handleModalKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedMember(null)
+        setSelectedProject(null)
+        setSelectedGalleryItem(null)
+        return
+      }
+
+      if (event.key !== "Tab") return
+      const focusable = focusableElements()
+      if (!focusable?.length) {
+        event.preventDefault()
+        modalRef.current?.focus()
+        return
+      }
+
+      const firstElement = focusable[0]
+      const lastElement = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault()
+        lastElement.focus()
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault()
+        firstElement.focus()
+      }
+    }
+
+    document.addEventListener("keydown", handleModalKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener("keydown", handleModalKeyDown)
+    }
+  }, [selectedMember, selectedProject, selectedGalleryItem])
 
   // Scroll listener for sticky glassmorphism navbar & scroll-reveal elements
   useEffect(() => {
@@ -735,6 +819,19 @@ export default function App() {
             </a>
           </div>
 
+          <button
+            type="button"
+            className={`mobile-menu-toggle ${isMobileMenuOpen ? "open" : ""}`}
+            aria-label={isMobileMenuOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
           <a 
             className="contact-button" 
             href="#contact"
@@ -746,6 +843,76 @@ export default function App() {
             Hubungi Kami
             <ArrowIcon />
           </a>
+
+          {isMobileMenuOpen && (
+            <div className="mobile-nav-panel" id="mobile-navigation">
+              <a
+                className={currentPage === "home" ? "active" : ""}
+                href="#home"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setIsMobileMenuOpen(false)
+                  navigateTo("home", "#home")
+                }}
+              >
+                Home
+              </a>
+              <a
+                className={currentPage === "people" ? "active" : ""}
+                href="#people"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setIsMobileMenuOpen(false)
+                  navigateTo("people")
+                }}
+              >
+                People
+              </a>
+              <a
+                className={currentPage === "gallery" ? "active" : ""}
+                href="#gallery"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setIsMobileMenuOpen(false)
+                  navigateTo("gallery")
+                }}
+              >
+                Galeri
+              </a>
+              <a
+                className={currentPage === "projects" ? "active" : ""}
+                href="#projects"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setIsMobileMenuOpen(false)
+                  navigateTo("projects")
+                }}
+              >
+                Tugas &amp; Project
+              </a>
+              <a
+                href="#about"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setIsMobileMenuOpen(false)
+                  navigateTo("home", "#about")
+                }}
+              >
+                About Us
+              </a>
+              <a
+                className="mobile-contact-link"
+                href="#contact"
+                onClick={(event) => {
+                  event.preventDefault()
+                  setIsMobileMenuOpen(false)
+                  navigateTo("home", "#contact")
+                }}
+              >
+                Hubungi Kami <ArrowIcon />
+              </a>
+            </div>
+          )}
         </nav>
       </header>
 
@@ -954,7 +1121,7 @@ export default function App() {
             </div>
 
             <div className="gallery-grid">
-              <figure className="gallery-card gallery-main">
+              <figure className="gallery-card gallery-main" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[0])}>
                 <img
                   src="https://images.unsplash.com/photo-1764720572747-cd3753f8fdb1?auto=format&fit=crop&w=1400&q=88"
                   alt="Students sharing a moment in class"
@@ -970,7 +1137,7 @@ export default function App() {
                 </figcaption>
               </figure>
 
-              <figure className="gallery-card gallery-top">
+              <figure className="gallery-card gallery-top" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[1])}>
                 <img
                   src="https://images.unsplash.com/photo-1742549586702-c23994895082?auto=format&fit=crop&w=1000&q=88"
                   alt="Students focusing during a classroom session"
@@ -983,7 +1150,7 @@ export default function App() {
                 </figcaption>
               </figure>
 
-              <figure className="gallery-card gallery-bottom">
+              <figure className="gallery-card gallery-bottom" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[2])}>
                 <img
                   src="https://images.unsplash.com/photo-1643216755260-cb0bc30473c8?auto=format&fit=crop&w=1000&q=88"
                   alt="Student working at a classroom desk"
@@ -1036,7 +1203,16 @@ export default function App() {
               <article 
                 className="project-card project-featured" 
                 style={{ cursor: "pointer" }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Lihat penjelasan ${projectItems[0].title}`}
                 onClick={() => setSelectedProject(projectItems[0])}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault()
+                    setSelectedProject(projectItems[0])
+                  }
+                }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
                 <div className="project-index">01 / WEB</div>
@@ -1072,7 +1248,16 @@ export default function App() {
               <article 
                 className="project-card project-small project-purple"
                 style={{ cursor: "pointer" }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Lihat penjelasan ${projectItems[1].title}`}
                 onClick={() => setSelectedProject(projectItems[1])}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault()
+                    setSelectedProject(projectItems[1])
+                  }
+                }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
                 <div className="project-index">02 / DATA</div>
@@ -1090,7 +1275,16 @@ export default function App() {
               <article 
                 className="project-card project-small project-cyan"
                 style={{ cursor: "pointer" }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Lihat penjelasan ${projectItems[2].title}`}
                 onClick={() => setSelectedProject(projectItems[2])}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault()
+                    setSelectedProject(projectItems[2])
+                  }
+                }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
                 <div className="project-index">03 / UI DESIGN</div>
@@ -1208,6 +1402,8 @@ export default function App() {
               <figure 
                 key={item.id} 
                 className={`full-gallery-card ${item.span || ""}`}
+                style={{ cursor: "pointer" }}
+                onClick={() => setSelectedGalleryItem(item)}
               >
                 <img src={item.image} alt={item.title} loading="lazy" />
                 <figcaption className="full-gallery-overlay">
@@ -1492,7 +1688,7 @@ export default function App() {
                         <button
                           type="button"
                           className="ig-action-btn"
-                          onClick={() => showToast(`Link profil ${member.name} disalin ke clipboard! 📋`)}
+                          onClick={() => void copyToClipboard(member.handle, `Handle ${member.handle}`)}
                           aria-label="Share"
                         >
                           <ShareIcon />
@@ -1533,6 +1729,7 @@ export default function App() {
           )}
 
           {/* Modal Detail Popup ala Instagram */}
+          {/* Enhanced Member Detail Modal */}
           {selectedMember && (
             <div 
               className="ig-modal-backdrop" 
@@ -1540,6 +1737,11 @@ export default function App() {
             >
               <div 
                 className="ig-modal-box" 
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label={`Profil ${selectedMember.name}`}
+                tabIndex={-1}
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
@@ -1570,20 +1772,37 @@ export default function App() {
                   </div>
 
                   <div style={{ padding: "18px 0", flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
-                    <div className="ig-card-caption">
-                      <strong>{selectedMember.handle.replace("@", "")}</strong>
+                    {/* Interactive Quote */}
+                    <div className="member-modal-quote">
                       {selectedMember.caption || `Senang bisa menjadi bagian dari keluarga besar Datalearners.XXV! Mari berkolaborasi dan berkarya bareng. ✨`}
                     </div>
 
+                    {/* Interactive Stat Cards */}
+                    <div className="member-modal-stat-grid">
+                      <div className="member-modal-stat">
+                        <strong>#{String(members.indexOf(selectedMember) + 1).padStart(2, "0")}</strong>
+                        <span>Urutan</span>
+                      </div>
+                      <div className="member-modal-stat">
+                        <strong>{(selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)}</strong>
+                        <span>Likes</span>
+                      </div>
+                      <div className="member-modal-stat">
+                        <strong>XXV</strong>
+                        <span>Angkatan</span>
+                      </div>
+                    </div>
+
+                    {/* Position Card */}
                     <div style={{ background: "rgba(0, 30, 61, 0.4)", padding: "14px", borderRadius: "12px", border: "1px solid rgba(91, 220, 255, 0.2)" }}>
                       <span style={{ fontSize: "11px", color: "var(--cyan-bright)", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                         Posisi di Kelas
                       </span>
                       <h4 style={{ margin: "4px 0 0", fontSize: "16px", color: "var(--white)" }}>
-                        {selectedMember.role}
+                        {selectedMember.role === "Komisaris" ? "👑 " : ""}{selectedMember.role}
                       </h4>
                       <p style={{ margin: "6px 0 0", fontSize: "12px", color: "#9bc4dc" }}>
-                        Nomor Urut: #{String(members.indexOf(selectedMember) + 1).padStart(2, "0")} · Datalearners Angkatan XXV
+                        Kelas TI 2B · Politeknik Negeri Lhokseumawe · 2026
                       </p>
                     </div>
 
@@ -1601,21 +1820,30 @@ export default function App() {
                         <button
                           type="button"
                           className={`ig-action-btn ${likedPosts[selectedMember.name] ? "liked" : ""}`}
-                          onClick={() => toggleLike(selectedMember.name)}
+                          onClick={() => {
+                            toggleLike(selectedMember.name)
+                            if (!likedPosts[selectedMember.name]) {
+                              showToast(`Kamu menyukai profil ${selectedMember.name} ❤️`)
+                            }
+                          }}
                         >
                           <HeartIcon filled={likedPosts[selectedMember.name]} />
                         </button>
-                        <button type="button" className="ig-action-btn">
+                        <button type="button" className="ig-action-btn" onClick={() => showToast(`Komentar untuk ${selectedMember.name} segera hadir! 💬`)}>
                           <CommentIcon />
                         </button>
-                        <button 
+                        <button
                           type="button" 
                           className="ig-action-btn"
-                          onClick={() => alert(`Handle ${selectedMember.handle} disalin!`)}
+                          aria-label={`Salin handle ${selectedMember.handle}`}
+                          onClick={() => void copyToClipboard(selectedMember.handle, `Handle ${selectedMember.handle}`)}
                         >
                           <ShareIcon />
                         </button>
                       </div>
+                      <button type="button" className="ig-action-btn" onClick={() => showToast(`Profil ${selectedMember.name} tersimpan! 🔖`)}>
+                        <BookmarkIcon />
+                      </button>
                     </div>
                     <div className="ig-card-likes" style={{ margin: "8px 0 0" }}>
                       {((selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
@@ -1629,6 +1857,194 @@ export default function App() {
             </div>
           )}
         </section>
+      )}
+
+      {/* ============ PROJECT DETAIL MODAL ============ */}
+      {selectedProject && (
+        <div
+          className="project-modal-backdrop"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div
+            className="project-modal-card"
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
+            tabIndex={-1}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="project-modal-close"
+              onClick={() => setSelectedProject(null)}
+              aria-label="Tutup modal"
+            >
+              ✕
+            </button>
+
+            <div className="project-modal-hero">
+              <img src={selectedProject.image} alt={selectedProject.title} />
+              <div className="project-modal-hero-badge">
+                <span className="badge-category">{selectedProject.category}</span>
+                <span className={`badge-status ${selectedProject.status === "COMPLETED" ? "completed" : selectedProject.status === "IN PROGRESS" ? "in-progress" : "concept"}`}>
+                  {selectedProject.status}
+                </span>
+              </div>
+            </div>
+
+            <div className="project-modal-body">
+              <h2 id="project-modal-title">{selectedProject.title}</h2>
+
+              <div className="project-modal-details-grid">
+                <div className="project-explanation-text">
+                  <h4>📋 Penjelasan Project</h4>
+                  <p>{selectedProject.explanation}</p>
+
+                  <h4>✦ Fitur Utama</h4>
+                  <ul className="project-feature-list">
+                    {selectedProject.features.map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="project-meta-box">
+                  <div className="meta-field">
+                    <label>Kategori</label>
+                    <span>{selectedProject.category}</span>
+                  </div>
+                  <div className="meta-field">
+                    <label>Status</label>
+                    <span>{selectedProject.status}</span>
+                  </div>
+                  <div className="meta-field">
+                    <label>Tim / Pembuat</label>
+                    <span>{selectedProject.author}</span>
+                  </div>
+                  <div className="meta-field">
+                    <label>Tech Stack</label>
+                    <div className="project-tech-stack-pills">
+                      {selectedProject.techStack.map((tech) => (
+                        <span key={tech} className="project-tech-pill">{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="project-modal-actions">
+                {selectedProject.githubUrl && (
+                  <a
+                    className="btn-github-link"
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => showToast(`Menuju repository ${selectedProject.title}... 🚀`)}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Lihat di GitHub
+                  </a>
+                )}
+                <button
+                  type="button"
+                  className="btn-github-link"
+                  style={{ background: "rgba(0, 20, 45, 0.6)", color: "var(--cyan-bright)", border: "1px solid rgba(91, 220, 255, 0.4)" }}
+                  onClick={() => setSelectedProject(null)}
+                >
+                  Tutup Penjelasan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============ GALLERY LIGHTBOX MODAL ============ */}
+      {selectedGalleryItem && (
+        <div
+          className="gallery-lightbox-backdrop"
+          onClick={() => setSelectedGalleryItem(null)}
+        >
+          <div
+            className="gallery-lightbox-box"
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Foto ${selectedGalleryItem.title}`}
+            tabIndex={-1}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="gallery-lightbox-image-wrap">
+              <img src={selectedGalleryItem.image} alt={selectedGalleryItem.title} />
+              <span className="gallery-lightbox-counter">
+                {galleryItems.indexOf(selectedGalleryItem) + 1} / {galleryItems.length}
+              </span>
+
+              {/* Previous button */}
+              <button
+                type="button"
+                className="gallery-lightbox-nav prev"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  const currentIndex = galleryItems.indexOf(selectedGalleryItem)
+                  const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length
+                  setSelectedGalleryItem(galleryItems[prevIndex])
+                }}
+                aria-label="Foto sebelumnya"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6" /></svg>
+              </button>
+
+              {/* Next button */}
+              <button
+                type="button"
+                className="gallery-lightbox-nav next"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  const currentIndex = galleryItems.indexOf(selectedGalleryItem)
+                  const nextIndex = (currentIndex + 1) % galleryItems.length
+                  setSelectedGalleryItem(galleryItems[nextIndex])
+                }}
+                aria-label="Foto selanjutnya"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" /></svg>
+              </button>
+            </div>
+
+            <div className="gallery-lightbox-body">
+              <div className="gallery-lightbox-info">
+                <div className="gallery-lightbox-category">{selectedGalleryItem.category}</div>
+                <h3>{selectedGalleryItem.title}</h3>
+                <p>{selectedGalleryItem.caption}</p>
+              </div>
+              <button
+                type="button"
+                className="gallery-lightbox-close"
+                onClick={() => setSelectedGalleryItem(null)}
+                aria-label="Tutup lightbox"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============ TOAST NOTIFICATION ============ */}
+      {toastMessage && (
+        <div className="toast-container" role="status" aria-live="polite">
+          <span className="toast-icon" aria-hidden="true">✦</span>
+          <span>{toastMessage}</span>
+          <button
+            type="button"
+            className="toast-dismiss"
+            aria-label="Tutup notifikasi"
+            onClick={() => setToastMessage(null)}
+          >
+            ✕
+          </button>
+        </div>
       )}
 
       <footer className="site-footer" id="contact">
