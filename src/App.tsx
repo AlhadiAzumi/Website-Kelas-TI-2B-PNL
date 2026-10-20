@@ -481,7 +481,7 @@ function FloatingProfile({
   className: string
 }) {
   return (
-    <div className={`floating-profile ${className}`}>
+    <div key={member.name} className={`floating-profile ${className}`}>
       <img src={member.image} alt="" />
       <div>
         <strong>{member.handle}</strong>
@@ -492,14 +492,35 @@ function FloatingProfile({
   )
 }
 
-function MemberCard({ member, index }: { member: Member; index: number }) {
+function MemberCard({
+  member,
+  index,
+  onSelect,
+}: {
+  member: Member
+  index: number
+  onSelect: (member: Member) => void
+}) {
   return (
-    <article className={`member-card ${member.accent}`}>
+    <article
+      className={`member-card ${member.accent}`}
+      role="button"
+      tabIndex={0}
+      aria-label={`Lihat profil ${member.name}`}
+      onClick={() => onSelect(member)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault()
+          onSelect(member)
+        }
+      }}
+    >
       <div className="member-photo-wrap">
         <img
           className="member-photo"
           src={member.image}
           alt={`Portrait of ${member.name}`}
+          loading="lazy"
         />
         <div className="photo-no">{String(index + 1).padStart(2, "0")}</div>
         <span className="photo-spark">✦</span>
@@ -578,6 +599,7 @@ function FeedIcon() {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<"home" | "people" | "gallery" | "projects">("home")
+  const [activeNav, setActiveNav] = useState<"home" | "people" | "gallery" | "projects" | "about">("home")
   const [isScrolled, setIsScrolled] = useState(false)
   const [feedView, setFeedView] = useState<"grid" | "feed">("grid")
   const [selectedMember, setSelectedMember] = useState<Member | null>(null)
@@ -590,6 +612,7 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [isFollowing, setIsFollowing] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [floatingProfilesIndex, setFloatingProfilesIndex] = useState(0)
   const modalRef = useRef<HTMLDivElement>(null)
 
   const showToast = (message: string) => {
@@ -631,6 +654,16 @@ export default function App() {
       window.removeEventListener("resize", closeMenuOnDesktop)
     }
   }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    if (currentPage !== "home") return
+
+    const rotation = window.setInterval(() => {
+      setFloatingProfilesIndex((index) => (index + 1) % members.length)
+    }, 3500)
+
+    return () => window.clearInterval(rotation)
+  }, [currentPage])
 
   useEffect(() => {
     const activeModal = selectedMember || selectedProject || selectedGalleryItem
@@ -687,6 +720,20 @@ export default function App() {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
+      }
+
+      if (currentPage === "home") {
+        const sections = ["home", "people", "gallery", "projects", "about"] as const
+        let currentSection: (typeof sections)[number] = "home"
+        for (const sectionId of sections) {
+          const section = document.getElementById(sectionId)
+          if (section && section.getBoundingClientRect().top <= 180) {
+            currentSection = sectionId
+          }
+        }
+        setActiveNav(currentSection)
+      } else {
+        setActiveNav(currentPage)
       }
 
       // Trigger scroll reveals
@@ -769,7 +816,7 @@ export default function App() {
 
           <div className="nav-links">
             <a
-              className={currentPage === "home" ? "active" : ""}
+              className={activeNav === "home" ? "active" : ""}
               href="#home"
               onClick={(e) => {
                 e.preventDefault()
@@ -779,7 +826,7 @@ export default function App() {
               Home
             </a>
             <a
-              className={currentPage === "people" ? "active" : ""}
+              className={activeNav === "people" ? "active" : ""}
               href="#people"
               onClick={(e) => {
                 e.preventDefault()
@@ -789,7 +836,7 @@ export default function App() {
               People
             </a>
             <a
-              className={currentPage === "gallery" ? "active" : ""}
+              className={activeNav === "gallery" ? "active" : ""}
               href="#gallery"
               onClick={(e) => {
                 e.preventDefault()
@@ -799,7 +846,7 @@ export default function App() {
               Galeri
             </a>
             <a
-              className={currentPage === "projects" ? "active" : ""}
+              className={activeNav === "projects" ? "active" : ""}
               href="#projects"
               onClick={(e) => {
                 e.preventDefault()
@@ -809,6 +856,7 @@ export default function App() {
               Tugas &amp; Project
             </a>
             <a
+              className={activeNav === "about" ? "active" : ""}
               href="#about"
               onClick={(e) => {
                 e.preventDefault()
@@ -847,7 +895,7 @@ export default function App() {
           {isMobileMenuOpen && (
             <div className="mobile-nav-panel" id="mobile-navigation">
               <a
-                className={currentPage === "home" ? "active" : ""}
+                className={activeNav === "home" ? "active" : ""}
                 href="#home"
                 onClick={(event) => {
                   event.preventDefault()
@@ -858,7 +906,7 @@ export default function App() {
                 Home
               </a>
               <a
-                className={currentPage === "people" ? "active" : ""}
+                className={activeNav === "people" ? "active" : ""}
                 href="#people"
                 onClick={(event) => {
                   event.preventDefault()
@@ -869,7 +917,7 @@ export default function App() {
                 People
               </a>
               <a
-                className={currentPage === "gallery" ? "active" : ""}
+                className={activeNav === "gallery" ? "active" : ""}
                 href="#gallery"
                 onClick={(event) => {
                   event.preventDefault()
@@ -880,7 +928,7 @@ export default function App() {
                 Galeri
               </a>
               <a
-                className={currentPage === "projects" ? "active" : ""}
+                className={activeNav === "projects" ? "active" : ""}
                 href="#projects"
                 onClick={(event) => {
                   event.preventDefault()
@@ -891,6 +939,7 @@ export default function App() {
                 Tugas &amp; Project
               </a>
               <a
+                className={activeNav === "about" ? "active" : ""}
                 href="#about"
                 onClick={(event) => {
                   event.preventDefault()
@@ -921,7 +970,6 @@ export default function App() {
           <section className="hero" id="home">
             <div className="hero-kicker">
               <span className="pulse-dot" />TI 2B · 2026
-              <span className="kicker-line" />
             </div>
 
             <div className="hero-title-wrap">
@@ -954,9 +1002,18 @@ export default function App() {
               <span className="doodle-cross cross-two">×</span>
             </div>
 
-            <FloatingProfile member={members[0]} className="float-one" />
-            <FloatingProfile member={members[1]} className="float-two" />
-            <FloatingProfile member={members[4]} className="float-three" />
+            <FloatingProfile
+              member={members[floatingProfilesIndex % members.length]}
+              className="float-one"
+            />
+            <FloatingProfile
+              member={members[(floatingProfilesIndex + 9) % members.length]}
+              className="float-two"
+            />
+            <FloatingProfile
+              member={members[(floatingProfilesIndex + 18) % members.length]}
+              className="float-three"
+            />
 
             <div className="hero-footer">
               <p>
@@ -1055,9 +1112,21 @@ export default function App() {
                     key={member.name}
                     member={member}
                     index={members.indexOf(member)}
+                    onSelect={setSelectedMember}
                   />
                 ))}
               </div>
+              <div className="member-grid-mobile" aria-label="Geser untuk melihat seluruh anggota">
+                {members.map((member, index) => (
+                  <MemberCard
+                    key={member.name}
+                    member={member}
+                    index={index}
+                    onSelect={setSelectedMember}
+                  />
+                ))}
+              </div>
+              <p className="member-swipe-hint">Geser untuk melihat semua {members.length} anggota <span aria-hidden="true">→</span></p>
 
               <button
                 className="carousel-control next"
@@ -1771,7 +1840,7 @@ export default function App() {
                     <span className="ig-card-badge">{selectedMember.role}</span>
                   </div>
 
-                  <div style={{ padding: "18px 0", flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
+                  <div className="member-modal-content" style={{ padding: "18px 0", flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
                     {/* Interactive Quote */}
                     <div className="member-modal-quote">
                       {selectedMember.caption || `Senang bisa menjadi bagian dari keluarga besar Datalearners.XXV! Mari berkolaborasi dan berkarya bareng. ✨`}
@@ -1794,7 +1863,7 @@ export default function App() {
                     </div>
 
                     {/* Position Card */}
-                    <div style={{ background: "rgba(0, 30, 61, 0.4)", padding: "14px", borderRadius: "12px", border: "1px solid rgba(91, 220, 255, 0.2)" }}>
+                    <div className="member-modal-position" style={{ background: "rgba(0, 30, 61, 0.4)", padding: "14px", borderRadius: "12px", border: "1px solid rgba(91, 220, 255, 0.2)" }}>
                       <span style={{ fontSize: "11px", color: "var(--cyan-bright)", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                         Posisi di Kelas
                       </span>
@@ -1814,7 +1883,7 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div style={{ borderTop: "1px solid var(--line)", paddingTop: "14px" }}>
+                  <div className="member-modal-footer" style={{ borderTop: "1px solid var(--line)", paddingTop: "14px" }}>
                     <div className="ig-card-actions" style={{ padding: 0 }}>
                       <div className="ig-action-left">
                         <button
@@ -1857,6 +1926,103 @@ export default function App() {
             </div>
           )}
         </section>
+      )}
+
+      {selectedMember && currentPage === "home" && (
+        <div
+          className="ig-modal-backdrop"
+          onClick={() => setSelectedMember(null)}
+        >
+          <div
+            className="ig-modal-box"
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Profil ${selectedMember.name}`}
+            tabIndex={-1}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="ig-modal-close"
+              onClick={() => setSelectedMember(null)}
+              aria-label="Tutup modal"
+            >
+              ✕
+            </button>
+            <div className="ig-modal-photo">
+              <img src={selectedMember.image} alt={selectedMember.name} />
+            </div>
+            <div className="ig-modal-side">
+              <div className="ig-card-header member-modal-header">
+                <div className="ig-user-badge">
+                  <div className="ig-user-avatar">
+                    <img src={selectedMember.image} alt="" />
+                  </div>
+                  <div className="ig-user-text">
+                    <strong>{selectedMember.handle.replace("@", "")}</strong>
+                    <span>{selectedMember.name}</span>
+                  </div>
+                </div>
+                <span className="ig-card-badge">{selectedMember.role}</span>
+              </div>
+              <div className="member-modal-content">
+                <div className="member-modal-quote">
+                  {selectedMember.caption || `Senang bisa menjadi bagian dari keluarga besar Datalearners.XXV! Mari berkolaborasi dan berkarya bareng. ✨`}
+                </div>
+                <div className="member-modal-stat-grid">
+                  <div className="member-modal-stat">
+                    <strong>#{String(members.indexOf(selectedMember) + 1).padStart(2, "0")}</strong>
+                    <span>Urutan</span>
+                  </div>
+                  <div className="member-modal-stat">
+                    <strong>{(selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)}</strong>
+                    <span>Likes</span>
+                  </div>
+                  <div className="member-modal-stat">
+                    <strong>XXV</strong>
+                    <span>Angkatan</span>
+                  </div>
+                </div>
+                <div className="member-modal-position">
+                  <span>Posisi di Kelas</span>
+                  <h4>{selectedMember.role === "Komisaris" ? "👑 " : ""}{selectedMember.role}</h4>
+                  <p>Kelas TI 2B · Politeknik Negeri Lhokseumawe · 2026</p>
+                </div>
+                <div className="ig-card-tags">
+                  <span>#DataLearnersXXV</span>
+                  <span>#StudentLife</span>
+                  <span>#TI2B</span>
+                </div>
+              </div>
+              <div className="member-modal-footer">
+                <div className="ig-card-actions">
+                  <div className="ig-action-left">
+                    <button
+                      type="button"
+                      className={`ig-action-btn ${likedPosts[selectedMember.name] ? "liked" : ""}`}
+                      aria-label={likedPosts[selectedMember.name] ? "Batal menyukai profil" : "Sukai profil"}
+                      onClick={() => toggleLike(selectedMember.name)}
+                    >
+                      <HeartIcon filled={likedPosts[selectedMember.name]} />
+                    </button>
+                    <button
+                      type="button"
+                      className="ig-action-btn"
+                      aria-label="Salin handle"
+                      onClick={() => void copyToClipboard(selectedMember.handle, `Handle ${selectedMember.handle}`)}
+                    >
+                      <ShareIcon />
+                    </button>
+                  </div>
+                  <span className="ig-card-likes">
+                    {((selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ============ PROJECT DETAIL MODAL ============ */}
