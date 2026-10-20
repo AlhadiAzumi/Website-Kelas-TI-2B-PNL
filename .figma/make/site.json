@@ -1,5 +1,9 @@
 {
+  "title": "profile datalearners.xxv",
   "description": "Showcases a vibrant, interactive class website featuring member profiles, project highlights, and easy navigation to connect and engage students.",
+  "icons": {
+    "icon": "/datalearners-logo.png"
+  },
   "robots": {
     "index": false
   },
