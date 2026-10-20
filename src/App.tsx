@@ -496,16 +496,19 @@ function MemberCard({
   member,
   index,
   onSelect,
+  isClone = false,
 }: {
   member: Member
   index: number
   onSelect: (member: Member) => void
+  isClone?: boolean
 }) {
   return (
     <article
       className={`member-card ${member.accent}`}
       role="button"
-      tabIndex={0}
+      tabIndex={isClone ? -1 : 0}
+      aria-hidden={isClone || undefined}
       aria-label={`Lihat profil ${member.name}`}
       onClick={() => onSelect(member)}
       onKeyDown={(event) => {
@@ -600,6 +603,7 @@ function FeedIcon() {
 export default function App() {
   const [currentPage, setCurrentPage] = useState<"home" | "people" | "gallery" | "projects">("home")
   const [activeNav, setActiveNav] = useState<"home" | "people" | "gallery" | "projects" | "about">("home")
+  const [revealedSections, setRevealedSections] = useState<Set<string>>(() => new Set())
   const [isScrolled, setIsScrolled] = useState(false)
   const [feedView, setFeedView] = useState<"grid" | "feed">("grid")
   const [selectedMember, setSelectedMember] = useState<Member | null>(null)
@@ -614,6 +618,7 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [floatingProfilesIndex, setFloatingProfilesIndex] = useState(0)
   const modalRef = useRef<HTMLDivElement>(null)
+  const mobileMemberTrackRef = useRef<HTMLDivElement>(null)
 
   const showToast = (message: string) => {
     setToastMessage(message)
@@ -663,6 +668,121 @@ export default function App() {
     }, 3500)
 
     return () => window.clearInterval(rotation)
+  }, [currentPage])
+
+  useEffect(() => {
+    if (currentPage !== "home") return
+
+    const track = mobileMemberTrackRef.current
+    if (!track) return
+
+    const cards = Array.from(
+      track.querySelectorAll<HTMLElement>(":scope > .member-card"),
+    )
+    if (cards.length !== members.length + 2) return
+
+    let activeMemberIndex = 0
+    let lastInteractionAt = 0
+    let initialized = false
+
+    const contentLeft = (card: HTMLElement) =>
+      track.scrollLeft +
+      card.getBoundingClientRect().left -
+      track.getBoundingClientRect().left
+
+    const goToMember = (index: number, behavior: ScrollBehavior = "auto") => {
+      track.scrollTo({
+        left: contentLeft(cards[index + 1]),
+        behavior,
+      })
+    }
+
+    const onScroll = () => {
+      if (!track.clientWidth) return
+
+      const firstActualLeft = contentLeft(cards[1])
+      const lastActualLeft = contentLeft(cards[members.length])
+      const beforeFirstThreshold = (contentLeft(cards[0]) + firstActualLeft) / 2
+      const afterLastThreshold =
+        (lastActualLeft + contentLeft(cards[members.length + 1])) / 2
+
+      if (track.scrollLeft < beforeFirstThreshold) {
+        activeMemberIndex = members.length - 1
+        goToMember(activeMemberIndex)
+        return
+      }
+      if (track.scrollLeft > afterLastThreshold) {
+        activeMemberIndex = 0
+        goToMember(activeMemberIndex)
+        return
+      }
+
+      let nearestIndex = 0
+      let nearestDistance = Number.POSITIVE_INFINITY
+      for (let index = 0; index < members.length; index += 1) {
+        const distance = Math.abs(
+          contentLeft(cards[index + 1]) - track.scrollLeft,
+        )
+        if (distance < nearestDistance) {
+          nearestDistance = distance
+          nearestIndex = index
+        }
+      }
+      activeMemberIndex = nearestIndex
+    }
+
+    const onInteraction = () => {
+      lastInteractionAt = Date.now()
+    }
+
+    const initializeIfVisible = () => {
+      if (!track.clientWidth) return
+      if (!initialized) {
+        goToMember(activeMemberIndex)
+        initialized = true
+      } else {
+        goToMember(activeMemberIndex)
+      }
+    }
+
+    initializeIfVisible()
+
+    const autoplay = window.setInterval(() => {
+      if (
+        !track.clientWidth ||
+        document.hidden ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        Date.now() - lastInteractionAt < 5000
+      ) {
+        return
+      }
+
+      const nextIndex = (activeMemberIndex + 1) % members.length
+      activeMemberIndex = nextIndex
+      if (nextIndex === 0) {
+        track.scrollTo({
+          left: contentLeft(cards[members.length + 1]),
+          behavior: "smooth",
+        })
+      } else {
+        goToMember(nextIndex, "smooth")
+      }
+    }, 4000)
+
+    track.addEventListener("scroll", onScroll, { passive: true })
+    track.addEventListener("pointerdown", onInteraction, { passive: true })
+    track.addEventListener("wheel", onInteraction, { passive: true })
+    track.addEventListener("focusin", onInteraction)
+    window.addEventListener("resize", initializeIfVisible)
+
+    return () => {
+      window.clearInterval(autoplay)
+      track.removeEventListener("scroll", onScroll)
+      track.removeEventListener("pointerdown", onInteraction)
+      track.removeEventListener("wheel", onInteraction)
+      track.removeEventListener("focusin", onInteraction)
+      window.removeEventListener("resize", initializeIfVisible)
+    }
   }, [currentPage])
 
   useEffect(() => {
@@ -738,12 +858,21 @@ export default function App() {
 
       // Trigger scroll reveals
       const reveals = document.querySelectorAll(".scroll-reveal")
+      const sectionsToReveal: string[] = []
       reveals.forEach((el) => {
         const rect = el.getBoundingClientRect()
-        if (rect.top <= window.innerHeight * 0.88) {
-          el.classList.add("revealed")
+        if (rect.top <= window.innerHeight * 0.88 && el.id) {
+          sectionsToReveal.push(el.id)
         }
       })
+      if (sectionsToReveal.length) {
+        setRevealedSections((previous) => {
+          if (sectionsToReveal.every((id) => previous.has(id))) return previous
+          const next = new Set(previous)
+          sectionsToReveal.forEach((id) => next.add(id))
+          return next
+        })
+      }
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -794,6 +923,13 @@ export default function App() {
 
   return (
     <main className="site-shell">
+      <div className="intro-screen" aria-hidden="true">
+        <div className="intro-screen-mark">
+          <img src="/datalearners-logo.png" alt="" />
+        </div>
+        <span className="intro-screen-label">DATALEARNERS.XXV</span>
+        <div className="intro-screen-progress" />
+      </div>
       <div className="background-grid" aria-hidden="true" />
       <div className="glow glow-one" aria-hidden="true" />
       <div className="glow glow-two" aria-hidden="true" />
@@ -1065,7 +1201,7 @@ export default function App() {
             </svg>
           </div>
 
-          <section className="people-section scroll-reveal" id="people">
+          <section className={`people-section scroll-reveal ${revealedSections.has("people") ? "revealed" : ""}`} id="people">
             <div className="dot-field dot-field-left" aria-hidden="true" />
             <div className="dot-field dot-field-right" aria-hidden="true" />
 
@@ -1116,7 +1252,19 @@ export default function App() {
                   />
                 ))}
               </div>
-              <div className="member-grid-mobile" aria-label="Geser untuk melihat seluruh anggota">
+              <div
+                className="member-grid-mobile"
+                ref={mobileMemberTrackRef}
+                role="region"
+                aria-label="Carousel anggota kelas, geser untuk menjelajah secara melingkar"
+              >
+                <MemberCard
+                  key={`clone-${members[members.length - 1].name}`}
+                  member={members[members.length - 1]}
+                  index={members.length - 1}
+                  onSelect={setSelectedMember}
+                  isClone
+                />
                 {members.map((member, index) => (
                   <MemberCard
                     key={member.name}
@@ -1125,8 +1273,18 @@ export default function App() {
                     onSelect={setSelectedMember}
                   />
                 ))}
+                <MemberCard
+                  key={`clone-${members[0].name}`}
+                  member={members[0]}
+                  index={0}
+                  onSelect={setSelectedMember}
+                  isClone
+                />
               </div>
-              <p className="member-swipe-hint">Geser untuk melihat semua {members.length} anggota <span aria-hidden="true">→</span></p>
+              <p className="member-swipe-hint">
+                Otomatis berputar · geser untuk lihat {members.length} anggota
+                <span aria-hidden="true">→</span>
+              </p>
 
               <button
                 className="carousel-control next"
@@ -1167,7 +1325,7 @@ export default function App() {
             </div>
           </section>
 
-          <section className="gallery-section scroll-reveal" id="gallery">
+          <section className={`gallery-section scroll-reveal ${revealedSections.has("gallery") ? "revealed" : ""}`} id="gallery">
             <div className="gallery-intro">
               <div>
                 <div className="section-label">
@@ -1249,7 +1407,7 @@ export default function App() {
             </div>
           </section>
 
-          <section className="projects-section scroll-reveal" id="projects">
+          <section className={`projects-section scroll-reveal ${revealedSections.has("projects") ? "revealed" : ""}`} id="projects">
             <div className="projects-orbit orbit-one" aria-hidden="true" />
             <div className="projects-orbit orbit-two" aria-hidden="true" />
             <header className="projects-heading">
@@ -1380,7 +1538,7 @@ export default function App() {
             </div>
           </section>
 
-          <section className="about-section scroll-reveal" id="about">
+          <section className={`about-section scroll-reveal ${revealedSections.has("about") ? "revealed" : ""}`} id="about">
             <div className="about-panel">
               <div className="about-logo-wrap">
                 <div className="logo-rings" aria-hidden="true" />
