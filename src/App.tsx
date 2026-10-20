@@ -319,6 +319,9 @@ type ProjectItem = {
   status: "COMPLETED" | "IN PROGRESS" | "CONCEPT"
   author: string
   techStack: string[]
+  explanation: string
+  features: string[]
+  githubUrl?: string
 }
 
 const projectItems: ProjectItem[] = [
@@ -332,6 +335,14 @@ const projectItems: ProjectItem[] = [
     status: "COMPLETED",
     author: "Tim Web TI 2B",
     techStack: ["React", "TypeScript", "Tailwind CSS"],
+    explanation: "Project ini dikembangkan untuk mempermudah 27 mahasiswa TI 2B dalam memantau nilai praktikum, jadwal mata kuliah harian, absensi kelas, dan pembagian kelompok tugas. Menggunakan antarmuka responsif dengan visualisasi grafik interaktif.",
+    features: [
+      "Pelacakan IPK & Rekap Nilai per Semester",
+      "Kalender Jadwal Kuliah & Ruangan Realtime",
+      "Papan Informasi & Pengumuman Tugas Dosen",
+      "Mode Tampilan Gelap (Dark Mode) Ergonomis"
+    ],
+    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
   },
   {
     id: 2,
@@ -343,6 +354,14 @@ const projectItems: ProjectItem[] = [
     status: "IN PROGRESS",
     author: "Divisi Data Science",
     techStack: ["Python", "Pandas", "Matplotlib"],
+    explanation: "Memanfaatkan data histori sensor cuaca wilayah pesisir Lhokseumawe untuk menganalisis anomali curah hujan, tingkat kelembapan, dan tren suhu. Hasil analisis disajikan dalam dashboard visual untuk mitigasi bencana lokal.",
+    features: [
+      "Pembersihan & Preprocessing Data Historis",
+      "Analisis Korelasi Suhu dan Curah Hujan",
+      "Grafik Interaktif Time-Series Prediktif",
+      "Export Laporan Otomatis ke Format PDF/Excel"
+    ],
+    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
   },
   {
     id: 3,
@@ -354,6 +373,14 @@ const projectItems: ProjectItem[] = [
     status: "COMPLETED",
     author: "Tim UI/UX Designers",
     techStack: ["Figma", "Design System", "Prototyping"],
+    explanation: "Desain sistem antarmuka buku tahunan digital untuk mengabadikan profil seluruh mahasiswa angkatan 2025/2026. Mengusung konsep Glassmorphism, Micro-interactions, dan layout grid bergaya modern aesthetic.",
+    features: [
+      "Desain Komponen Modular & Reusable",
+      "Interaksi Animasi Transisi Halus (Smart Animate)",
+      "Tampilan Profil & Story Highlight Mahasiswa",
+      "Optimasi Tampilan Layar Desktop & Mobile"
+    ],
+    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
   },
   {
     id: 4,
@@ -365,6 +392,14 @@ const projectItems: ProjectItem[] = [
     status: "IN PROGRESS",
     author: "App Dev Squad",
     techStack: ["Flutter", "Dart", "Firebase"],
+    explanation: "Solusi praktis berbasis mobile untuk mengatasi masalah lupa jadwal kuliah atau deadline praktikum. Dilengkapi push notification otomatis 30 menit sebelum jadwal perkuliahan dimulai.",
+    features: [
+      "Notifikasi Pengingat Kuliah & Ujian",
+      "Sinkronisasi Cloud dengan Akun Mahasiswa",
+      "Daftar Checklist Tugas & Progress Tracker",
+      "Bisa Diakses Secara Offline"
+    ],
+    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
   },
   {
     id: 5,
@@ -376,6 +411,14 @@ const projectItems: ProjectItem[] = [
     status: "CONCEPT",
     author: "Research Group",
     techStack: ["OpenCV", "TensorFlow", "Python"],
+    explanation: "Penelitian kecerdasan buatan terapan menggunakan computer vision untuk mengenali wajah mahasiswa di pintu masuk laboratorium komputer, memangkas waktu absensi manual secara signifikan.",
+    features: [
+      "Deteksi Multi-Wajah Secara Real-Time",
+      "Tingkat Akurasi Pengenalan hingga 96.8%",
+      "Integrasi Database Presensi Terpusat",
+      "Anti-Spoofing Pencegah Pemalsuan Foto"
+    ],
+    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
   },
   {
     id: 6,
@@ -387,6 +430,14 @@ const projectItems: ProjectItem[] = [
     status: "COMPLETED",
     author: "Alhadi Azumi & Tim",
     techStack: ["Vite", "React 19", "CSS Glassmorphism"],
+    explanation: "Website resmi kelas Datalearners.XXV TI 2B Politeknik Negeri Lhokseumawe. Menghubungkan seluruh civitas kelas dengan fitur Instagram Feed, Galeri Dokumentasi, dan Etalase Karya Mahasiswa.",
+    features: [
+      "Desain Cyberpunk Blue Neon Glassmorphism",
+      "Navigasi Sticky Header Halus",
+      "Tampilan Instagram Profile & Story Highlight",
+      "Showcase Galeri & Portfolio Tugas Mandiri"
+    ],
+    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
   },
 ]
 
@@ -534,6 +585,16 @@ export default function App() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [galleryFilter, setGalleryFilter] = useState<string>("All")
   const [projectFilter, setProjectFilter] = useState<string>("All")
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
+  const [toastMessage, setToastMessage] = useState<string | null>(null)
+  const [isFollowing, setIsFollowing] = useState(false)
+
+  const showToast = (message: string) => {
+    setToastMessage(message)
+    setTimeout(() => {
+      setToastMessage((current) => (current === message ? null : current))
+    }, 2800)
+  }
 
   // Scroll listener for sticky glassmorphism navbar & scroll-reveal elements
   useEffect(() => {
@@ -972,7 +1033,12 @@ export default function App() {
             </header>
 
             <div className="project-list">
-              <article className="project-card project-featured">
+              <article 
+                className="project-card project-featured" 
+                style={{ cursor: "pointer" }}
+                onClick={() => setSelectedProject(projectItems[0])}
+                title="Klik untuk melihat penjelasan lengkap"
+              >
                 <div className="project-index">01 / WEB</div>
                 <div className="project-visual dashboard-visual">
                   <div className="visual-browser">
@@ -1003,7 +1069,12 @@ export default function App() {
                 </div>
               </article>
 
-              <article className="project-card project-small project-purple">
+              <article 
+                className="project-card project-small project-purple"
+                style={{ cursor: "pointer" }}
+                onClick={() => setSelectedProject(projectItems[1])}
+                title="Klik untuk melihat penjelasan lengkap"
+              >
                 <div className="project-index">02 / DATA</div>
                 <div className="mini-project-icon">01</div>
                 <div className="project-info">
@@ -1016,16 +1087,21 @@ export default function App() {
                 </div>
               </article>
 
-              <article className="project-card project-small project-cyan">
+              <article 
+                className="project-card project-small project-cyan"
+                style={{ cursor: "pointer" }}
+                onClick={() => setSelectedProject(projectItems[2])}
+                title="Klik untuk melihat penjelasan lengkap"
+              >
                 <div className="project-index">03 / UI DESIGN</div>
                 <div className="mini-project-icon">Aa</div>
                 <div className="project-info">
                   <span className="project-status">CONCEPT</span>
                   <h3>Class Digital Yearbook</h3>
                   <p>Arsip digital untuk menyimpan cerita satu angkatan.</p>
-                  <a href="#contact">
-                    COLLABORATE <ArrowIcon />
-                  </a>
+                  <span style={{ color: "var(--cyan-bright)", fontSize: "11px", fontWeight: 700, display: "inline-flex", alignItems: "center", gap: "6px" }}>
+                    DETAIL PENJELASAN <ArrowIcon />
+                  </span>
                 </div>
               </article>
             </div>
@@ -1218,9 +1294,9 @@ export default function App() {
                     <button 
                       type="button"
                       style={{ background: "transparent", border: "none", color: "var(--cyan-bright)", display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, cursor: "pointer" }}
-                      onClick={() => alert(`Detail project "${p.title}" dapat dilihat di repositori GitHub kelas!`)}
+                      onClick={() => setSelectedProject(p)}
                     >
-                      Detail Project <ArrowIcon />
+                      Lihat Penjelasan Project <ArrowIcon />
                     </button>
                   </div>
                 </div>
@@ -1277,9 +1353,12 @@ export default function App() {
                 <button 
                   type="button" 
                   className="ig-follow-btn"
-                  onClick={() => alert("Terima kasih sudah mengikuti @datalearners.xxv! ✨")}
+                  onClick={() => {
+                    setIsFollowing(!isFollowing)
+                    showToast(isFollowing ? "Berhenti mengikuti @datalearners.xxv" : "Terima kasih sudah mengikuti @datalearners.xxv! ✨")
+                  }}
                 >
-                  Follow
+                  {isFollowing ? "Mengikuti ✓" : "Follow"}
                 </button>
               </div>
 
@@ -1288,7 +1367,7 @@ export default function App() {
                   <strong>{members.length}</strong> posts
                 </span>
                 <span className="ig-stat">
-                  <strong>2.7k</strong> followers
+                  <strong>{2700 + (isFollowing ? 1 : 0)}</strong> followers
                 </span>
                 <span className="ig-stat">
                   <strong>1</strong> following
@@ -1413,7 +1492,7 @@ export default function App() {
                         <button
                           type="button"
                           className="ig-action-btn"
-                          onClick={() => alert(`Link profil ${member.name} disalin ke clipboard!`)}
+                          onClick={() => showToast(`Link profil ${member.name} disalin ke clipboard! 📋`)}
                           aria-label="Share"
                         >
                           <ShareIcon />

@@ -3003,3 +3003,220 @@ a {
   }
 }
 
+/* ============================================================
+   INTERACTIVE TOAST NOTIFICATION & PROJECT DETAIL MODAL
+   ============================================================ */
+
+.toast-container {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  background: rgba(0, 24, 52, 0.92);
+  border: 1px solid rgba(91, 220, 255, 0.45);
+  border-radius: 999px;
+  box-shadow: 0 16px 40px rgba(0, 10, 30, 0.6), 0 0 24px rgba(0, 186, 239, 0.25);
+  backdrop-filter: blur(16px);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  animation: toastSlideUp 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.toast-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 186, 239, 0.2);
+  border: 1px solid var(--cyan);
+  display: grid;
+  place-items: center;
+  color: var(--cyan-bright);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Project Detail Modal */
+.project-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 12, 28, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 200ms ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.project-modal-card {
+  position: relative;
+  background: linear-gradient(155deg, rgba(14, 85, 129, 0.92), rgba(0, 25, 52, 0.96));
+  border: 1px solid rgba(91, 220, 255, 0.4);
+  border-radius: 24px;
+  width: min(840px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px rgba(0, 5, 20, 0.7);
+  padding: 32px;
+  scrollbar-width: thin;
+}
+
+.project-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 20, 45, 0.7);
+  border: 1px solid rgba(91, 220, 255, 0.3);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 180ms ease;
+  z-index: 10;
+}
+
+.project-modal-close:hover {
+  background: var(--cyan);
+  color: var(--ink-deep);
+  transform: rotate(90deg);
+}
+
+.project-modal-hero {
+  position: relative;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #001e3d;
+}
+
+.project-modal-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-modal-body h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 36px);
+  margin: 0 0 14px;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+
+.project-modal-details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+  margin-top: 20px;
+}
+
+.project-explanation-text {
+  color: #c4e1f3;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.project-explanation-text h4 {
+  color: var(--cyan-bright);
+  font-size: 15px;
+  margin: 18px 0 8px;
+  font-family: var(--font-display);
+}
+
+.project-meta-box {
+  background: rgba(0, 20, 45, 0.6);
+  border: 1px solid rgba(91, 220, 255, 0.25);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.meta-field label {
+  display: block;
+  font-size: 11px;
+  color: #79a7bf;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.meta-field span {
+  font-size: 13px;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.project-modal-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.btn-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: var(--cyan);
+  color: var(--ink-deep);
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.btn-github-link:hover {
+  background: var(--cyan-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(0, 186, 239, 0.45);
+}
+
+@media (max-width: 768px) {
+  .project-modal-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-modal-card {
+    padding: 20px;
+  }
+  .toast-container {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    justify-content: center;
+  }
+}
+
+
