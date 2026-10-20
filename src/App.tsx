@@ -1,0 +1,1219 @@
+import { useState } from "react"
+
+type Member = {
+  name: string
+  role: string
+  handle: string
+  image: string
+  accent: string
+  quote?: string
+  caption?: string
+  likes?: number
+}
+
+// 27 Anggota Kelas Datalearners.XXV (Urut Abjad A-Z)
+const members: Member[] = [
+  {
+    name: "Abdul Karim Al-Husainy",
+    role: "Anggota",
+    handle: "@karim.xxv",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-cyan",
+  },
+  {
+    name: "Ahmad Fairuzy",
+    role: "Komisaris",
+    handle: "@ahmadfairuzy",
+    image:
+      "https://images.unsplash.com/photo-1729821728830-068bbff90645?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-blue",
+  },
+  {
+    name: "Alhadi Azumi",
+    role: "Anggota",
+    handle: "@alhadi.xxv",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-violet",
+  },
+  {
+    name: "Anzirwan Ramadhan",
+    role: "Anggota",
+    handle: "@anzirwan.xxv",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-teal",
+  },
+  {
+    name: "Ayla Azzura",
+    role: "Anggota",
+    handle: "@ayla.xxv",
+    image:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-cyan",
+  },
+  {
+    name: "Cut Nanda Asy-Syifa",
+    role: "Anggota",
+    handle: "@cutnanda.xxv",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-blue",
+  },
+  {
+    name: "Fadhlul Hadi",
+    role: "Anggota",
+    handle: "@fadhlul.xxv",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-violet",
+  },
+  {
+    name: "Fatia Azahara",
+    role: "Anggota",
+    handle: "@fatia.xxv",
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-teal",
+  },
+  {
+    name: "Hassila Zuhra",
+    role: "Anggota",
+    handle: "@hassila.xxv",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-cyan",
+  },
+  {
+    name: "M Faiz Irsyad",
+    role: "Anggota",
+    handle: "@faiz.xxv",
+    image:
+      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-blue",
+  },
+  {
+    name: "Muhammad Farhan",
+    role: "Anggota",
+    handle: "@farhan.xxv",
+    image:
+      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-violet",
+  },
+  {
+    name: "Muhammad Ghifari Maulidan",
+    role: "Anggota",
+    handle: "@ghifari.xxv",
+    image:
+      "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-teal",
+  },
+  {
+    name: "Muhammad Irham Fahri",
+    role: "Anggota",
+    handle: "@irham.xxv",
+    image:
+      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-cyan",
+  },
+  {
+    name: "Muhammad Khairul Azmi",
+    role: "Anggota",
+    handle: "@khairul.xxv",
+    image:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-blue",
+  },
+  {
+    name: "Muhammad Reza Fahlevi",
+    role: "Anggota",
+    handle: "@reza.xxv",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-violet",
+  },
+  {
+    name: "Muhammad Zakin Nizar",
+    role: "Anggota",
+    handle: "@zakin.xxv",
+    image:
+      "https://images.unsplash.com/photo-1729821728945-7e1287deb341?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-teal",
+  },
+  {
+    name: "Nabila Syifa",
+    role: "Anggota",
+    handle: "@nabilasyifa.xxv",
+    image:
+      "https://images.unsplash.com/photo-1677168916969-e5a4af982664?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-cyan",
+  },
+  {
+    name: "Nazwa Syaqilla Putri",
+    role: "Anggota",
+    handle: "@nazwa.xxv",
+    image:
+      "https://images.unsplash.com/photo-1634707532472-00e23a3a5f43?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-blue",
+  },
+  {
+    name: "Nurul fazillah",
+    role: "Anggota",
+    handle: "@nurul.xxv",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-violet",
+  },
+  {
+    name: "Rahmat Naufal",
+    role: "Anggota",
+    handle: "@naufal.xxv",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-teal",
+  },
+  {
+    name: "Riska Ayu Naul",
+    role: "Anggota",
+    handle: "@riska.xxv",
+    image:
+      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-cyan",
+  },
+  {
+    name: "Said Fachrian Jamaal",
+    role: "Anggota",
+    handle: "@said.xxv",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-blue",
+  },
+  {
+    name: "Silvia Iqlima",
+    role: "Anggota",
+    handle: "@silvia.xxv",
+    image:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-violet",
+  },
+  {
+    name: "Syarifah tsalisa nur meutia",
+    role: "Anggota",
+    handle: "@tsalisa.xxv",
+    image:
+      "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-teal",
+  },
+  {
+    name: "Teuku Zaky Farhani",
+    role: "Anggota",
+    handle: "@zakyfarhani.xxv",
+    image:
+      "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-cyan",
+  },
+  {
+    name: "Wahyu Haiqal",
+    role: "Anggota",
+    handle: "@wahyu.xxv",
+    image:
+      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-blue",
+  },
+  {
+    name: "Zaskya Adindazahra",
+    role: "Anggota",
+    handle: "@zaskya.xxv",
+    image:
+      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=900&q=88",
+    accent: "accent-violet",
+  },
+]
+
+function ArrowIcon({ direction = "right" }: { direction?: "left" | "right" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={direction === "left" ? "flip-icon" : ""}
+      viewBox="0 0 24 24"
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  )
+}
+
+function Spark({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={`spark ${className}`}
+      viewBox="0 0 48 48"
+    >
+      <path d="M24 2c1.6 14.4 7.6 20.4 22 22-14.4 1.6-20.4 7.6-22 22C22.4 31.6 16.4 25.6 2 24 16.4 22.4 22.4 16.4 24 2Z" />
+    </svg>
+  )
+}
+
+function Logo() {
+  return (
+    <div className="brand-mark">
+      <img src="/datalearners-logo.png" alt="" />
+    </div>
+  )
+}
+
+function FloatingProfile({
+  member,
+  className,
+}: {
+  member: Member
+  className: string
+}) {
+  return (
+    <div className={`floating-profile ${className}`}>
+      <img src={member.image} alt="" />
+      <div>
+        <strong>{member.handle}</strong>
+        <span>{member.role}</span>
+      </div>
+      <span className="profile-status" aria-label="Online" />
+    </div>
+  )
+}
+
+function MemberCard({ member, index }: { member: Member; index: number }) {
+  return (
+    <article className={`member-card ${member.accent}`}>
+      <div className="member-photo-wrap">
+        <img
+          className="member-photo"
+          src={member.image}
+          alt={`Portrait of ${member.name}`}
+        />
+        <div className="photo-no">{String(index + 1).padStart(2, "0")}</div>
+        <span className="photo-spark">✦</span>
+      </div>
+      <div className="member-meta">
+        <span className="role-pill">{member.role}</span>
+        <h3>{member.name}</h3>
+        <div className="member-bottom">
+          <span>{member.handle}</span>
+          <span className="mini-arrow">
+            <ArrowIcon />
+          </span>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+// Helper Instagram Icons
+function HeartIcon({ filled = false }: { filled?: boolean }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill={filled ? "#ff3366" : "none"} stroke={filled ? "#ff3366" : "currentColor"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  )
+}
+
+function CommentIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+    </svg>
+  )
+}
+
+function ShareIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="22" y1="2" x2="11" y2="13" />
+      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+    </svg>
+  )
+}
+
+function BookmarkIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+    </svg>
+  )
+}
+
+function GridIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7" height="7" />
+      <rect x="14" y="3" width="7" height="7" />
+      <rect x="14" y="14" width="7" height="7" />
+      <rect x="3" y="14" width="7" height="7" />
+    </svg>
+  )
+}
+
+function FeedIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6" />
+      <line x1="8" y1="12" x2="21" y2="12" />
+      <line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" />
+      <line x1="3" y1="12" x2="3.01" y2="12" />
+      <line x1="3" y1="18" x2="3.01" y2="18" />
+    </svg>
+  )
+}
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState<"home" | "people">("home")
+  const [feedView, setFeedView] = useState<"grid" | "feed">("grid")
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null)
+  const [likedPosts, setLikedPosts] = useState<Record<string, boolean>>({})
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const toggleLike = (name: string) => {
+    setLikedPosts((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }))
+  }
+
+  const navigateTo = (page: "home" | "people", hash?: string) => {
+    setCurrentPage(page)
+    if (page === "home" && hash) {
+      setTimeout(() => {
+        const el = document.querySelector(hash)
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }, 50)
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+  }
+
+  const CARDS_PER_SLIDE = 4
+  const totalSlides = Math.ceil(members.length / CARDS_PER_SLIDE)
+
+  const changeSlide = (direction: number) => {
+    setActiveIndex(
+      (current) => (current + direction + totalSlides) % totalSlides,
+    )
+  }
+
+  const currentMembers = members.slice(
+    activeIndex * CARDS_PER_SLIDE,
+    (activeIndex + 1) * CARDS_PER_SLIDE,
+  )
+
+  return (
+    <main className="site-shell">
+      <div className="background-grid" aria-hidden="true" />
+      <div className="glow glow-one" aria-hidden="true" />
+      <div className="glow glow-two" aria-hidden="true" />
+
+      <nav className="navbar" aria-label="Main navigation">
+        <a 
+          className="brand" 
+          href="#home" 
+          aria-label="Datalearners home"
+          onClick={(e) => {
+            e.preventDefault()
+            navigateTo("home", "#home")
+          }}
+        >
+          <Logo />
+          <span>DATALEARNERS.XXV</span>
+        </a>
+
+        <div className="nav-links">
+          <a
+            className={currentPage === "home" ? "active" : ""}
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo("home", "#home")
+            }}
+          >
+            Home
+          </a>
+          <a
+            className={currentPage === "people" ? "active" : ""}
+            href="#people"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo("people")
+            }}
+          >
+            People
+          </a>
+          <a
+            href="#gallery"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo("home", "#gallery")
+            }}
+          >
+            Galeri
+          </a>
+          <a
+            href="#projects"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo("home", "#projects")
+            }}
+          >
+            Tugas &amp; Project
+          </a>
+          <a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo("home", "#about")
+            }}
+          >
+            About Us
+          </a>
+        </div>
+
+        <a 
+          className="contact-button" 
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault()
+            navigateTo("home", "#contact")
+          }}
+        >
+          Hubungi Kami
+          <ArrowIcon />
+        </a>
+      </nav>
+
+      {currentPage === "home" ? (
+        <>
+          <section className="hero" id="home">
+            <div className="hero-kicker">
+              <span className="pulse-dot" />TI 2B · 2026
+              <span className="kicker-line" />
+            </div>
+
+            <div className="hero-title-wrap">
+              <span className="eyebrow-note">THE PEOPLE BEHIND THE DATA</span>
+              <h1>
+                <span>DATALEARNERS</span>
+                <span className="outline-word">PEOPLE</span>
+              </h1>
+
+              <svg
+                className="doodle-arrow arrow-top"
+                viewBox="0 0 180 100"
+                aria-hidden="true"
+              >
+                <path d="M7 86c35-4 61-16 76-38 11-16 1-32-13-25-15 8 10 38 91 21" />
+                <path d="m145 29 19 15-17 17" />
+              </svg>
+              <svg
+                className="doodle-arrow arrow-bottom"
+                viewBox="0 0 160 120"
+                aria-hidden="true"
+              >
+                <path d="M143 8c-3 42-32 77-104 81" />
+                <path d="m53 71-19 19 23 11" />
+              </svg>
+
+              <Spark className="spark-one" />
+              <Spark className="spark-two" />
+              <span className="doodle-cross cross-one">×</span>
+              <span className="doodle-cross cross-two">×</span>
+            </div>
+
+            <FloatingProfile member={members[0]} className="float-one" />
+            <FloatingProfile member={members[1]} className="float-two" />
+            <FloatingProfile member={members[4]} className="float-three" />
+
+            <div className="hero-footer">
+              <p>
+                Satu kelas, banyak cerita.
+                <br />
+                Kenalan dengan para <strong>data learners!</strong>
+              </p>
+              <a 
+                className="scroll-cue" 
+                href="#people"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const el = document.querySelector("#people")
+                  if (el) el.scrollIntoView({ behavior: "smooth" })
+                }}
+              >
+                <span>SCROLL TO EXPLORE</span>
+                <span className="scroll-icon">↓</span>
+              </a>
+              <div 
+                className="student-count" 
+                style={{ cursor: "pointer" }}
+                onClick={() => navigateTo("people")}
+                title="Buka Instagram Feed Anggota"
+              >
+                <div className="avatar-stack">
+                  {members.slice(0, 3).map((member) => (
+                    <img key={member.name} src={member.image} alt="" />
+                  ))}
+                </div>
+                <div>
+                  <strong>27</strong>
+                  <span>creative minds (view feed →)</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div className="wave-divider" aria-hidden="true">
+            <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+              <path
+                className="wave-back"
+                d="M0 70c220 95 390-60 618 10 219 67 349 77 822-18v118H0Z"
+              />
+              <path
+                className="wave-front"
+                d="M0 112c232 43 349-83 613-24 264 60 503 59 827-25v117H0Z"
+              />
+            </svg>
+          </div>
+
+          <section className="people-section" id="people">
+            <div className="dot-field dot-field-left" aria-hidden="true" />
+            <div className="dot-field dot-field-right" aria-hidden="true" />
+
+            <header className="section-heading">
+              <div>
+                <div className="section-label">
+                  <span>02</span>
+                  OUR PEOPLE
+                </div>
+                <h2>
+                  ANGGOTA <span>KELAS</span>
+                </h2>
+              </div>
+              <div className="heading-side">
+                <p>
+                  Unik dalam karakter,
+                  <br />
+                  kompak dalam tujuan.
+                </p>
+                <button
+                  className="round-button"
+                  type="button"
+                  aria-label="View next slide"
+                  onClick={() => changeSlide(1)}
+                >
+                  <ArrowIcon />
+                </button>
+              </div>
+            </header>
+
+            <div className="carousel">
+              <button
+                className="carousel-control prev"
+                type="button"
+                aria-label="Previous slide"
+                onClick={() => changeSlide(-1)}
+              >
+                <ArrowIcon direction="left" />
+              </button>
+
+              <div className="member-grid" aria-live="polite">
+                {currentMembers.map((member) => (
+                  <MemberCard
+                    key={member.name}
+                    member={member}
+                    index={members.indexOf(member)}
+                  />
+                ))}
+              </div>
+
+              <button
+                className="carousel-control next"
+                type="button"
+                aria-label="Next slide"
+                onClick={() => changeSlide(1)}
+              >
+                <ArrowIcon />
+              </button>
+            </div>
+
+            <div className="pagination" aria-label="Carousel pagination">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  className={index === activeIndex ? "active" : ""}
+                  key={index}
+                  type="button"
+                  aria-label={`Go to slide ${index + 1}`}
+                  aria-current={index === activeIndex}
+                  onClick={() => setActiveIndex(index)}
+                />
+              ))}
+            </div>
+
+            <div style={{ textAlign: "center", marginTop: "42px" }}>
+              <button
+                type="button"
+                className="explore-feed-btn"
+                onClick={() => navigateTo("people")}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+                Buka Instagram Feed Kelas (27 Members) →
+              </button>
+            </div>
+          </section>
+
+          <section className="gallery-section" id="gallery">
+            <div className="gallery-intro">
+              <div>
+                <div className="section-label">
+                  <span>03</span>
+                  OUR MOMENTS
+                </div>
+                <h2>
+                  CERITA DALAM
+                  <br />
+                  <span>SATU FRAME.</span>
+                </h2>
+              </div>
+              <div className="gallery-copy">
+                <span className="handwritten">no boring days here!</span>
+                <p>
+                  Potongan kecil dari keseharian kami—belajar, bercanda, dan tumbuh
+                  bareng sebagai satu kelas.
+                </p>
+              </div>
+            </div>
+
+            <div className="gallery-grid">
+              <figure className="gallery-card gallery-main">
+                <img
+                  src="https://images.unsplash.com/photo-1764720572747-cd3753f8fdb1?auto=format&fit=crop&w=1400&q=88"
+                  alt="Students sharing a moment in class"
+                />
+                <figcaption>
+                  <div>
+                    <span>CLASS MOMENT · 01</span>
+                    <strong>Morning Chaos</strong>
+                  </div>
+                  <span className="gallery-arrow">
+                    <ArrowIcon />
+                  </span>
+                </figcaption>
+              </figure>
+
+              <figure className="gallery-card gallery-top">
+                <img
+                  src="https://images.unsplash.com/photo-1742549586702-c23994895082?auto=format&fit=crop&w=1000&q=88"
+                  alt="Students focusing during a classroom session"
+                />
+                <figcaption>
+                  <div>
+                    <span>STUDY MODE · 02</span>
+                    <strong>Focus, Please!</strong>
+                  </div>
+                </figcaption>
+              </figure>
+
+              <figure className="gallery-card gallery-bottom">
+                <img
+                  src="https://images.unsplash.com/photo-1643216755260-cb0bc30473c8?auto=format&fit=crop&w=1000&q=88"
+                  alt="Student working at a classroom desk"
+                />
+                <figcaption>
+                  <div>
+                    <span>BEHIND THE TASK · 03</span>
+                    <strong>Deadline Energy</strong>
+                  </div>
+                </figcaption>
+              </figure>
+
+              <div className="gallery-note">
+                <span>∞</span>
+                <p>Memories loading...</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="projects-section" id="projects">
+            <div className="projects-orbit orbit-one" aria-hidden="true" />
+            <div className="projects-orbit orbit-two" aria-hidden="true" />
+            <header className="projects-heading">
+              <div>
+                <div className="section-label">
+                  <span>04</span>
+                  WHAT WE BUILD
+                </div>
+                <h2>
+                  TUGAS &amp; <span>PROJECT</span>
+                </h2>
+              </div>
+              <p>
+                Bukan cuma tugas sekolah. Ini tempat ide kecil berubah jadi sesuatu
+                yang bisa diklik, dilihat, dan dibanggakan.
+              </p>
+            </header>
+
+            <div className="project-list">
+              <article className="project-card project-featured">
+                <div className="project-index">01 / WEB</div>
+                <div className="project-visual dashboard-visual">
+                  <div className="visual-browser">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <div className="visual-chart">
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                  </div>
+                  <div className="visual-code">&lt;/&gt;</div>
+                </div>
+                <div className="project-info">
+                  <span className="project-status">COMPLETED</span>
+                  <h3>Dashboard Nilai Kelas</h3>
+                  <p>
+                    Eksperimen dashboard interaktif untuk melihat perkembangan
+                    belajar seluruh anggota kelas.
+                  </p>
+                  <div className="tech-list">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JAVASCRIPT</span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="project-card project-small project-purple">
+                <div className="project-index">02 / DATA</div>
+                <div className="mini-project-icon">01</div>
+                <div className="project-info">
+                  <span className="project-status">IN PROGRESS</span>
+                  <h3>Data Cuaca Harian</h3>
+                  <p>Mengolah data sederhana menjadi cerita visual.</p>
+                  <div className="progress-track">
+                    <span />
+                  </div>
+                </div>
+              </article>
+
+              <article className="project-card project-small project-cyan">
+                <div className="project-index">03 / UI DESIGN</div>
+                <div className="mini-project-icon">Aa</div>
+                <div className="project-info">
+                  <span className="project-status">CONCEPT</span>
+                  <h3>Class Digital Yearbook</h3>
+                  <p>Arsip digital untuk menyimpan cerita satu angkatan.</p>
+                  <a href="#contact">
+                    COLLABORATE <ArrowIcon />
+                  </a>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section className="about-section" id="about">
+            <div className="about-panel">
+              <div className="about-logo-wrap">
+                <div className="logo-rings" aria-hidden="true" />
+                <img src="/datalearners-logo.png" alt="Datalearners class logo" />
+                <span>EST. 2025</span>
+              </div>
+
+              <div className="about-content">
+                <div className="section-label">
+                  <span>05</span>
+                  ABOUT OUR CLASS
+                </div>
+                <h2>
+                  WE LEARN.
+                  <br />
+                  WE BUILD. <span>TOGETHER.</span>
+                </h2>
+                <p>
+                  Datalearners.XXV adalah rumah untuk 27 kepala dengan sejuta ide.
+                  Kami percaya teknologi jadi lebih seru saat dipelajari bersama,
+                  satu error dan satu tawa dalam satu waktu.
+                </p>
+
+                <div className="class-values">
+                  <div>
+                    <strong>27</strong>
+                    <span>ANGGOTA</span>
+                  </div>
+                  <div>
+                    <strong>1</strong>
+                    <span>KELAS</span>
+                  </div>
+                  <div>
+                    <strong>∞</strong>
+                    <span>IDE BESAR</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        /* ================= INSTAGRAM FEED PAGE ================= */
+        <section className="ig-page">
+          <div className="ig-back-bar">
+            <button
+              type="button"
+              className="ig-back-btn"
+              onClick={() => navigateTo("home", "#people")}
+            >
+              ← Kembali ke Beranda
+            </button>
+
+            <div className="ig-view-toggle">
+              <button
+                type="button"
+                className={`ig-toggle-btn ${feedView === "grid" ? "active" : ""}`}
+                onClick={() => setFeedView("grid")}
+              >
+                <GridIcon />
+                <span>Grid 3x3</span>
+              </button>
+              <button
+                type="button"
+                className={`ig-toggle-btn ${feedView === "feed" ? "active" : ""}`}
+                onClick={() => setFeedView("feed")}
+              >
+                <FeedIcon />
+                <span>Feed Timeline</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Instagram Profile Header */}
+          <header className="ig-profile-header">
+            <div className="ig-avatar-ring">
+              <div className="ig-avatar-inner">
+                <img src="/datalearners-logo.png" alt="Datalearners XXV Profile" />
+              </div>
+            </div>
+
+            <div className="ig-profile-info">
+              <div className="ig-profile-top">
+                <h1 className="ig-username">
+                  datalearners.xxv
+                  <span className="ig-verified-badge" title="Verified Class Profile">✓</span>
+                </h1>
+                <button 
+                  type="button" 
+                  className="ig-follow-btn"
+                  onClick={() => alert("Terima kasih sudah mengikuti @datalearners.xxv! ✨")}
+                >
+                  Follow
+                </button>
+              </div>
+
+              <div className="ig-stats-row">
+                <span className="ig-stat">
+                  <strong>{members.length}</strong> posts
+                </span>
+                <span className="ig-stat">
+                  <strong>2.7k</strong> followers
+                </span>
+                <span className="ig-stat">
+                  <strong>1</strong> following
+                </span>
+              </div>
+
+              <div className="ig-bio">
+                <h3>Datalearners XXV · TI 2B 2026</h3>
+                <p>
+                  Official Class Feed &amp; Roster 🎓
+                  <br />
+                  Data Science, Coding &amp; Creative Minds.
+                  <br />
+                  <span className="ig-bio-tag">#TI2B #DataLearnersXXV #FutureTech</span>
+                </p>
+              </div>
+            </div>
+          </header>
+
+          {/* Stories / Highlights */}
+          <div className="ig-stories" aria-label="Stories highlights">
+            <div className="ig-story-item" onClick={() => setSelectedMember(members[1])}>
+              <div className="ig-story-circle">
+                <img src={members[1].image} alt="Komisaris" />
+              </div>
+              <span className="ig-story-title">👑 Komisaris</span>
+            </div>
+          </div>
+
+          {/* Tabs Navigation */}
+          <div className="ig-tabs-bar">
+            <button
+              type="button"
+              className={`ig-tab ${feedView === "grid" ? "active" : ""}`}
+              onClick={() => setFeedView("grid")}
+            >
+              <GridIcon />
+              POSTS GRID ({members.length})
+            </button>
+            <button
+              type="button"
+              className={`ig-tab ${feedView === "feed" ? "active" : ""}`}
+              onClick={() => setFeedView("feed")}
+            >
+              <FeedIcon />
+              TIMELINE FEED
+            </button>
+          </div>
+
+          {/* View 1: 3-Column Instagram Profile Grid */}
+          {feedView === "grid" ? (
+            <div className="ig-grid-container">
+              {members.map((member, index) => {
+                const isLiked = likedPosts[member.name]
+                return (
+                  <div
+                    key={member.name}
+                    className="ig-grid-item"
+                    onClick={() => setSelectedMember(member)}
+                  >
+                    <img src={member.image} alt={member.name} loading="lazy" />
+                    <div className="ig-grid-overlay">
+                      <span className="ig-overlay-role">{member.role}</span>
+                      <strong className="ig-overlay-name">{member.name}</strong>
+                      <div className="ig-overlay-stats">
+                        <span>❤️ {(member.likes || 142) + (isLiked ? 1 : 0)}</span>
+                        <span>💬 {12 + (index % 15)}</span>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            /* View 2: Instagram Feed Post Cards (Vertical Timeline) */
+            <div className="ig-feed-container">
+              {members.map((member, index) => {
+                const isLiked = likedPosts[member.name]
+                const currentLikes = (member.likes || 128 + index * 9) + (isLiked ? 1 : 0)
+
+                return (
+                  <article key={member.name} className="ig-post-card">
+                    <header className="ig-card-header">
+                      <div className="ig-user-badge">
+                        <div className="ig-user-avatar">
+                          <img src={member.image} alt={member.name} />
+                        </div>
+                        <div className="ig-user-text">
+                          <strong>{member.handle.replace("@", "")}</strong>
+                          <span>{member.name}</span>
+                        </div>
+                      </div>
+                      <span className="ig-card-badge">{member.role}</span>
+                    </header>
+
+                    <div 
+                      className="ig-card-photo-wrap"
+                      onDoubleClick={() => toggleLike(member.name)}
+                      title="Double click untuk like"
+                    >
+                      <img src={member.image} alt={`Post by ${member.name}`} />
+                    </div>
+
+                    <div className="ig-card-actions">
+                      <div className="ig-action-left">
+                        <button
+                          type="button"
+                          className={`ig-action-btn ${isLiked ? "liked" : ""}`}
+                          onClick={() => toggleLike(member.name)}
+                          aria-label="Like post"
+                        >
+                          <HeartIcon filled={isLiked} />
+                        </button>
+                        <button
+                          type="button"
+                          className="ig-action-btn"
+                          onClick={() => setSelectedMember(member)}
+                          aria-label="Comment"
+                        >
+                          <CommentIcon />
+                        </button>
+                        <button
+                          type="button"
+                          className="ig-action-btn"
+                          onClick={() => alert(`Link profil ${member.name} disalin ke clipboard!`)}
+                          aria-label="Share"
+                        >
+                          <ShareIcon />
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="ig-action-btn"
+                        aria-label="Save post"
+                      >
+                        <BookmarkIcon />
+                      </button>
+                    </div>
+
+                    <div className="ig-card-content">
+                      <div className="ig-card-likes">
+                        {currentLikes.toLocaleString()} suka
+                      </div>
+                      <div className="ig-card-caption">
+                        <strong>{member.handle.replace("@", "")}</strong>
+                        {member.caption || `Halo semuanya! Saya ${member.name} (${member.role}) dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀`}
+                      </div>
+                      <div className="ig-card-tags">
+                        <span>#DataLearnersXXV</span>
+                        <span>#TI2B</span>
+                        <span>#{member.role.replace(/\s+/g, "")}</span>
+                        <span>#TechFamily</span>
+                      </div>
+                      <div className="ig-card-time">
+                        {index + 1} HARI LALU · JAKARTA, INDONESIA
+                      </div>
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
+          )}
+
+          {/* Modal Detail Popup ala Instagram */}
+          {selectedMember && (
+            <div 
+              className="ig-modal-backdrop" 
+              onClick={() => setSelectedMember(null)}
+            >
+              <div 
+                className="ig-modal-box" 
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  className="ig-modal-close"
+                  onClick={() => setSelectedMember(null)}
+                  aria-label="Tutup modal"
+                >
+                  ✕
+                </button>
+
+                <div className="ig-modal-photo">
+                  <img src={selectedMember.image} alt={selectedMember.name} />
+                </div>
+
+                <div className="ig-modal-side">
+                  <div className="ig-card-header" style={{ padding: "0 0 16px", borderBottom: "1px solid var(--line)" }}>
+                    <div className="ig-user-badge">
+                      <div className="ig-user-avatar">
+                        <img src={selectedMember.image} alt={selectedMember.name} />
+                      </div>
+                      <div className="ig-user-text">
+                        <strong>{selectedMember.handle.replace("@", "")}</strong>
+                        <span>{selectedMember.name}</span>
+                      </div>
+                    </div>
+                    <span className="ig-card-badge">{selectedMember.role}</span>
+                  </div>
+
+                  <div style={{ padding: "18px 0", flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
+                    <div className="ig-card-caption">
+                      <strong>{selectedMember.handle.replace("@", "")}</strong>
+                      {selectedMember.caption || `Senang bisa menjadi bagian dari keluarga besar Datalearners.XXV! Mari berkolaborasi dan berkarya bareng. ✨`}
+                    </div>
+
+                    <div style={{ background: "rgba(0, 30, 61, 0.4)", padding: "14px", borderRadius: "12px", border: "1px solid rgba(91, 220, 255, 0.2)" }}>
+                      <span style={{ fontSize: "11px", color: "var(--cyan-bright)", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                        Posisi di Kelas
+                      </span>
+                      <h4 style={{ margin: "4px 0 0", fontSize: "16px", color: "var(--white)" }}>
+                        {selectedMember.role}
+                      </h4>
+                      <p style={{ margin: "6px 0 0", fontSize: "12px", color: "#9bc4dc" }}>
+                        Nomor Urut: #{String(members.indexOf(selectedMember) + 1).padStart(2, "0")} · Datalearners Angkatan XXV
+                      </p>
+                    </div>
+
+                    <div className="ig-card-tags">
+                      <span>#DataLearnersXXV</span>
+                      <span>#StudentLife</span>
+                      <span>#TI2B</span>
+                      <span>#CampusMoments</span>
+                    </div>
+                  </div>
+
+                  <div style={{ borderTop: "1px solid var(--line)", paddingTop: "14px" }}>
+                    <div className="ig-card-actions" style={{ padding: 0 }}>
+                      <div className="ig-action-left">
+                        <button
+                          type="button"
+                          className={`ig-action-btn ${likedPosts[selectedMember.name] ? "liked" : ""}`}
+                          onClick={() => toggleLike(selectedMember.name)}
+                        >
+                          <HeartIcon filled={likedPosts[selectedMember.name]} />
+                        </button>
+                        <button type="button" className="ig-action-btn">
+                          <CommentIcon />
+                        </button>
+                        <button 
+                          type="button" 
+                          className="ig-action-btn"
+                          onClick={() => alert(`Handle ${selectedMember.handle} disalin!`)}
+                        >
+                          <ShareIcon />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="ig-card-likes" style={{ margin: "8px 0 0" }}>
+                      {((selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
+                    </div>
+                    <div className="ig-card-time" style={{ marginTop: "4px" }}>
+                      TERDAFTAR DI DATALEARNERS.XXV · 2026
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
+      <footer className="site-footer" id="contact">
+        <div className="footer-top">
+          <div>
+            <span className="footer-kicker">
+              LET&apos;S MAKE SOMETHING COOL
+            </span>
+            <h2>
+              SAY HELLO,
+              <br />
+              <span>JANGAN MALU!</span>
+            </h2>
+          </div>
+          <a className="footer-cta" href="mailto:datalearners.xxv@example.com">
+            <span>HUBUNGI KAMI</span>
+            <ArrowIcon />
+          </a>
+        </div>
+        <div className="footer-bottom">
+          <a className="brand" href="#home">
+            <Logo />
+            <span>DATALEARNERS.XXV</span>
+          </a>
+          <p>MADE WITH CURIOSITY, COFFEE &amp; A LOT OF CTRL + Z.</p>
+          <span>© 2026 · TI 2B</span>
+        </div>
+      </footer>
+    </main>
+  )
+}

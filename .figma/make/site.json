@@ -1,0 +1,10 @@
+{
+  "description": "Showcases a vibrant, interactive class website featuring member profiles, project highlights, and easy navigation to connect and engage students.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
