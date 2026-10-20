@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 type Member = {
   name: string
@@ -231,6 +231,165 @@ const members: Member[] = [
   },
 ]
 
+type GalleryItem = {
+  id: number
+  title: string
+  category: "Classroom" | "Hangout" | "Project" | "Events"
+  image: string
+  caption: string
+  span?: "tall" | "wide"
+}
+
+const galleryItems: GalleryItem[] = [
+  {
+    id: 1,
+    title: "Morning Chaos & Laughter",
+    category: "Classroom",
+    image: "https://images.unsplash.com/photo-1764720572747-cd3753f8fdb1?auto=format&fit=crop&w=1400&q=88",
+    caption: "Suasana pagi sebelum dosen masuk, selalu ada obrolan seru dan canda tawa.",
+    span: "wide",
+  },
+  {
+    id: 2,
+    title: "Study Mode: Focus Please!",
+    category: "Classroom",
+    image: "https://images.unsplash.com/photo-1742549586702-c23994895082?auto=format&fit=crop&w=1000&q=88",
+    caption: "Konsentrasi penuh saat materi praktikum coding mulai menantang.",
+  },
+  {
+    id: 3,
+    title: "Behind the Task: Deadline Energy",
+    category: "Project",
+    image: "https://images.unsplash.com/photo-1643216755260-cb0bc30473c8?auto=format&fit=crop&w=1000&q=88",
+    caption: "Momen begadang bareng ngerjain tugas laporan dan debug code.",
+  },
+  {
+    id: 4,
+    title: "Coffee Break & Brainstorming",
+    category: "Hangout",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=88",
+    caption: "Nongkrong santai sepulang kuliah sambil bahas ide project angkatan.",
+    span: "tall",
+  },
+  {
+    id: 5,
+    title: "Data Workshop Hands-On",
+    category: "Events",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=88",
+    caption: "Sesi berbagi wawasan teknologi dan algoritma data terkini.",
+  },
+  {
+    id: 6,
+    title: "Team Presentation Day",
+    category: "Project",
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=88",
+    caption: "Presentasi hasil kolaborasi tim di hadapan dosen dan teman sekelas.",
+    span: "wide",
+  },
+  {
+    id: 7,
+    title: "Foto Bersama TI 2B",
+    category: "Events",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=88",
+    caption: "Kenangan kompak satu angkatan yang tak ternilai harganya.",
+  },
+  {
+    id: 8,
+    title: "Coding Sprint Marathons",
+    category: "Project",
+    image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1200&q=88",
+    caption: "Fokus di depan laptop mengejar deadline submission tugas bersama.",
+  },
+  {
+    id: 9,
+    title: "Sunset Vibes After Class",
+    category: "Hangout",
+    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=88",
+    caption: "Menikmati senja di kampus bersama teman-teman seperjuangan.",
+  },
+]
+
+type ProjectItem = {
+  id: number
+  index: string
+  category: "WEB" | "DATA" | "UI DESIGN" | "MOBILE" | "AI / ML"
+  title: string
+  description: string
+  image: string
+  status: "COMPLETED" | "IN PROGRESS" | "CONCEPT"
+  author: string
+  techStack: string[]
+}
+
+const projectItems: ProjectItem[] = [
+  {
+    id: 1,
+    index: "01 / WEB",
+    category: "WEB",
+    title: "Dashboard Nilai & Roster Kelas",
+    description: "Sistem monitoring akademik interaktif untuk melihat progres perkuliahan, kehadiran, dan pengumuman kelas.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=88",
+    status: "COMPLETED",
+    author: "Tim Web TI 2B",
+    techStack: ["React", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    id: 2,
+    index: "02 / DATA",
+    category: "DATA",
+    title: "Analisis Data Cuaca & Iklim Lhokseumawe",
+    description: "Visualisasi time-series data cuaca lokal menjadi insight grafis yang mudah dipahami oleh masyarakat.",
+    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1000&q=88",
+    status: "IN PROGRESS",
+    author: "Divisi Data Science",
+    techStack: ["Python", "Pandas", "Matplotlib"],
+  },
+  {
+    id: 3,
+    index: "03 / UI DESIGN",
+    category: "UI DESIGN",
+    title: "Class Digital Yearbook XXV",
+    description: "Konsep UI/UX buku tahunan interaktif berbasis web dengan nuansa futuristik cyber & neon glass.",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=88",
+    status: "COMPLETED",
+    author: "Tim UI/UX Designers",
+    techStack: ["Figma", "Design System", "Prototyping"],
+  },
+  {
+    id: 4,
+    index: "04 / MOBILE",
+    category: "MOBILE",
+    title: "Jadwalin: App Pengingat Kuliah",
+    description: "Aplikasi mobile manajemen jadwal mata kuliah, ruang kelas, dan notifikasi tugas praktikum harian.",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1000&q=88",
+    status: "IN PROGRESS",
+    author: "App Dev Squad",
+    techStack: ["Flutter", "Dart", "Firebase"],
+  },
+  {
+    id: 5,
+    index: "05 / AI / ML",
+    category: "AI / ML",
+    title: "Smart Attendance Face Recognition",
+    description: "Eksperimen model deteksi wajah cerdas untuk presensi otomatis mahasiswa saat memasuki laboratorium.",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=88",
+    status: "CONCEPT",
+    author: "Research Group",
+    techStack: ["OpenCV", "TensorFlow", "Python"],
+  },
+  {
+    id: 6,
+    index: "06 / WEB",
+    category: "WEB",
+    title: "Datalearners Official Hub",
+    description: "Portal pusat informasi kelas TI 2B, arsip materi presentasi, dan ruang apresiasi karya mahasiswa.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=88",
+    status: "COMPLETED",
+    author: "Alhadi Azumi & Tim",
+    techStack: ["Vite", "React 19", "CSS Glassmorphism"],
+  },
+]
+
 function ArrowIcon({ direction = "right" }: { direction?: "left" | "right" }) {
   return (
     <svg
@@ -367,11 +526,38 @@ function FeedIcon() {
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<"home" | "people">("home")
+  const [currentPage, setCurrentPage] = useState<"home" | "people" | "gallery" | "projects">("home")
+  const [isScrolled, setIsScrolled] = useState(false)
   const [feedView, setFeedView] = useState<"grid" | "feed">("grid")
   const [selectedMember, setSelectedMember] = useState<Member | null>(null)
   const [likedPosts, setLikedPosts] = useState<Record<string, boolean>>({})
   const [activeIndex, setActiveIndex] = useState(0)
+  const [galleryFilter, setGalleryFilter] = useState<string>("All")
+  const [projectFilter, setProjectFilter] = useState<string>("All")
+
+  // Scroll listener for sticky glassmorphism navbar & scroll-reveal elements
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 40) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+
+      // Trigger scroll reveals
+      const reveals = document.querySelectorAll(".scroll-reveal")
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= window.innerHeight * 0.88) {
+          el.classList.add("revealed")
+        }
+      })
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [currentPage])
 
   const toggleLike = (name: string) => {
     setLikedPosts((prev) => ({
@@ -380,13 +566,13 @@ export default function App() {
     }))
   }
 
-  const navigateTo = (page: "home" | "people", hash?: string) => {
+  const navigateTo = (page: "home" | "people" | "gallery" | "projects", hash?: string) => {
     setCurrentPage(page)
     if (page === "home" && hash) {
       setTimeout(() => {
         const el = document.querySelector(hash)
         if (el) el.scrollIntoView({ behavior: "smooth" })
-      }, 50)
+      }, 60)
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" })
     }
@@ -406,88 +592,101 @@ export default function App() {
     (activeIndex + 1) * CARDS_PER_SLIDE,
   )
 
+  const filteredGallery = galleryFilter === "All"
+    ? galleryItems
+    : galleryItems.filter((item) => item.category === galleryFilter)
+
+  const filteredProjects = projectFilter === "All"
+    ? projectItems
+    : projectItems.filter((item) => item.category === projectFilter)
+
   return (
     <main className="site-shell">
       <div className="background-grid" aria-hidden="true" />
       <div className="glow glow-one" aria-hidden="true" />
       <div className="glow glow-two" aria-hidden="true" />
 
-      <nav className="navbar" aria-label="Main navigation">
-        <a 
-          className="brand" 
-          href="#home" 
-          aria-label="Datalearners home"
-          onClick={(e) => {
-            e.preventDefault()
-            navigateTo("home", "#home")
-          }}
-        >
-          <Logo />
-          <span>DATALEARNERS.XXV</span>
-        </a>
-
-        <div className="nav-links">
-          <a
-            className={currentPage === "home" ? "active" : ""}
-            href="#home"
+      {/* Sticky Glassmorphism Header */}
+      <header className={`navbar-wrap ${isScrolled ? "scrolled" : ""}`}>
+        <nav className="navbar" aria-label="Main navigation">
+          <a 
+            className="brand" 
+            href="#home" 
+            aria-label="Datalearners home"
             onClick={(e) => {
               e.preventDefault()
               navigateTo("home", "#home")
             }}
           >
-            Home
+            <Logo />
+            <span>DATALEARNERS.XXV</span>
           </a>
-          <a
-            className={currentPage === "people" ? "active" : ""}
-            href="#people"
-            onClick={(e) => {
-              e.preventDefault()
-              navigateTo("people")
-            }}
-          >
-            People
-          </a>
-          <a
-            href="#gallery"
-            onClick={(e) => {
-              e.preventDefault()
-              navigateTo("home", "#gallery")
-            }}
-          >
-            Galeri
-          </a>
-          <a
-            href="#projects"
-            onClick={(e) => {
-              e.preventDefault()
-              navigateTo("home", "#projects")
-            }}
-          >
-            Tugas &amp; Project
-          </a>
-          <a
-            href="#about"
-            onClick={(e) => {
-              e.preventDefault()
-              navigateTo("home", "#about")
-            }}
-          >
-            About Us
-          </a>
-        </div>
 
-        <a 
-          className="contact-button" 
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault()
-            navigateTo("home", "#contact")
-          }}
-        >
-          Hubungi Kami
-          <ArrowIcon />
-        </a>
-      </nav>
+          <div className="nav-links">
+            <a
+              className={currentPage === "home" ? "active" : ""}
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo("home", "#home")
+              }}
+            >
+              Home
+            </a>
+            <a
+              className={currentPage === "people" ? "active" : ""}
+              href="#people"
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo("people")
+              }}
+            >
+              People
+            </a>
+            <a
+              className={currentPage === "gallery" ? "active" : ""}
+              href="#gallery"
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo("gallery")
+              }}
+            >
+              Galeri
+            </a>
+            <a
+              className={currentPage === "projects" ? "active" : ""}
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo("projects")
+              }}
+            >
+              Tugas &amp; Project
+            </a>
+            <a
+              href="#about"
+              onClick={(e) => {
+                e.preventDefault()
+                navigateTo("home", "#about")
+              }}
+            >
+              About Us
+            </a>
+          </div>
+
+          <a 
+            className="contact-button" 
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault()
+              navigateTo("home", "#contact")
+            }}
+          >
+            Hubungi Kami
+            <ArrowIcon />
+          </a>
+        </nav>
+      </header>
 
       {currentPage === "home" ? (
         <>
@@ -581,7 +780,7 @@ export default function App() {
             </svg>
           </div>
 
-          <section className="people-section" id="people">
+          <section className="people-section scroll-reveal" id="people">
             <div className="dot-field dot-field-left" aria-hidden="true" />
             <div className="dot-field dot-field-right" aria-hidden="true" />
 
@@ -671,7 +870,7 @@ export default function App() {
             </div>
           </section>
 
-          <section className="gallery-section" id="gallery">
+          <section className="gallery-section scroll-reveal" id="gallery">
             <div className="gallery-intro">
               <div>
                 <div className="section-label">
@@ -741,9 +940,19 @@ export default function App() {
                 <p>Memories loading...</p>
               </div>
             </div>
+
+            <div className="home-section-cta">
+              <button 
+                type="button" 
+                className="view-more-btn"
+                onClick={() => navigateTo("gallery")}
+              >
+                Lihat Semua Foto Galeri Kelas ({galleryItems.length} Momen) →
+              </button>
+            </div>
           </section>
 
-          <section className="projects-section" id="projects">
+          <section className="projects-section scroll-reveal" id="projects">
             <div className="projects-orbit orbit-one" aria-hidden="true" />
             <div className="projects-orbit orbit-two" aria-hidden="true" />
             <header className="projects-heading">
@@ -820,9 +1029,19 @@ export default function App() {
                 </div>
               </article>
             </div>
+
+            <div className="home-section-cta">
+              <button 
+                type="button" 
+                className="view-more-btn"
+                onClick={() => navigateTo("projects")}
+              >
+                Lihat Semua Tugas &amp; Project ({projectItems.length} Project) →
+              </button>
+            </div>
           </section>
 
-          <section className="about-section" id="about">
+          <section className="about-section scroll-reveal" id="about">
             <div className="about-panel">
               <div className="about-logo-wrap">
                 <div className="logo-rings" aria-hidden="true" />
@@ -864,6 +1083,151 @@ export default function App() {
             </div>
           </section>
         </>
+      ) : currentPage === "gallery" ? (
+        /* ================= FULL GALLERY PAGE ================= */
+        <section className="subpage-container">
+          <div className="ig-back-bar">
+            <button
+              type="button"
+              className="ig-back-btn"
+              onClick={() => navigateTo("home", "#gallery")}
+            >
+              ← Kembali ke Beranda
+            </button>
+            <span style={{ fontSize: "13px", color: "var(--cyan-bright)", fontWeight: 600 }}>
+              Koleksi Dokumentasi Angkatan XXV
+            </span>
+          </div>
+
+          <header className="subpage-header">
+            <div className="subpage-title-wrap">
+              <div>
+                <div className="section-label">
+                  <span>03</span>
+                  FULL GALLERY
+                </div>
+                <h1>GALERI <span>MOMEN KELAS</span></h1>
+              </div>
+              <p style={{ margin: 0, color: "#9bc4dc", maxWidth: "420px", fontSize: "13px", lineHeight: 1.6 }}>
+                Arsip foto bersama, praktikum di laboratorium, kegiatan kampus, hingga momen nongkrong santai seluruh mahasiswa TI 2B.
+              </p>
+            </div>
+
+            <div className="subpage-category-filters">
+              {["All", "Classroom", "Hangout", "Project", "Events"].map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  className={`filter-pill ${galleryFilter === cat ? "active" : ""}`}
+                  onClick={() => setGalleryFilter(cat)}
+                >
+                  {cat === "All" ? "Semua Foto" : cat}
+                </button>
+              ))}
+            </div>
+          </header>
+
+          <div className="full-gallery-grid">
+            {filteredGallery.map((item) => (
+              <figure 
+                key={item.id} 
+                className={`full-gallery-card ${item.span || ""}`}
+              >
+                <img src={item.image} alt={item.title} loading="lazy" />
+                <figcaption className="full-gallery-overlay">
+                  <span className="gallery-tag-pill">{item.category}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.caption}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ) : currentPage === "projects" ? (
+        /* ================= FULL PROJECTS PAGE ================= */
+        <section className="subpage-container">
+          <div className="ig-back-bar">
+            <button
+              type="button"
+              className="ig-back-btn"
+              onClick={() => navigateTo("home", "#projects")}
+            >
+              ← Kembali ke Beranda
+            </button>
+            <span style={{ fontSize: "13px", color: "var(--cyan-bright)", fontWeight: 600 }}>
+              Koleksi Karya &amp; Portfolio TI 2B
+            </span>
+          </div>
+
+          <header className="subpage-header">
+            <div className="subpage-title-wrap">
+              <div>
+                <div className="section-label">
+                  <span>04</span>
+                  ALL PROJECTS &amp; TASKS
+                </div>
+                <h1>TUGAS &amp; <span>PROJECT KELAS</span></h1>
+              </div>
+              <p style={{ margin: 0, color: "#9bc4dc", maxWidth: "440px", fontSize: "13px", lineHeight: 1.6 }}>
+                Eksplorasi pembuatan aplikasi web, data analysis, UI/UX design, mobile apps, hingga riset machine learning oleh mahasiswa Datalearners.XXV.
+              </p>
+            </div>
+
+            <div className="subpage-category-filters">
+              {["All", "WEB", "DATA", "UI DESIGN", "MOBILE", "AI / ML"].map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  className={`filter-pill ${projectFilter === cat ? "active" : ""}`}
+                  onClick={() => setProjectFilter(cat)}
+                >
+                  {cat === "All" ? "Semua Kategori" : cat}
+                </button>
+              ))}
+            </div>
+          </header>
+
+          <div className="full-projects-grid">
+            {filteredProjects.map((p) => (
+              <article key={p.id} className="project-showcase-card">
+                <div className="project-banner-preview">
+                  <img src={p.image} alt={p.title} loading="lazy" />
+                  <span className="project-cat-badge">{p.category}</span>
+                  <span className={`project-status-badge ${p.status === "COMPLETED" ? "completed" : p.status === "IN PROGRESS" ? "in-progress" : ""}`}>
+                    {p.status}
+                  </span>
+                </div>
+
+                <div className="project-showcase-body">
+                  <div style={{ fontSize: "11px", color: "var(--cyan-bright)", fontWeight: 700, letterSpacing: "0.08em", marginBottom: "6px" }}>
+                    {p.index}
+                  </div>
+                  <h3>{p.title}</h3>
+                  <p>{p.description}</p>
+
+                  <div className="project-tags">
+                    {p.techStack.map((tech) => (
+                      <span key={tech} className="project-tag">{tech}</span>
+                    ))}
+                  </div>
+
+                  <div className="project-team-row">
+                    <span className="project-team-author">
+                      Karya: <strong>{p.author}</strong>
+                    </span>
+                    <button 
+                      type="button"
+                      style={{ background: "transparent", border: "none", color: "var(--cyan-bright)", display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, cursor: "pointer" }}
+                      onClick={() => alert(`Detail project "${p.title}" dapat dilihat di repositori GitHub kelas!`)}
+                    >
+                      Detail Project <ArrowIcon />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       ) : (
         /* ================= INSTAGRAM FEED PAGE ================= */
         <section className="ig-page">
