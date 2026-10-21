@@ -2,12 +2,13 @@ import { useState, useEffect, useRef } from "react"
 
 type Member = {
   name: string
-  role: string
+  interest: string
+  classPosition?: "Komisaris"
   handle: string
   image: string
   accent: string
   quote?: string
-  caption?: string
+  caption: string
   likes?: number
 }
 
@@ -15,219 +16,247 @@ type Member = {
 const members: Member[] = [
   {
     name: "Abdul Karim Al-Husainy",
-    role: "Anggota",
+    interest: "Data Analyst",
     handle: "@karim.xxv",
     image:
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=88",
     accent: "accent-cyan",
+    caption: "Halo semuanya! Saya Abdul Karim Al-Husainy dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Ahmad Fairuzy",
-    role: "Komisaris",
+    interest: "UI/UX Designer",
+    classPosition: "Komisaris",
     handle: "@ahmadfairuzy",
     image:
       "https://images.unsplash.com/photo-1729821728830-068bbff90645?auto=format&fit=crop&w=900&q=88",
     accent: "accent-blue",
+    caption: "Halo semuanya! Saya Ahmad Fairuzy dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Alhadi Azumi",
-    role: "Anggota",
-    handle: "@alhadi.xxv",
+    interest: "Web Developer",
+    handle: "@alhdzm",
     image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=88",
+      "/public/images/personal/hadi.JPG",
     accent: "accent-violet",
+    caption: "Halo semuanya! Saya Alhadi Azumi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Anzirwan Ramadhan",
-    role: "Anggota",
+    interest: "Front-End Developer",
     handle: "@anzirwan.xxv",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=88",
     accent: "accent-teal",
+    caption: "Halo semuanya! Saya Anzirwan Ramadhan dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Ayla Azzura",
-    role: "Anggota",
+    interest: "UI/UX Designer",
     handle: "@ayla.xxv",
     image:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=88",
     accent: "accent-cyan",
+    caption: "Halo semuanya! Saya Ayla Azzura dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Cut Nanda Asy-Syifa",
-    role: "Anggota",
+    interest: "Data Analyst",
     handle: "@cutnanda.xxv",
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=88",
     accent: "accent-blue",
+    caption: "Halo semuanya! Saya Cut Nanda Asy-Syifa dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Fadhlul Hadi",
-    role: "Anggota",
+    interest: "Cybersecurity",
     handle: "@fadhlul.xxv",
     image:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=88",
     accent: "accent-violet",
+    caption: "Halo semuanya! Saya Fadhlul Hadi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Fatia Azahara",
-    role: "Anggota",
+    interest: "Mobile App Developer",
     handle: "@fatia.xxv",
     image:
       "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=88",
     accent: "accent-teal",
+    caption: "Halo semuanya! Saya Fatia Azahara dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Hassila Zuhra",
-    role: "Anggota",
+    interest: "Back-End Developer",
     handle: "@hassila.xxv",
     image:
       "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=88",
     accent: "accent-cyan",
+    caption: "Halo semuanya! Saya Hassila Zuhra dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "M Faiz Irsyad",
-    role: "Anggota",
+    interest: "Data Scientist",
     handle: "@faiz.xxv",
     image:
       "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=88",
     accent: "accent-blue",
+    caption: "Halo semuanya! Saya M Faiz Irsyad dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Muhammad Farhan",
-    role: "Anggota",
+    interest: "Graphic Designer",
     handle: "@farhan.xxv",
     image:
       "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=900&q=88",
     accent: "accent-violet",
+    caption: "Halo semuanya! Saya Muhammad Farhan dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Muhammad Ghifari Maulidan",
-    role: "Anggota",
+    interest: "Network Engineer",
     handle: "@ghifari.xxv",
     image:
       "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=900&q=88",
     accent: "accent-teal",
+    caption: "Halo semuanya! Saya Muhammad Ghifari Maulidan dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Muhammad Irham Fahri",
-    role: "Anggota",
+    interest: "Game Developer",
     handle: "@irham.xxv",
     image:
       "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=900&q=88",
     accent: "accent-cyan",
+    caption: "Halo semuanya! Saya Muhammad Irham Fahri dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Muhammad Khairul Azmi",
-    role: "Anggota",
+    interest: "Cloud Computing",
     handle: "@khairul.xxv",
     image:
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=88",
     accent: "accent-blue",
+    caption: "Halo semuanya! Saya Muhammad Khairul Azmi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Muhammad Reza Fahlevi",
-    role: "Anggota",
+    interest: "Machine Learning",
     handle: "@reza.xxv",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=900&q=88",
     accent: "accent-violet",
+    caption: "Halo semuanya! Saya Muhammad Reza Fahlevi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Muhammad Zakin Nizar",
-    role: "Anggota",
+    interest: "Product Designer",
     handle: "@zakin.xxv",
     image:
       "https://images.unsplash.com/photo-1729821728945-7e1287deb341?auto=format&fit=crop&w=900&q=88",
     accent: "accent-teal",
+    caption: "Halo semuanya! Saya Muhammad Zakin Nizar dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Nabila Syifa",
-    role: "Anggota",
+    interest: "Front-End Developer",
     handle: "@nabilasyifa.xxv",
     image:
       "https://images.unsplash.com/photo-1677168916969-e5a4af982664?auto=format&fit=crop&w=900&q=88",
     accent: "accent-cyan",
+    caption: "Halo semuanya! Saya Nabila Syifa dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Nazwa Syaqilla Putri",
-    role: "Anggota",
+    interest: "Data Analyst",
     handle: "@nazwa.xxv",
     image:
       "https://images.unsplash.com/photo-1634707532472-00e23a3a5f43?auto=format&fit=crop&w=900&q=88",
     accent: "accent-blue",
+    caption: "Halo semuanya! Saya Nazwa Syaqilla Putri dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Nurul fazillah",
-    role: "Anggota",
+    interest: "Quality Assurance",
     handle: "@nurul.xxv",
     image:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=88",
     accent: "accent-violet",
+    caption: "Halo semuanya! Saya Nurul fazillah dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Rahmat Naufal",
-    role: "Anggota",
+    interest: "Back-End Developer",
     handle: "@naufal.xxv",
     image:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=88",
     accent: "accent-teal",
+    caption: "Halo semuanya! Saya Rahmat Naufal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Riska Ayu Naul",
-    role: "Anggota",
+    interest: "Digital Marketing",
     handle: "@riska.xxv",
     image:
       "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=88",
     accent: "accent-cyan",
+    caption: "Halo semuanya! Saya Riska Ayu Naul dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Said Fachrian Jamaal",
-    role: "Anggota",
+    interest: "Mobile App Developer",
     handle: "@said.xxv",
     image:
       "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=88",
     accent: "accent-blue",
+    caption: "Halo semuanya! Saya Said Fachrian Jamaal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Silvia Iqlima",
-    role: "Anggota",
+    interest: "Database Administrator",
     handle: "@silvia.xxv",
     image:
       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=88",
     accent: "accent-violet",
+    caption: "Halo semuanya! Saya Silvia Iqlima dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Syarifah tsalisa nur meutia",
-    role: "Anggota",
+    interest: "System Analyst",
     handle: "@tsalisa.xxv",
     image:
       "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=900&q=88",
     accent: "accent-teal",
+    caption: "Halo semuanya! Saya Syarifah tsalisa nur meutia dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Teuku Zaky Farhani",
-    role: "Anggota",
+    interest: "DevOps Engineer",
     handle: "@zakyfarhani.xxv",
     image:
       "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=900&q=88",
     accent: "accent-cyan",
+    caption: "Halo semuanya! Saya Teuku Zaky Farhani dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Wahyu Haiqal",
-    role: "Anggota",
+    interest: "AI Engineer",
     handle: "@wahyu.xxv",
     image:
       "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=88",
     accent: "accent-blue",
+    caption: "Halo semuanya! Saya Wahyu Haiqal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Zaskya Adindazahra",
-    role: "Anggota",
+    interest: "UI/UX Designer",
     handle: "@zaskya.xxv",
     image:
       "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=900&q=88",
     accent: "accent-violet",
+    caption: "Halo semuanya! Saya Zaskya Adindazahra dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
 ]
 
@@ -485,7 +514,7 @@ function FloatingProfile({
       <img src={member.image} alt="" />
       <div>
         <strong>{member.handle}</strong>
-        <span>{member.role}</span>
+        <span>{member.interest}</span>
       </div>
       <span className="profile-status" aria-label="Online" />
     </div>
@@ -529,7 +558,7 @@ function MemberCard({
         <span className="photo-spark">✦</span>
       </div>
       <div className="member-meta">
-        <span className="role-pill">{member.role}</span>
+        <span className="role-pill">{member.interest}</span>
         <h3>{member.name}</h3>
         <div className="member-bottom">
           <span>{member.handle}</span>
@@ -1873,7 +1902,7 @@ export default function App() {
                   >
                     <img src={member.image} alt={member.name} loading="lazy" />
                     <div className="ig-grid-overlay">
-                      <span className="ig-overlay-role">{member.role}</span>
+                      <span className="ig-overlay-role">{member.interest}</span>
                       <strong className="ig-overlay-name">{member.name}</strong>
                       <div className="ig-overlay-stats">
                         <span>❤️ {(member.likes || 142) + (isLiked ? 1 : 0)}</span>
@@ -1903,7 +1932,7 @@ export default function App() {
                           <span>{member.name}</span>
                         </div>
                       </div>
-                      <span className="ig-card-badge">{member.role}</span>
+                      <span className="ig-card-badge">{member.interest}</span>
                     </header>
 
                     <div 
@@ -1957,12 +1986,12 @@ export default function App() {
                       </div>
                       <div className="ig-card-caption">
                         <strong>{member.handle.replace("@", "")}</strong>
-                        {member.caption || `Halo semuanya! Saya ${member.name} (${member.role}) dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀`}
+                        {member.caption}
                       </div>
                       <div className="ig-card-tags">
                         <span>#DataLearnersXXV</span>
                         <span>#TI2B</span>
-                        <span>#{member.role.replace(/\s+/g, "")}</span>
+                        <span>#{member.interest.replace(/\s+/g, "")}</span>
                         <span>#TechFamily</span>
                       </div>
                       <div className="ig-card-time">
@@ -2015,13 +2044,13 @@ export default function App() {
                         <span>{selectedMember.name}</span>
                       </div>
                     </div>
-                    <span className="ig-card-badge">{selectedMember.role}</span>
+                    <span className="ig-card-badge">{selectedMember.interest}</span>
                   </div>
 
                   <div className="member-modal-content" style={{ padding: "18px 0", flex: 1, display: "flex", flexDirection: "column", gap: "14px" }}>
                     {/* Interactive Quote */}
                     <div className="member-modal-quote">
-                      {selectedMember.caption || `Senang bisa menjadi bagian dari keluarga besar Datalearners.XXV! Mari berkolaborasi dan berkarya bareng. ✨`}
+                      {selectedMember.caption}
                     </div>
 
                     {/* Interactive Stat Cards */}
@@ -2043,10 +2072,10 @@ export default function App() {
                     {/* Position Card */}
                     <div className="member-modal-position" style={{ background: "rgba(0, 30, 61, 0.4)", padding: "14px", borderRadius: "12px", border: "1px solid rgba(91, 220, 255, 0.2)" }}>
                       <span style={{ fontSize: "11px", color: "var(--cyan-bright)", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                        Posisi di Kelas
+                        {selectedMember.classPosition ? "Posisi di Kelas" : "Bidang IT yang Diminati"}
                       </span>
                       <h4 style={{ margin: "4px 0 0", fontSize: "16px", color: "var(--white)" }}>
-                        {selectedMember.role === "Komisaris" ? "👑 " : ""}{selectedMember.role}
+                        {selectedMember.classPosition ? "👑 " : ""}{selectedMember.classPosition || selectedMember.interest}
                       </h4>
                       <p style={{ margin: "6px 0 0", fontSize: "12px", color: "#9bc4dc" }}>
                         Kelas TI 2B · Politeknik Negeri Lhokseumawe · 2026
@@ -2142,11 +2171,11 @@ export default function App() {
                     <span>{selectedMember.name}</span>
                   </div>
                 </div>
-                <span className="ig-card-badge">{selectedMember.role}</span>
+                <span className="ig-card-badge">{selectedMember.interest}</span>
               </div>
               <div className="member-modal-content">
                 <div className="member-modal-quote">
-                  {selectedMember.caption || `Senang bisa menjadi bagian dari keluarga besar Datalearners.XXV! Mari berkolaborasi dan berkarya bareng. ✨`}
+                  {selectedMember.caption}
                 </div>
                 <div className="member-modal-stat-grid">
                   <div className="member-modal-stat">
@@ -2163,8 +2192,8 @@ export default function App() {
                   </div>
                 </div>
                 <div className="member-modal-position">
-                  <span>Posisi di Kelas</span>
-                  <h4>{selectedMember.role === "Komisaris" ? "👑 " : ""}{selectedMember.role}</h4>
+                  <span>{selectedMember.classPosition ? "Posisi di Kelas" : "Bidang IT yang Diminati"}</span>
+                  <h4>{selectedMember.classPosition ? "👑 " : ""}{selectedMember.classPosition || selectedMember.interest}</h4>
                   <p>Kelas TI 2B · Politeknik Negeri Lhokseumawe · 2026</p>
                 </div>
                 <div className="ig-card-tags">
