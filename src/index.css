@@ -2159,7 +2159,7 @@ a {
     gap: 14px;
     width: calc(100% + 40px);
     margin-inline: -20px;
-    padding: 2px 20px 14px;
+    padding: 12px 24px 22px;
     scrollbar-width: none;
     touch-action: pan-x;
     -webkit-overflow-scrolling: touch;
@@ -2171,14 +2171,19 @@ a {
 
   .member-grid-mobile .member-card {
     display: block;
-    flex: 0 0 min(82%, 320px);
+    flex: 0 0 min(76%, 300px);
     min-width: 0;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     border-radius: 20px;
   }
 
   .member-grid-mobile .member-card:hover {
     transform: none;
+  }
+
+  .member-grid-mobile .member-card.member-card-active,
+  .member-grid-mobile .member-card.member-card-active:hover {
+    transform: scale(1.04);
   }
 
   .member-grid-mobile .member-photo-wrap {

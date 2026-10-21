@@ -685,14 +685,29 @@ export default function App() {
     let lastInteractionAt = 0
     let initialized = false
 
-    const contentLeft = (card: HTMLElement) =>
-      track.scrollLeft +
-      card.getBoundingClientRect().left -
-      track.getBoundingClientRect().left
+    const centeredScrollLeft = (card: HTMLElement) => {
+      const cardRect = card.getBoundingClientRect()
+      return (
+        track.scrollLeft +
+        cardRect.left +
+        cardRect.width / 2 -
+        track.getBoundingClientRect().left -
+        track.clientWidth / 2
+      )
+    }
+
+    const setActiveCard = (index: number) => {
+      cards.forEach((card, cardIndex) => {
+        card.classList.toggle(
+          "member-card-active",
+          cardIndex === index + 1,
+        )
+      })
+    }
 
     const goToMember = (index: number, behavior: ScrollBehavior = "auto") => {
       track.scrollTo({
-        left: contentLeft(cards[index + 1]),
+        left: centeredScrollLeft(cards[index + 1]),
         behavior,
       })
     }
@@ -700,19 +715,22 @@ export default function App() {
     const onScroll = () => {
       if (!track.clientWidth) return
 
-      const firstActualLeft = contentLeft(cards[1])
-      const lastActualLeft = contentLeft(cards[members.length])
-      const beforeFirstThreshold = (contentLeft(cards[0]) + firstActualLeft) / 2
+      const firstActualLeft = centeredScrollLeft(cards[1])
+      const lastActualLeft = centeredScrollLeft(cards[members.length])
+      const beforeFirstThreshold =
+        (centeredScrollLeft(cards[0]) + firstActualLeft) / 2
       const afterLastThreshold =
-        (lastActualLeft + contentLeft(cards[members.length + 1])) / 2
+        (lastActualLeft + centeredScrollLeft(cards[members.length + 1])) / 2
 
       if (track.scrollLeft < beforeFirstThreshold) {
         activeMemberIndex = members.length - 1
+        setActiveCard(activeMemberIndex)
         goToMember(activeMemberIndex)
         return
       }
       if (track.scrollLeft > afterLastThreshold) {
         activeMemberIndex = 0
+        setActiveCard(activeMemberIndex)
         goToMember(activeMemberIndex)
         return
       }
@@ -721,7 +739,7 @@ export default function App() {
       let nearestDistance = Number.POSITIVE_INFINITY
       for (let index = 0; index < members.length; index += 1) {
         const distance = Math.abs(
-          contentLeft(cards[index + 1]) - track.scrollLeft,
+          centeredScrollLeft(cards[index + 1]) - track.scrollLeft,
         )
         if (distance < nearestDistance) {
           nearestDistance = distance
@@ -729,6 +747,7 @@ export default function App() {
         }
       }
       activeMemberIndex = nearestIndex
+      setActiveCard(activeMemberIndex)
     }
 
     const onInteraction = () => {
@@ -737,6 +756,7 @@ export default function App() {
 
     const initializeIfVisible = () => {
       if (!track.clientWidth) return
+      setActiveCard(activeMemberIndex)
       if (!initialized) {
         goToMember(activeMemberIndex)
         initialized = true
@@ -761,13 +781,13 @@ export default function App() {
       activeMemberIndex = nextIndex
       if (nextIndex === 0) {
         track.scrollTo({
-          left: contentLeft(cards[members.length + 1]),
+          left: centeredScrollLeft(cards[members.length + 1]),
           behavior: "smooth",
         })
       } else {
         goToMember(nextIndex, "smooth")
       }
-    }, 4000)
+    }, 6500)
 
     track.addEventListener("scroll", onScroll, { passive: true })
     track.addEventListener("pointerdown", onInteraction, { passive: true })
