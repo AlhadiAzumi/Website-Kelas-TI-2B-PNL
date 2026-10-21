@@ -2072,7 +2072,7 @@ export default function App() {
                     {/* Position Card */}
                     <div className="member-modal-position" style={{ background: "rgba(0, 30, 61, 0.4)", padding: "14px", borderRadius: "12px", border: "1px solid rgba(91, 220, 255, 0.2)" }}>
                       <span style={{ fontSize: "11px", color: "var(--cyan-bright)", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                        {selectedMember.classPosition ? "Posisi di Kelas" : "Bidang IT yang Diminati"}
+                        {selectedMember.classPosition ? "Posisi di Kelas" : "Profesional di Bidang"}
                       </span>
                       <h4 style={{ margin: "4px 0 0", fontSize: "16px", color: "var(--white)" }}>
                         {selectedMember.classPosition ? "👑 " : ""}{selectedMember.classPosition || selectedMember.interest}
@@ -2192,7 +2192,7 @@ export default function App() {
                   </div>
                 </div>
                 <div className="member-modal-position">
-                  <span>{selectedMember.classPosition ? "Posisi di Kelas" : "Bidang IT yang Diminati"}</span>
+                  <span>{selectedMember.classPosition ? "Posisi di Kelas" : "Profesional di Bidang"}</span>
                   <h4>{selectedMember.classPosition ? "👑 " : ""}{selectedMember.classPosition || selectedMember.interest}</h4>
                   <p>Kelas TI 2B · Politeknik Negeri Lhokseumawe · 2026</p>
                 </div>
