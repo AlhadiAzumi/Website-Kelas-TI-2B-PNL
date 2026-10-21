@@ -38,7 +38,7 @@ const members: Member[] = [
     interest: "Web Developer",
     handle: "@alhdzm",
     image:
-      "/public/images/personal/hadi.JPG",
+      "/images/personal/hadi.JPG",
     accent: "accent-violet",
     caption: "Halo semuanya! Saya Alhadi Azumi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
