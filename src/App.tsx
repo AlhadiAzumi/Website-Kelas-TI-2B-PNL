@@ -9,7 +9,6 @@ type Member = {
   accent: string
   quote?: string
   caption: string
-  likes?: number
 }
 
 // 27 Anggota Kelas Datalearners.XXV (Urut Abjad A-Z)
@@ -21,7 +20,7 @@ const members: Member[] = [
     image:
       "/images/personal/s.jpeg",
     accent: "accent-cyan",
-    caption: "",
+    caption: "when yh",
   },
   {
     name: "Ahmad Fairuzy",
@@ -260,13 +259,47 @@ const members: Member[] = [
   },
 ]
 
+const memberLikeCounts: Record<string, number> = {
+  "Abdul Karim Al-Husainy": 428,
+  "Ahmad Fairuzy": 437,
+  "Alhadi Azumi": 1201,
+  "Anzirwan Ramadhan": 455,
+  "Ayla Azzura": 464,
+  "Cut Nanda Asy-Syifa": 473,
+  "Fadhlul Hadi": 700,
+  "Fatia Azahara": 491,
+  "Hassila Zuhra": 400,
+  "M Faiz Irsyad": 409,
+  "Muhammad Farhan": 418,
+  "Muhammad Ghifari Maulidan": 427,
+  "Muhammad Irham Fahri": 436,
+  "Muhammad Khairul Azmi": 445,
+  "Muhammad Reza Fahlevi": 454,
+  "Muhammad Zakin Nizar": 463,
+  "Nabila Syifa": 472,
+  "Nazwa Syaqilla Putri": 481,
+  "Nurul fazillah": 490,
+  "Rahmat Naufal": 499,
+  "Riska Ayu Naul": 508,
+  "Said Fachrian Jamaal": 517,
+  "Silvia Iqlima": 526,
+  "Syarifah tsalisa nur meutia": 535,
+  "Teuku Zaky Farhani": 544,
+  "Wahyu Haiqal": 553,
+  "Zaskya Adindazahra": 562,
+}
+
+const getMemberLikeCount = (member: Member) => {
+  return memberLikeCounts[member.name] ?? 0
+}
+
 type GalleryItem = {
   id: number
   title: string
-  category: "Classroom" | "Hangout" | "Project" | "Events"
+  category: "Moment" | "Hangout" | "Project" | "Events"
   image: string
   caption: string
-  span?: "tall" | "wide"
+  imagePosition?: string
 }
 
 const galleryItems: GalleryItem[] = [
@@ -276,19 +309,19 @@ const galleryItems: GalleryItem[] = [
     category: "Events",
     image: "/images/galeri/batikday26.jpg",
     caption: "Batik Day 2026, Sayangi Budaya Indonesia!",
-    span: "wide",
+    imagePosition: "center 80%",
   },
   {
     id: 2,
     title: "First Photo At Third Semester",
-    category: "Events",
+    category: "Moment",
     image: "/images/galeri/sem3.jpg",
     caption: "Wajah-wajah kena bantai tugas semester 3.",
   },
   {
     id: 3,
     title: "Last Class On Second Semester",
-    category: "Project",
+    category: "Moment",
     image: "/images/galeri/lastclasem2.jpg",
     caption: "The End of Semester 2 Class.",
   },
@@ -298,7 +331,6 @@ const galleryItems: GalleryItem[] = [
     category: "Hangout",
     image: "/images/galeri/rayap.jpg",
     caption: "Menghabiskan Waktu Setelah UAS Semester 2 dengan bakar-bakar di air terjun rayap.",
-    span: "tall",
   },
   {
     id: 5,
@@ -313,7 +345,6 @@ const galleryItems: GalleryItem[] = [
     category: "Events",
     image: "/images/galeri/connectik.jpg",
     caption: "We On Connectik 2026, Connection for Community of TIK",
-    span: "wide",
   },
   {
     id: 7,
@@ -321,12 +352,11 @@ const galleryItems: GalleryItem[] = [
     category: "Events",
     image: "/images/galeri/bukber26.jpg",
     caption: "Buka Puasa Bersama Datalearners 25, Breaking The Fast Together.",
-    span: "wide",
   },
   {
     id: 8,
     title: "Last Photo At First Semester",
-    category: "Project",
+    category: "Moment",
     image: "/images/galeri/lastsem1.jpg",
     caption: "The End of Semester 1 Class, And The Start of Our Journey Together.",
   },
@@ -599,9 +629,9 @@ function ShareIcon() {
   )
 }
 
-function BookmarkIcon() {
+function BookmarkIcon({ filled = false }: { filled?: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
       <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
     </svg>
   )
@@ -632,13 +662,14 @@ function FeedIcon() {
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<"home" | "people" | "gallery" | "projects">("home")
+  const [currentPage, setCurrentPage] = useState<"home" | "people" | "gallery" | "projects" | "about">("home")
   const [activeNav, setActiveNav] = useState<"home" | "people" | "gallery" | "projects" | "about">("home")
   const [revealedSections, setRevealedSections] = useState<Set<string>>(() => new Set())
   const [isScrolled, setIsScrolled] = useState(false)
   const [feedView, setFeedView] = useState<"grid" | "feed">("grid")
   const [selectedMember, setSelectedMember] = useState<Member | null>(null)
   const [likedPosts, setLikedPosts] = useState<Record<string, boolean>>({})
+  const [savedPosts, setSavedPosts] = useState<Record<string, boolean>>({})
   const [activeIndex, setActiveIndex] = useState(0)
   const [galleryFilter, setGalleryFilter] = useState<string>("All")
   const [projectFilter, setProjectFilter] = useState<string>("All")
@@ -938,7 +969,14 @@ export default function App() {
     }))
   }
 
-  const navigateTo = (page: "home" | "people" | "gallery" | "projects", hash?: string) => {
+  const toggleSave = (name: string) => {
+    setSavedPosts((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }))
+  }
+
+  const navigateTo = (page: "home" | "people" | "gallery" | "projects" | "about", hash?: string) => {
     setCurrentPage(page)
     if (page === "home" && hash) {
       setTimeout(() => {
@@ -1047,7 +1085,7 @@ export default function App() {
               href="#about"
               onClick={(e) => {
                 e.preventDefault()
-                navigateTo("home", "#about")
+                navigateTo("about")
               }}
             >
               About Us
@@ -1131,7 +1169,7 @@ export default function App() {
                 onClick={(event) => {
                   event.preventDefault()
                   setIsMobileMenuOpen(false)
-                  navigateTo("home", "#about")
+                  navigateTo("about")
                 }}
               >
                 About Us
@@ -1403,6 +1441,7 @@ export default function App() {
                 <img
                   src="/images/galeri/batikday26.jpg"
                   alt="Batik Day 2026"
+                  style={{ objectPosition: galleryItems[0].imagePosition }}
                 />
                 <figcaption>
                   <div>
@@ -1494,19 +1533,13 @@ export default function App() {
                 title="Klik untuk melihat penjelasan lengkap"
               >
                 <div className="project-index">01 / WEB</div>
-                <div className="project-visual dashboard-visual">
-                  <div className="visual-browser">
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                  <div className="visual-chart">
-                    <i />
-                    <i />
-                    <i />
-                    <i />
-                  </div>
-                  <div className="visual-code">&lt;/&gt;</div>
+                <div className="project-visual">
+                  <img
+                    className="project-cover-image"
+                    src={projectItems[0].image}
+                    alt={projectItems[0].title}
+                    loading="lazy"
+                  />
                 </div>
                 <div className="project-info">
                   <span className="project-status">COMPLETED</span>
@@ -1570,7 +1603,7 @@ export default function App() {
                 <div className="project-info">
                   <span className="project-status">CONCEPT</span>
                   <h3>Class Digital Yearbook</h3>
-                  <p>Arsip digital untuk menyimpan cerita satu angkatan.</p>
+                  <p>Arsip digital untuk menyimpan cerita kelas TI 2B.</p>
                   <span style={{ color: "var(--cyan-bright)", fontSize: "11px", fontWeight: 700, display: "inline-flex", alignItems: "center", gap: "6px" }}>
                     DETAIL PENJELASAN <ArrowIcon />
                   </span>
@@ -1662,7 +1695,7 @@ export default function App() {
             </div>
 
             <div className="subpage-category-filters">
-              {["All", "Classroom", "Hangout", "Project", "Events"].map((cat) => (
+              {["All", "Moment", "Hangout", "Project", "Events"].map((cat) => (
                 <button
                   key={cat}
                   type="button"
@@ -1679,11 +1712,16 @@ export default function App() {
             {filteredGallery.map((item) => (
               <figure 
                 key={item.id} 
-                className={`full-gallery-card ${item.span || ""}`}
+                className="full-gallery-card"
                 style={{ cursor: "pointer" }}
                 onClick={() => setSelectedGalleryItem(item)}
               >
-                <img src={item.image} alt={item.title} loading="lazy" />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  style={{ objectPosition: item.imagePosition }}
+                />
                 <figcaption className="full-gallery-overlay">
                   <span className="gallery-tag-pill">{item.category}</span>
                   <h3>{item.title}</h3>
@@ -1778,6 +1816,78 @@ export default function App() {
             ))}
           </div>
         </section>
+      ) : currentPage === "about" ? (
+        <section className="about-page-container">
+          <button
+            type="button"
+            className="ig-back-btn about-page-back"
+            onClick={() => navigateTo("home", "#home")}
+          >
+            ← Kembali ke Beranda
+          </button>
+
+          <div className="about-page-hero">
+            <div className="about-page-copy">
+              <div className="section-label">
+                <span>05</span>
+                WHERE CURIOSITY MEETS LOGIC
+              </div>
+              <h1>
+                Transforming Raw Data into <span>Future Stories.</span>
+              </h1>
+              <p className="about-page-tagline">
+                We are <strong>datalearners.xxv</strong> — bukan sekadar tempat
+                ngumpul, tapi wadah buat belajar, ngolah ide, dan berkembang bareng.
+              </p>
+              <div className="about-page-stats">
+                <div><strong>27</strong><span>KEPALA</span></div>
+                <div><strong>∞</strong><span>IDE</span></div>
+                <div><strong>1</strong><span>TUJUAN</span></div>
+              </div>
+            </div>
+
+            <div className="about-page-photos">
+              <figure className="about-page-photo about-page-photo-main">
+                <img src="/images/galeri/batikday26.jpg" alt="Datalearners XXV bersama di Batik Day 2026" />
+                <figcaption>One class, countless stories · 2026</figcaption>
+              </figure>
+              <figure className="about-page-photo about-page-photo-secondary">
+                <img src="/images/galeri/sem3.jpg" alt="Momen kebersamaan Datalearners di semester tiga" />
+                <figcaption>Growing together</figcaption>
+              </figure>
+              <span className="about-page-photo-note">DATALEARNERS.XXV ✦ TI 2B</span>
+            </div>
+          </div>
+
+          <div className="about-page-story">
+            <div className="about-page-story-label">
+              <span className="pulse-dot" />
+              OUR STORY
+            </div>
+            <div>
+              <h2>Where curiosity<br /><span>becomes impact.</span></h2>
+              <p>
+                Di <strong>datalearners.xxv</strong>, kami percaya kalau data bukan
+                cuma sekadar angka dan kode, tapi cerita tentang masa depan yang lagi
+                kami susun. Lahir sebagai angkatan XXV, kami adalah kumpulan
+                orang-orang yang penasaran sama cara kerja dunia digital, analitis
+                dalam mikir, dan pantang menyerah pas ngadepin <em>bug</em> kehidupan
+                maupun pemrograman.
+              </p>
+              <p>
+                Kami di sini bukan cuma buat belajar bareng, tapi juga tumbuh bareng
+                jadi talenta yang siap bikin dampak. Dari rasa ingin tahu, ide-ide
+                kecil, sampai karya yang bisa dibanggakan—semuanya kami bangun
+                bersama.
+              </p>
+            </div>
+          </div>
+
+          <div className="about-page-footer">
+            <span>“27 kepala, beribu ide, satu tujuan.”</span>
+            <p>Welcome to the home of <strong>datalearners.xxv</strong>.</p>
+          </div>
+        </section>
       ) : (
         /* ================= INSTAGRAM FEED PAGE ================= */
         <section className="ig-page">
@@ -1841,7 +1951,7 @@ export default function App() {
                   <strong>{members.length}</strong> posts
                 </span>
                 <span className="ig-stat">
-                  <strong>{2700 + (isFollowing ? 1 : 0)}</strong> followers
+                  <strong>{2025 + (isFollowing ? 1 : 0)}</strong> followers
                 </span>
                 <span className="ig-stat">
                   <strong>1</strong> following
@@ -1849,27 +1959,17 @@ export default function App() {
               </div>
 
               <div className="ig-bio">
-                <h3>Datalearners XXV · TI 2B 2026</h3>
+                <h3>Information Technology Company</h3>
                 <p>
-                  Official Class Feed &amp; Roster 🎓
+                  Official Instagram of Class TI 2B PNL
                   <br />
-                  Data Science, Coding &amp; Creative Minds.
+                  Learning, Building and Creating with Data
                   <br />
-                  <span className="ig-bio-tag">#TI2B #DataLearnersXXV #FutureTech</span>
+                  The XXV Generation of Future Data Experts
                 </p>
               </div>
             </div>
           </header>
-
-          {/* Stories / Highlights */}
-          <div className="ig-stories" aria-label="Stories highlights">
-            <div className="ig-story-item" onClick={() => setSelectedMember(members[1])}>
-              <div className="ig-story-circle">
-                <img src={members[1].image} alt="Komisaris" />
-              </div>
-              <span className="ig-story-title">Komisaris</span>
-            </div>
-          </div>
 
           {/* Tabs Navigation */}
           <div className="ig-tabs-bar">
@@ -1907,7 +2007,7 @@ export default function App() {
                       <span className="ig-overlay-role">{member.interest}</span>
                       <strong className="ig-overlay-name">{member.name}</strong>
                       <div className="ig-overlay-stats">
-                        <span>❤️ {(member.likes || 142) + (isLiked ? 1 : 0)}</span>
+                        <span>❤️ {getMemberLikeCount(member) + (isLiked ? 1 : 0)}</span>
                         <span>💬 {12 + (index % 15)}</span>
                       </div>
                     </div>
@@ -1920,7 +2020,7 @@ export default function App() {
             <div className="ig-feed-container">
               {members.map((member, index) => {
                 const isLiked = likedPosts[member.name]
-                const currentLikes = (member.likes || 128 + index * 9) + (isLiked ? 1 : 0)
+                const currentLikes = getMemberLikeCount(member) + (isLiked ? 1 : 0)
 
                 return (
                   <article key={member.name} className="ig-post-card">
@@ -1975,10 +2075,12 @@ export default function App() {
 
                       <button
                         type="button"
-                        className="ig-action-btn"
-                        aria-label="Save post"
+                        className={`ig-action-btn ${savedPosts[member.name] ? "saved" : ""}`}
+                        aria-label={savedPosts[member.name] ? "Hapus dari postingan tersimpan" : "Simpan postingan"}
+                        aria-pressed={Boolean(savedPosts[member.name])}
+                        onClick={() => toggleSave(member.name)}
                       >
-                        <BookmarkIcon />
+                        <BookmarkIcon filled={savedPosts[member.name]} />
                       </button>
                     </div>
 
@@ -2062,12 +2164,12 @@ export default function App() {
                         <span>Urutan</span>
                       </div>
                       <div className="member-modal-stat">
-                        <strong>{(selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)}</strong>
+                        <strong>{getMemberLikeCount(selectedMember) + (likedPosts[selectedMember.name] ? 1 : 0)}</strong>
                         <span>Likes</span>
                       </div>
                       <div className="member-modal-stat">
-                        <strong>XXV</strong>
-                        <span>Angkatan</span>
+                        <strong>TI 2B</strong>
+                        <span>Class</span>
                       </div>
                     </div>
 
@@ -2119,15 +2221,21 @@ export default function App() {
                           <ShareIcon />
                         </button>
                       </div>
-                      <button type="button" className="ig-action-btn" onClick={() => showToast(`Profil ${selectedMember.name} tersimpan! 🔖`)}>
-                        <BookmarkIcon />
+                      <button
+                        type="button"
+                        className={`ig-action-btn ${savedPosts[selectedMember.name] ? "saved" : ""}`}
+                        aria-label={savedPosts[selectedMember.name] ? "Hapus dari postingan tersimpan" : "Simpan postingan"}
+                        aria-pressed={Boolean(savedPosts[selectedMember.name])}
+                        onClick={() => toggleSave(selectedMember.name)}
+                      >
+                        <BookmarkIcon filled={savedPosts[selectedMember.name]} />
                       </button>
                     </div>
                     <div className="ig-card-likes" style={{ margin: "8px 0 0" }}>
-                      {((selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
+                      {(getMemberLikeCount(selectedMember) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
                     </div>
                     <div className="ig-card-time" style={{ marginTop: "4px" }}>
-                      TERDAFTAR DI DATALEARNERS.XXV · 2026
+                      DATALEARNERS.XXV · 2026
                     </div>
                   </div>
                 </div>
@@ -2185,12 +2293,12 @@ export default function App() {
                     <span>Urutan</span>
                   </div>
                   <div className="member-modal-stat">
-                    <strong>{(selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)}</strong>
+                    <strong>{getMemberLikeCount(selectedMember) + (likedPosts[selectedMember.name] ? 1 : 0)}</strong>
                     <span>Likes</span>
                   </div>
                   <div className="member-modal-stat">
-                    <strong>XXV</strong>
-                    <span>Angkatan</span>
+                    <strong>TI 2B</strong>
+                    <span>CLASS</span>
                   </div>
                 </div>
                 <div className="member-modal-position">
@@ -2225,7 +2333,7 @@ export default function App() {
                     </button>
                   </div>
                   <span className="ig-card-likes">
-                    {((selectedMember.likes || 178) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
+                    {(getMemberLikeCount(selectedMember) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
                   </span>
                 </div>
               </div>
@@ -2434,7 +2542,7 @@ export default function App() {
               <span>JANGAN MALU!</span>
             </h2>
           </div>
-          <a className="footer-cta" href="mailto:datalearners.xxv@example.com">
+          <a className="footer-cta" href="mailto:datalearnersxxv@gmail.com">
             <span>HUBUNGI KAMI</span>
             <ArrowIcon />
           </a>
