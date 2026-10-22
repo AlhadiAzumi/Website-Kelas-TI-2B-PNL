@@ -44,12 +44,12 @@ const members: Member[] = [
   },
   {
     name: "Anzirwan Ramadhan",
-    interest: "Front-End Developer",
-    handle: "@anzirwan.xxv",
+    interest: "Backend/Database Developer",
+    handle: "@ramadhananzirwan",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/anzirwan.JPG",
     accent: "accent-teal",
-    caption: "Halo semuanya! Saya Anzirwan Ramadhan dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "Aku anak rajin",
   },
   {
     name: "Ayla Azzura",
