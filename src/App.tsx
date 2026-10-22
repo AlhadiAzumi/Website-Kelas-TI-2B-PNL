@@ -62,7 +62,7 @@ const members: Member[] = [
   {
     name: "Cut Nanda Asy-Syifa",
     interest: "Data Analyst",
-    handle: "@cutnanda.xxv",
+    handle: "@pocutnandaa",
     image:
       "/images/personal/siluetce.jpeg",
     accent: "accent-blue",
@@ -587,7 +587,6 @@ function MemberCard({
           loading="lazy"
         />
         <div className="photo-no">{String(index + 1).padStart(2, "0")}</div>
-        <span className="photo-spark">✦</span>
       </div>
       <div className="member-meta">
         <span className="role-pill">{member.interest}</span>
@@ -681,6 +680,8 @@ export default function App() {
   const [floatingProfilesIndex, setFloatingProfilesIndex] = useState(0)
   const modalRef = useRef<HTMLDivElement>(null)
   const mobileMemberTrackRef = useRef<HTMLDivElement>(null)
+  const mobileGalleryTrackRef = useRef<HTMLDivElement>(null)
+  const mobileProjectTrackRef = useRef<HTMLDivElement>(null)
 
   const showToast = (message: string) => {
     setToastMessage(message)
@@ -868,6 +869,98 @@ export default function App() {
   }, [currentPage])
 
   useEffect(() => {
+    if (currentPage !== "home") return
+
+    const tracks = [
+      { element: mobileGalleryTrackRef.current, selector: ".gallery-card" },
+      { element: mobileProjectTrackRef.current, selector: ".project-card" },
+    ].filter(
+      (track): track is { element: HTMLDivElement; selector: string } =>
+        track.element !== null,
+    )
+
+    const cleanups = tracks.map(({ element: track, selector }) => {
+      const cards = Array.from(track.querySelectorAll<HTMLElement>(selector))
+      if (!cards.length) return () => {}
+
+      let activeIndex = 0
+      let lastInteractionAt = 0
+
+      const centeredScrollLeft = (card: HTMLElement) => {
+        const cardRect = card.getBoundingClientRect()
+        return (
+          track.scrollLeft +
+          cardRect.left +
+          cardRect.width / 2 -
+          track.getBoundingClientRect().left -
+          track.clientWidth / 2
+        )
+      }
+
+      const goToCard = (index: number, behavior: ScrollBehavior = "auto") => {
+        track.scrollTo({ left: centeredScrollLeft(cards[index]), behavior })
+      }
+
+      const onScroll = () => {
+        let nearestIndex = 0
+        let nearestDistance = Number.POSITIVE_INFINITY
+        cards.forEach((card, index) => {
+          const distance = Math.abs(centeredScrollLeft(card) - track.scrollLeft)
+          if (distance < nearestDistance) {
+            nearestDistance = distance
+            nearestIndex = index
+          }
+        })
+        activeIndex = nearestIndex
+      }
+
+      const onInteraction = () => {
+        lastInteractionAt = Date.now()
+      }
+
+      const initialize = () => {
+        if (track.clientWidth && window.matchMedia("(max-width: 768px)").matches) {
+          goToCard(activeIndex)
+        }
+      }
+
+      initialize()
+
+      const autoplay = window.setInterval(() => {
+        if (
+          !track.clientWidth ||
+          !window.matchMedia("(max-width: 768px)").matches ||
+          document.hidden ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          Date.now() - lastInteractionAt < 5000
+        ) {
+          return
+        }
+
+        activeIndex = (activeIndex + 1) % cards.length
+        goToCard(activeIndex, "smooth")
+      }, 6500)
+
+      track.addEventListener("scroll", onScroll, { passive: true })
+      track.addEventListener("pointerdown", onInteraction, { passive: true })
+      track.addEventListener("wheel", onInteraction, { passive: true })
+      track.addEventListener("focusin", onInteraction)
+      window.addEventListener("resize", initialize)
+
+      return () => {
+        window.clearInterval(autoplay)
+        track.removeEventListener("scroll", onScroll)
+        track.removeEventListener("pointerdown", onInteraction)
+        track.removeEventListener("wheel", onInteraction)
+        track.removeEventListener("focusin", onInteraction)
+        window.removeEventListener("resize", initialize)
+      }
+    })
+
+    return () => cleanups.forEach((cleanup) => cleanup())
+  }, [currentPage])
+
+  useEffect(() => {
     const activeModal = selectedMember || selectedProject || selectedGalleryItem
     if (!activeModal) return
 
@@ -925,15 +1018,7 @@ export default function App() {
       }
 
       if (currentPage === "home") {
-        const sections = ["home", "people", "gallery", "projects", "about"] as const
-        let currentSection: (typeof sections)[number] = "home"
-        for (const sectionId of sections) {
-          const section = document.getElementById(sectionId)
-          if (section && section.getBoundingClientRect().top <= 180) {
-            currentSection = sectionId
-          }
-        }
-        setActiveNav(currentSection)
+        setActiveNav("home")
       } else {
         setActiveNav(currentPage)
       }
@@ -1436,7 +1521,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="gallery-grid">
+            <div className="gallery-grid" ref={mobileGalleryTrackRef}>
               <figure className="gallery-card gallery-main" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[0])}>
                 <img
                   src="/images/galeri/batikday26.jpg"
@@ -1516,7 +1601,7 @@ export default function App() {
               </p>
             </header>
 
-            <div className="project-list">
+            <div className="project-list" ref={mobileProjectTrackRef}>
               <article 
                 className="project-card project-featured" 
                 style={{ cursor: "pointer" }}
@@ -1660,6 +1745,14 @@ export default function App() {
                     <span>IDE BESAR</span>
                   </div>
                 </div>
+
+                <button
+                  type="button"
+                  className="about-more-link"
+                  onClick={() => navigateTo("about")}
+                >
+                  Ingin mengenal kami lebih jauh? <span>Kenalan di sini <ArrowIcon /></span>
+                </button>
               </div>
             </div>
           </section>
