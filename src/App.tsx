@@ -35,12 +35,12 @@ const members: Member[] = [
   },
   {
     name: "Alhadi Azumi",
-    interest: "Web Developer",
+    interest: "AI Engineering",
     handle: "@alhdzm",
     image:
       "/images/personal/hadi.JPG",
     accent: "accent-violet",
-    caption: "Halo semuanya! Saya Alhadi Azumi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "everyone can be anything what them want, except me:3",
   },
   {
     name: "Anzirwan Ramadhan",
@@ -170,12 +170,12 @@ const members: Member[] = [
   },
   {
     name: "Nazwa Syaqilla Putri",
-    interest: "Data Analyst",
-    handle: "@nazwa.xxv",
+    interest: "Database Engineering",
+    handle: "@syaqillaa0",
     image:
-      "https://images.unsplash.com/photo-1634707532472-00e23a3a5f43?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/wawa.jpeg",
     accent: "accent-blue",
-    caption: "Halo semuanya! Saya Nazwa Syaqilla Putri dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "dipastikan yang ini baik hati💗",
   },
   {
     name: "Nurul fazillah",
@@ -233,12 +233,12 @@ const members: Member[] = [
   },
   {
     name: "Teuku Zaky Farhani",
-    interest: "DevOps Engineer",
-    handle: "@zakyfarhani.xxv",
+    interest: "Web Developer",
+    handle: "@tuvwxyzaky_",
     image:
-      "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/zaky.jpeg",
     accent: "accent-cyan",
-    caption: "Halo semuanya! Saya Teuku Zaky Farhani dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "This is me, unfiltered and unapologetic, stepping into a brand new chapter.",
   },
   {
     name: "Wahyu Haiqal",
