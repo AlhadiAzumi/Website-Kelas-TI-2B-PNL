@@ -17,21 +17,21 @@ const members: Member[] = [
   {
     name: "Abdul Karim Al-Husainy",
     interest: "Data Analyst",
-    handle: "@karim.xxv",
+    handle: "@alhusainynst",
     image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-cyan",
-    caption: "Halo semuanya! Saya Abdul Karim Al-Husainy dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "",
   },
   {
     name: "Ahmad Fairuzy",
-    interest: "UI/UX Designer",
+    interest: "Backend Developer",
     classPosition: "Komisaris",
-    handle: "@ahmadfairuzy",
+    handle: "@ahmadfairuzy29",
     image:
-      "https://images.unsplash.com/photo-1729821728830-068bbff90645?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/fairuz.JPG",
     accent: "accent-blue",
-    caption: "Halo semuanya! Saya Ahmad Fairuzy dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "No noise, just presence.",
   },
   {
     name: "Alhadi Azumi",
@@ -56,7 +56,7 @@ const members: Member[] = [
     interest: "UI/UX Designer",
     handle: "@ayla.xxv",
     image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-cyan",
     caption: "Halo semuanya! Saya Ayla Azzura dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -65,7 +65,7 @@ const members: Member[] = [
     interest: "Data Analyst",
     handle: "@cutnanda.xxv",
     image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-blue",
     caption: "Halo semuanya! Saya Cut Nanda Asy-Syifa dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -74,7 +74,7 @@ const members: Member[] = [
     interest: "Cybersecurity",
     handle: "@fadhlul.xxv",
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-violet",
     caption: "Halo semuanya! Saya Fadhlul Hadi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -83,7 +83,7 @@ const members: Member[] = [
     interest: "Mobile App Developer",
     handle: "@fatia.xxv",
     image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-teal",
     caption: "Halo semuanya! Saya Fatia Azahara dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -92,7 +92,7 @@ const members: Member[] = [
     interest: "Back-End Developer",
     handle: "@hassila.xxv",
     image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-cyan",
     caption: "Halo semuanya! Saya Hassila Zuhra dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -101,7 +101,7 @@ const members: Member[] = [
     interest: "Data Scientist",
     handle: "@faiz.xxv",
     image:
-      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-blue",
     caption: "Halo semuanya! Saya M Faiz Irsyad dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -110,7 +110,7 @@ const members: Member[] = [
     interest: "Graphic Designer",
     handle: "@farhan.xxv",
     image:
-      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-violet",
     caption: "Halo semuanya! Saya Muhammad Farhan dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -119,7 +119,7 @@ const members: Member[] = [
     interest: "Network Engineer",
     handle: "@ghifari.xxv",
     image:
-      "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-teal",
     caption: "Halo semuanya! Saya Muhammad Ghifari Maulidan dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -128,7 +128,7 @@ const members: Member[] = [
     interest: "Game Developer",
     handle: "@irham.xxv",
     image:
-      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-cyan",
     caption: "Halo semuanya! Saya Muhammad Irham Fahri dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -137,7 +137,7 @@ const members: Member[] = [
     interest: "Cloud Computing",
     handle: "@khairul.xxv",
     image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-blue",
     caption: "Halo semuanya! Saya Muhammad Khairul Azmi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -146,7 +146,7 @@ const members: Member[] = [
     interest: "Machine Learning",
     handle: "@reza.xxv",
     image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-violet",
     caption: "Halo semuanya! Saya Muhammad Reza Fahlevi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -155,7 +155,7 @@ const members: Member[] = [
     interest: "Product Designer",
     handle: "@zakin.xxv",
     image:
-      "https://images.unsplash.com/photo-1729821728945-7e1287deb341?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-teal",
     caption: "Halo semuanya! Saya Muhammad Zakin Nizar dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -164,7 +164,7 @@ const members: Member[] = [
     interest: "Front-End Developer",
     handle: "@nabilasyifa.xxv",
     image:
-      "https://images.unsplash.com/photo-1677168916969-e5a4af982664?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-cyan",
     caption: "Halo semuanya! Saya Nabila Syifa dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -182,7 +182,7 @@ const members: Member[] = [
     interest: "Quality Assurance",
     handle: "@nurul.xxv",
     image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-violet",
     caption: "Halo semuanya! Saya Nurul fazillah dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -191,7 +191,7 @@ const members: Member[] = [
     interest: "Back-End Developer",
     handle: "@naufal.xxv",
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-teal",
     caption: "Halo semuanya! Saya Rahmat Naufal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -200,7 +200,7 @@ const members: Member[] = [
     interest: "Digital Marketing",
     handle: "@riska.xxv",
     image:
-      "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-cyan",
     caption: "Halo semuanya! Saya Riska Ayu Naul dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -209,7 +209,7 @@ const members: Member[] = [
     interest: "Mobile App Developer",
     handle: "@said.xxv",
     image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-blue",
     caption: "Halo semuanya! Saya Said Fachrian Jamaal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -218,7 +218,7 @@ const members: Member[] = [
     interest: "Database Administrator",
     handle: "@silvia.xxv",
     image:
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-violet",
     caption: "Halo semuanya! Saya Silvia Iqlima dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -227,7 +227,7 @@ const members: Member[] = [
     interest: "System Analyst",
     handle: "@tsalisa.xxv",
     image:
-      "https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-teal",
     caption: "Halo semuanya! Saya Syarifah tsalisa nur meutia dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -245,7 +245,7 @@ const members: Member[] = [
     interest: "AI Engineer",
     handle: "@wahyu.xxv",
     image:
-      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/s.jpeg",
     accent: "accent-blue",
     caption: "Halo semuanya! Saya Wahyu Haiqal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -254,7 +254,7 @@ const members: Member[] = [
     interest: "UI/UX Designer",
     handle: "@zaskya.xxv",
     image:
-      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=900&q=88",
+      "/images/personal/siluetce.jpeg",
     accent: "accent-violet",
     caption: "Halo semuanya! Saya Zaskya Adindazahra dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
@@ -272,69 +272,70 @@ type GalleryItem = {
 const galleryItems: GalleryItem[] = [
   {
     id: 1,
-    title: "Morning Chaos & Laughter",
-    category: "Classroom",
-    image: "https://images.unsplash.com/photo-1764720572747-cd3753f8fdb1?auto=format&fit=crop&w=1400&q=88",
-    caption: "Suasana pagi sebelum dosen masuk, selalu ada obrolan seru dan canda tawa.",
+    title: "Batik Day 2026",
+    category: "Events",
+    image: "/images/galeri/batikday26.jpg",
+    caption: "Batik Day 2026, Sayangi Budaya Indonesia!",
     span: "wide",
   },
   {
     id: 2,
-    title: "Study Mode: Focus Please!",
-    category: "Classroom",
-    image: "https://images.unsplash.com/photo-1742549586702-c23994895082?auto=format&fit=crop&w=1000&q=88",
-    caption: "Konsentrasi penuh saat materi praktikum coding mulai menantang.",
+    title: "First Photo At Third Semester",
+    category: "Events",
+    image: "/images/galeri/sem3.jpg",
+    caption: "Wajah-wajah kena bantai tugas semester 3.",
   },
   {
     id: 3,
-    title: "Behind the Task: Deadline Energy",
+    title: "Last Class On Second Semester",
     category: "Project",
-    image: "https://images.unsplash.com/photo-1643216755260-cb0bc30473c8?auto=format&fit=crop&w=1000&q=88",
-    caption: "Momen begadang bareng ngerjain tugas laporan dan debug code.",
+    image: "/images/galeri/lastclasem2.jpg",
+    caption: "The End of Semester 2 Class.",
   },
   {
     id: 4,
-    title: "Coffee Break & Brainstorming",
+    title: "Bakar-bakar With Us at Air Terjun Rayap!",
     category: "Hangout",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=88",
-    caption: "Nongkrong santai sepulang kuliah sambil bahas ide project angkatan.",
+    image: "/images/galeri/rayap.jpg",
+    caption: "Menghabiskan Waktu Setelah UAS Semester 2 dengan bakar-bakar di air terjun rayap.",
     span: "tall",
   },
   {
     id: 5,
-    title: "Data Workshop Hands-On",
+    title: "We On Revoltik 2025",
     category: "Events",
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=88",
-    caption: "Sesi berbagi wawasan teknologi dan algoritma data terkini.",
+    image: "/images/galeri/revoltik.png",
+    caption: "We On Revoltik 2025, Revolution Leadership of TIK",
   },
   {
     id: 6,
-    title: "Team Presentation Day",
-    category: "Project",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=88",
-    caption: "Presentasi hasil kolaborasi tim di hadapan dosen dan teman sekelas.",
+    title: "We On Connectik 2026",
+    category: "Events",
+    image: "/images/galeri/connectik.jpg",
+    caption: "We On Connectik 2026, Connection for Community of TIK",
     span: "wide",
   },
   {
     id: 7,
-    title: "Foto Bersama TI 2B",
+    title: "Buka Puasa Bersama Versi Kami",
     category: "Events",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=88",
-    caption: "Kenangan kompak satu angkatan yang tak ternilai harganya.",
+    image: "/images/galeri/bukber26.jpg",
+    caption: "Buka Puasa Bersama Datalearners 25, Breaking The Fast Together.",
+    span: "wide",
   },
   {
     id: 8,
-    title: "Coding Sprint Marathons",
+    title: "Last Photo At First Semester",
     category: "Project",
-    image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1200&q=88",
-    caption: "Fokus di depan laptop mengejar deadline submission tugas bersama.",
+    image: "/images/galeri/lastsem1.jpg",
+    caption: "The End of Semester 1 Class, And The Start of Our Journey Together.",
   },
   {
     id: 9,
-    title: "Sunset Vibes After Class",
+    title: "Foto Pertama Kami",
     category: "Hangout",
-    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=88",
-    caption: "Menikmati senja di kampus bersama teman-teman seperjuangan.",
+    image: "/images/galeri/1stphoto.jpg",
+    caption: "Foto bersama pertama kami sebagai Datalearners 25.",
   },
 ]
 
@@ -358,20 +359,21 @@ const projectItems: ProjectItem[] = [
     id: 1,
     index: "01 / WEB",
     category: "WEB",
-    title: "Dashboard Nilai & Roster Kelas",
-    description: "Sistem monitoring akademik interaktif untuk melihat progres perkuliahan, kehadiran, dan pengumuman kelas.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=88",
+    title: "Deteksi kematangan buah tomat berbasis pengolahan citra digital",
+    description: "Project ini dikembangkan untuk mempermudah mengetahui sebuah tomat itu matang atau tidak, dengan menggunakan teknologi pengolahan citra digital. Sistem menganalisa gambar bisa dengan mengupload file ataupun melalui kamera.",
+    image: "/images/projek/tomat.jpeg",
     status: "COMPLETED",
-    author: "Tim Web TI 2B",
-    techStack: ["React", "TypeScript", "Tailwind CSS"],
-    explanation: "Project ini dikembangkan untuk mempermudah 27 mahasiswa TI 2B dalam memantau nilai praktikum, jadwal mata kuliah harian, absensi kelas, dan pembagian kelompok tugas. Menggunakan antarmuka responsif dengan visualisasi grafik interaktif.",
+    author: "Teuku Zaky Farhani",
+    techStack: ["Python", "Flask", "Scikit-learn", "OpenCV"],
+    explanation: "Projek ini dikembangkan untuk mempermudah mengetahui sebuah tomat itu matang atau tidak, dengan menggunakan teknologi pengolahan citra digital. Sistem menganalisa gambar bisa dengan mengupload file ataupun melalui kamera.",
     features: [
-      "Pelacakan IPK & Rekap Nilai per Semester",
-      "Kalender Jadwal Kuliah & Ruangan Realtime",
-      "Papan Informasi & Pengumuman Tugas Dosen",
-      "Mode Tampilan Gelap (Dark Mode) Ergonomis"
+      "Pendeteksi Kematangan Buah Tomat",
+      "Berapa persen buah tomat itu matang dari 0% sampai 100%",
+      "Apakah buah tomat itu layak untuk di jual",
+      "Bisa di akses melalu web",
+      "Bisa di akses melalu kamera hp"
     ],
-    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
+    githubUrl: "https://github.com/teukuzakyfarhani-design/my-project.git",
   },
   {
     id: 2,
@@ -1399,13 +1401,13 @@ export default function App() {
             <div className="gallery-grid">
               <figure className="gallery-card gallery-main" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[0])}>
                 <img
-                  src="https://images.unsplash.com/photo-1764720572747-cd3753f8fdb1?auto=format&fit=crop&w=1400&q=88"
-                  alt="Students sharing a moment in class"
+                  src="/images/galeri/batikday26.jpg"
+                  alt="Batik Day 2026"
                 />
                 <figcaption>
                   <div>
-                    <span>CLASS MOMENT · 01</span>
-                    <strong>Morning Chaos</strong>
+                    <span>BATIK DAY · 01</span>
+                    <strong>Batik Day 2026</strong>
                   </div>
                   <span className="gallery-arrow">
                     <ArrowIcon />
@@ -1415,26 +1417,26 @@ export default function App() {
 
               <figure className="gallery-card gallery-top" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[1])}>
                 <img
-                  src="https://images.unsplash.com/photo-1742549586702-c23994895082?auto=format&fit=crop&w=1000&q=88"
+                  src="/images/galeri/sem3.jpg"
                   alt="Students focusing during a classroom session"
                 />
                 <figcaption>
                   <div>
-                    <span>STUDY MODE · 02</span>
-                    <strong>Focus, Please!</strong>
+                    <span>FIRST PHOTO AT 3Rd SEMESTER · 02</span>
+                    <strong>First Day At Third Semester</strong>
                   </div>
                 </figcaption>
               </figure>
 
               <figure className="gallery-card gallery-bottom" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[2])}>
                 <img
-                  src="https://images.unsplash.com/photo-1643216755260-cb0bc30473c8?auto=format&fit=crop&w=1000&q=88"
-                  alt="Student working at a classroom desk"
+                  src="/images/galeri/lastclasem2.jpg"
+                  alt="Last Class On Second Semester"
                 />
                 <figcaption>
                   <div>
-                    <span>BEHIND THE TASK · 03</span>
-                    <strong>Deadline Energy</strong>
+                    <span>LAST CLASS ON SECOND SEMESTER · 03</span>
+                    <strong>Last Class On Second Semester</strong>
                   </div>
                 </figcaption>
               </figure>
@@ -1508,15 +1510,15 @@ export default function App() {
                 </div>
                 <div className="project-info">
                   <span className="project-status">COMPLETED</span>
-                  <h3>Dashboard Nilai Kelas</h3>
+                  <h3>Deteksi kematangan buah tomat berbasis pengolahan citra digital</h3>
                   <p>
-                    Eksperimen dashboard interaktif untuk melihat perkembangan
-                    belajar seluruh anggota kelas.
+                    Project ini dikembangkan untuk mempermudah mengetahui sebuah tomat itu matang atau tidak, dengan menggunakan teknologi pengolahan citra digital. Sistem menganalisa gambar bisa dengan mengupload file ataupun melalui kamera.
                   </p>
                   <div className="tech-list">
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JAVASCRIPT</span>
+                    <span>Python</span>
+                    <span>Flask</span>
+                    <span>Scikit-learn</span>
+                    <span>OpenCV</span>
                   </div>
                 </div>
               </article>
@@ -1641,7 +1643,7 @@ export default function App() {
               ← Kembali ke Beranda
             </button>
             <span style={{ fontSize: "13px", color: "var(--cyan-bright)", fontWeight: 600 }}>
-              Koleksi Dokumentasi Angkatan XXV
+              Koleksi Dokumentasi datalearners.xxv
             </span>
           </div>
 
@@ -1865,7 +1867,7 @@ export default function App() {
               <div className="ig-story-circle">
                 <img src={members[1].image} alt="Komisaris" />
               </div>
-              <span className="ig-story-title">👑 Komisaris</span>
+              <span className="ig-story-title">Komisaris</span>
             </div>
           </div>
 
