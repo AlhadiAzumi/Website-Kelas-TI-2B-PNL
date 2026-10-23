@@ -195,13 +195,13 @@ const members: Member[] = [
     caption: "Halo semuanya! Saya Rahmat Naufal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
-    name: "Riska Ayu Naul",
+    name: "Riska Ayu Nauli",
     interest: "Digital Marketing",
     handle: "@riska.xxv",
     image:
       "/images/personal/siluetce.jpeg",
     accent: "accent-cyan",
-    caption: "Halo semuanya! Saya Riska Ayu Naul dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "Halo semuanya! Saya Riska Ayu Nauli dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
     name: "Said Fachrian Jamaal",
@@ -2197,7 +2197,7 @@ export default function App() {
                         <span>#TechFamily</span>
                       </div>
                       <div className="ig-card-time">
-                        {index + 1} HARI LALU · JAKARTA, INDONESIA
+                        {index + 1} MENIT LALU · Politeknik Negeri Lhokseumawe, ACEH
                       </div>
                     </div>
                   </article>
