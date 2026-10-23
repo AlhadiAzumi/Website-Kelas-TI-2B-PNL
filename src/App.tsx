@@ -44,7 +44,7 @@ const members: Member[] = [
   },
   {
     name: "Anzirwan Ramadhan",
-    interest: "Backend/Database Developer",
+    interest: "Backend Developer",
     handle: "@ramadhananzirwan",
     image:
       "/images/personal/anzirwan.JPG",
