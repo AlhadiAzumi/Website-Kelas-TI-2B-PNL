@@ -4723,13 +4723,13 @@ a {
   }
 
   .ig-grid-container {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 3px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .ig-grid-item {
-    aspect-ratio: 1 / 1;
-    border-radius: 5px;
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
   }
 
   .ig-feed-container {
