@@ -6,6 +6,7 @@ type Member = {
   classPosition?: "Komisaris"
   handle: string
   image: string
+  photoPosition?: string
   accent: string
   quote?: string
   caption: string
@@ -173,6 +174,7 @@ const members: Member[] = [
     handle: "@syaqillaa0",
     image:
       "/images/personal/wawa.jpeg",
+    photoPosition: "center 100%",
     accent: "accent-blue",
     caption: "dipastikan yang ini baik hati💗",
   },
@@ -584,6 +586,7 @@ function MemberCard({
           className="member-photo"
           src={member.image}
           alt={`Portrait of ${member.name}`}
+          style={{ objectPosition: member.photoPosition }}
           loading="lazy"
         />
         <div className="photo-no">{String(index + 1).padStart(2, "0")}</div>
@@ -1932,7 +1935,7 @@ export default function App() {
                 Transforming Raw Data into <span>Future Stories.</span>
               </h1>
               <p className="about-page-tagline">
-                We are <strong>datalearners.xxv</strong> — bukan sekadar tempat
+                We are <strong>datalearners.xxv,</strong>bukan sekadar tempat
                 ngumpul, tapi wadah buat belajar, ngolah ide, dan berkembang bareng.
               </p>
               <div className="about-page-stats">
@@ -2097,7 +2100,12 @@ export default function App() {
                     className="ig-grid-item"
                     onClick={() => setSelectedMember(member)}
                   >
-                    <img src={member.image} alt={member.name} loading="lazy" />
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      style={{ objectPosition: member.photoPosition }}
+                      loading="lazy"
+                    />
                     <div className="ig-grid-overlay">
                       <span className="ig-overlay-role">{member.interest}</span>
                       <strong className="ig-overlay-name">{member.name}</strong>

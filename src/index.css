@@ -4392,3 +4392,531 @@ a {
     gap: 6px;
   }
 }
+
+@media (max-width: 768px) {
+  .people-section {
+    min-height: 0;
+    padding-top: 48px;
+    padding-bottom: 72px;
+  }
+
+  .section-heading {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .member-grid-mobile .member-card {
+    flex-basis: min(82vw, 340px);
+  }
+
+  .ig-page {
+    width: min(100% - 28px, 680px);
+    padding: 22px 0 72px;
+  }
+
+  .ig-back-bar {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+  }
+
+  .ig-back-btn {
+    min-height: 42px;
+  }
+
+  .ig-profile-header {
+    padding: 20px;
+    margin-bottom: 24px;
+    border-radius: 20px;
+    gap: 16px;
+  }
+
+  .ig-avatar-ring {
+    width: 88px;
+    height: 88px;
+  }
+
+  .ig-profile-info {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .ig-profile-top {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .ig-username {
+    min-width: 0;
+    margin: 0;
+    font-size: clamp(17px, 5vw, 23px);
+    overflow-wrap: anywhere;
+  }
+
+  .ig-follow-btn {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 8px 16px;
+  }
+
+  .ig-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .ig-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 9px 4px;
+    border: 1px solid rgba(91, 220, 255, 0.16);
+    border-radius: 12px;
+    background: rgba(0, 22, 47, 0.32);
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .ig-stat strong {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .ig-bio {
+    text-align: left;
+  }
+
+  .ig-bio h3 {
+    font-size: 13px;
+  }
+
+  .ig-bio p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .ig-tabs-bar {
+    justify-content: space-around;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .ig-tab {
+    justify-content: center;
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 6px;
+    padding: 12px 2px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .ig-grid-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .ig-grid-item {
+    border-radius: 8px;
+  }
+
+  .ig-feed-container {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .ig-card-header {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .ig-user-badge {
+    min-width: 0;
+    gap: 9px;
+  }
+
+  .ig-user-text {
+    min-width: 0;
+  }
+
+  .ig-user-text strong,
+  .ig-user-text span {
+    overflow-wrap: anywhere;
+  }
+
+  .ig-card-badge {
+    max-width: 42%;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .ig-card-actions {
+    padding: 10px 12px 6px;
+  }
+
+  .ig-card-content {
+    padding: 0 12px 14px;
+  }
+}
+
+@media (max-width: 580px) {
+  .hero {
+    min-height: min(560px, 100svh);
+  }
+
+  .wave-divider {
+    height: 90px;
+  }
+
+  .people-section {
+    padding: 42px 16px 64px;
+  }
+
+  .section-heading {
+    align-items: flex-end;
+    margin-bottom: 18px;
+  }
+
+  .section-heading h2 {
+    max-width: 100%;
+    font-size: clamp(34px, 10vw, 40px);
+    line-height: 0.98;
+  }
+
+  .member-grid-mobile {
+    width: calc(100% + 32px);
+    margin-inline: -16px;
+    padding: 12px 16px 20px;
+    gap: 12px;
+    scroll-padding-inline: 16px;
+  }
+
+  .member-grid-mobile .member-card {
+    flex-basis: calc(100vw - 32px);
+    padding: 7px;
+    border-radius: 18px;
+  }
+
+  .member-grid-mobile .member-photo-wrap {
+    height: clamp(360px, 112vw, 440px);
+    border-radius: 13px;
+  }
+
+  .member-grid-mobile .member-photo {
+    object-position: center 35%;
+  }
+
+  .member-meta {
+    padding: 14px 9px 9px;
+  }
+
+  .member-meta h3 {
+    margin: 10px 0 13px;
+    font-size: clamp(17px, 5.2vw, 20px);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .member-swipe-hint {
+    padding-inline: 8px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .ig-page {
+    width: calc(100% - 16px);
+    padding-top: 16px;
+    padding-bottom: 56px;
+  }
+
+  .ig-back-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .ig-back-btn {
+    justify-content: center;
+    width: 100%;
+    padding-inline: 12px;
+    font-size: 12px;
+  }
+
+  .ig-view-toggle {
+    width: 100%;
+    gap: 4px;
+  }
+
+  .ig-view-toggle .ig-toggle-btn {
+    flex: 1 1 0;
+    justify-content: center;
+    min-width: 0;
+    min-height: 40px;
+    padding: 7px 6px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .ig-profile-header {
+    padding: 16px 14px;
+    margin-bottom: 18px;
+    border-radius: 16px;
+  }
+
+  .ig-avatar-ring {
+    width: 76px;
+    height: 76px;
+  }
+
+  .ig-profile-top {
+    gap: 8px;
+  }
+
+  .ig-username {
+    font-size: clamp(16px, 5vw, 20px);
+    letter-spacing: -0.04em;
+    gap: 5px;
+  }
+
+  .ig-verified-badge {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+    font-size: 9px;
+  }
+
+  .ig-follow-btn {
+    min-height: 38px;
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  .ig-stat {
+    font-size: 9px;
+  }
+
+  .ig-stat strong {
+    font-size: 14px;
+  }
+
+  .ig-tabs-bar {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .ig-tab {
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 2px;
+    font-size: 9px;
+  }
+
+  .ig-tab svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ig-grid-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .ig-grid-item {
+    aspect-ratio: 4 / 5;
+    border-radius: 14px;
+  }
+
+  .ig-grid-item img {
+    object-position: center 30%;
+  }
+
+  .ig-grid-overlay {
+    inset: auto 0 0;
+    min-height: 32%;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 3px;
+    padding: 6px;
+    opacity: 1;
+    background: linear-gradient(transparent, rgba(0, 15, 35, 0.88));
+    backdrop-filter: none;
+  }
+
+  .ig-overlay-role {
+    max-width: 100%;
+    padding: 3px 7px;
+    font-size: 8px;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ig-overlay-name {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    font-size: clamp(10px, 3.2vw, 13px);
+    line-height: 1.15;
+    text-align: left;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .ig-overlay-stats {
+    display: flex;
+    gap: 10px;
+    margin-top: 2px;
+    font-size: 10px;
+  }
+
+  .ig-feed-container {
+    gap: 16px;
+  }
+
+  .ig-post-card {
+    border-radius: 16px;
+  }
+
+  .ig-card-header {
+    padding: 10px;
+  }
+
+  .ig-user-avatar {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+  }
+
+  .ig-user-text strong {
+    font-size: 11px;
+  }
+
+  .ig-user-text span {
+    font-size: 10px;
+  }
+
+  .ig-card-badge {
+    max-width: 38%;
+    padding: 4px 7px;
+    font-size: 8px;
+    line-height: 1.25;
+  }
+
+  .ig-card-photo-wrap {
+    aspect-ratio: 4 / 4.5;
+  }
+
+  .ig-card-caption {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+  }
+
+  .ig-card-time {
+    font-size: 9px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .subpage-container {
+    width: calc(100% - 28px);
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+
+  .subpage-header {
+    margin-bottom: 26px;
+  }
+
+  .subpage-title-wrap h1 {
+    font-size: clamp(36px, 11vw, 52px);
+  }
+
+  .subpage-category-filters {
+    gap: 8px;
+  }
+
+  .filter-pill {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .full-gallery-grid {
+    gap: 10px;
+  }
+
+  .full-gallery-overlay {
+    padding: 12px;
+  }
+
+  .full-gallery-overlay h3 {
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+
+  .full-gallery-overlay p {
+    font-size: 11px;
+  }
+
+  .full-projects-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .project-showcase-body {
+    padding: 18px;
+  }
+
+  .project-showcase-body h3 {
+    font-size: 19px;
+    overflow-wrap: anywhere;
+  }
+
+  .project-team-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar {
+    width: calc(100% - 24px);
+  }
+
+  .brand {
+    gap: 7px;
+    font-size: 10px;
+    letter-spacing: 0.025em;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .mobile-menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ig-profile-header {
+    padding-inline: 11px;
+  }
+
+  .ig-username {
+    font-size: 15px;
+  }
+
+  .ig-follow-btn {
+    padding-inline: 9px;
+  }
+}
