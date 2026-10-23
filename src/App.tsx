@@ -6,7 +6,6 @@ type Member = {
   classPosition?: "Komisaris"
   handle: string
   image: string
-  photoPosition?: string
   accent: string
   quote?: string
   caption: string
@@ -174,7 +173,6 @@ const members: Member[] = [
     handle: "@syaqillaa0",
     image:
       "/images/personal/wawa.jpeg",
-    photoPosition: "center 100%",
     accent: "accent-blue",
     caption: "dipastikan yang ini baik hati💗",
   },
@@ -301,7 +299,6 @@ type GalleryItem = {
   category: "Moment" | "Hangout" | "Project" | "Events"
   image: string
   caption: string
-  imagePosition?: string
 }
 
 const galleryItems: GalleryItem[] = [
@@ -311,7 +308,6 @@ const galleryItems: GalleryItem[] = [
     category: "Events",
     image: "/images/galeri/batikday26.jpg",
     caption: "Batik Day 2026, Sayangi Budaya Indonesia!",
-    imagePosition: "center 80%",
   },
   {
     id: 2,
@@ -586,7 +582,6 @@ function MemberCard({
           className="member-photo"
           src={member.image}
           alt={`Portrait of ${member.name}`}
-          style={{ objectPosition: member.photoPosition }}
           loading="lazy"
         />
         <div className="photo-no">{String(index + 1).padStart(2, "0")}</div>
@@ -681,6 +676,7 @@ export default function App() {
   const [projectFilter, setProjectFilter] = useState<string>("All")
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
   const [selectedGalleryItem, setSelectedGalleryItem] = useState<GalleryItem | null>(null)
+  const [galleryImageAspect, setGalleryImageAspect] = useState<{ src: string; ratio: number } | null>(null)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [floatingProfilesIndex, setFloatingProfilesIndex] = useState(0)
@@ -1532,7 +1528,6 @@ export default function App() {
                 <img
                   src="/images/galeri/batikday26.jpg"
                   alt="Batik Day 2026"
-                  style={{ objectPosition: galleryItems[0].imagePosition }}
                 />
                 <figcaption>
                   <div>
@@ -1819,7 +1814,6 @@ export default function App() {
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  style={{ objectPosition: item.imagePosition }}
                 />
                 <figcaption className="full-gallery-overlay">
                   <span className="gallery-tag-pill">{item.category}</span>
@@ -2103,7 +2097,6 @@ export default function App() {
                     <img
                       src={member.image}
                       alt={member.name}
-                      style={{ objectPosition: member.photoPosition }}
                       loading="lazy"
                     />
                     <div className="ig-grid-overlay">
@@ -2564,8 +2557,25 @@ export default function App() {
             tabIndex={-1}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="gallery-lightbox-image-wrap">
-              <img src={selectedGalleryItem.image} alt={selectedGalleryItem.title} />
+            <div
+              className={`gallery-lightbox-image-wrap ${galleryImageAspect?.src === selectedGalleryItem.image ? "is-landscape" : ""}`}
+              style={galleryImageAspect?.src === selectedGalleryItem.image ? { aspectRatio: galleryImageAspect.ratio } : undefined}
+            >
+              <img
+                src={selectedGalleryItem.image}
+                alt={selectedGalleryItem.title}
+                onLoad={(event) => {
+                  const { naturalWidth, naturalHeight } = event.currentTarget
+                  setGalleryImageAspect(
+                    naturalWidth > naturalHeight
+                      ? {
+                          src: selectedGalleryItem.image,
+                          ratio: naturalWidth / naturalHeight,
+                        }
+                      : null,
+                  )
+                }}
+              />
               <span className="gallery-lightbox-counter">
                 {galleryItems.indexOf(selectedGalleryItem) + 1} / {galleryItems.length}
               </span>

@@ -1054,18 +1054,11 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   filter: saturate(0.65) contrast(1.08);
   transition:
     scale 650ms ease,
     filter 400ms ease;
-}
-
-.gallery-main img {
-  object-position: center 42%;
-}
-
-.gallery-top img {
-  object-position: center 35%;
 }
 
 .gallery-card::after {
@@ -2894,6 +2887,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .ig-modal-side {
@@ -3090,6 +3084,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 600ms ease;
 }
 
@@ -3172,6 +3167,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 500ms ease;
 }
 
@@ -3672,11 +3668,12 @@ a {
 
   .ig-modal-photo {
     flex: 0 0 auto;
-    height: clamp(165px, 25dvh, 220px);
+    height: clamp(340px, 70dvh, 600px);
   }
 
   .ig-modal-photo img {
-    object-position: center 35%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .ig-modal-side {
@@ -3884,6 +3881,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .project-modal-body h2 {
@@ -4041,6 +4039,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
   display: block;
 }
 
@@ -4596,13 +4595,13 @@ a {
   }
 
   .member-grid-mobile .member-card {
-    flex-basis: calc(100vw - 32px);
+    flex-basis: min(76%, 300px);
     padding: 7px;
     border-radius: 18px;
   }
 
   .member-grid-mobile .member-photo-wrap {
-    height: clamp(360px, 112vw, 440px);
+    height: clamp(220px, 64vw, 270px);
     border-radius: 13px;
   }
 
@@ -4808,6 +4807,15 @@ a {
     gap: 10px;
   }
 
+  .full-gallery-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .full-gallery-card img,
+  .gallery-card img {
+    object-position: center;
+  }
+
   .full-gallery-overlay {
     padding: 12px;
   }
@@ -4824,6 +4832,34 @@ a {
   .full-projects-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 18px;
+  }
+
+  .project-banner-preview {
+    height: clamp(220px, 68vw, 300px);
+  }
+
+  .project-modal-hero {
+    height: clamp(220px, 68vw, 300px);
+  }
+
+  .project-modal-hero img {
+    object-position: center;
+  }
+
+  .gallery-lightbox-image-wrap img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gallery-lightbox-image-wrap {
+    height: min(118vw, 62dvh, 520px);
+    flex-basis: min(118vw, 62dvh, 520px);
+  }
+
+  .gallery-lightbox-image-wrap.is-landscape {
+    height: auto;
+    max-height: 62dvh;
+    flex-basis: auto;
   }
 
   .project-showcase-body {
