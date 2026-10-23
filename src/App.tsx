@@ -679,7 +679,6 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null)
   const [selectedGalleryItem, setSelectedGalleryItem] = useState<GalleryItem | null>(null)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
-  const [isFollowing, setIsFollowing] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [floatingProfilesIndex, setFloatingProfilesIndex] = useState(0)
   const modalRef = useRef<HTMLDivElement>(null)
@@ -2031,16 +2030,15 @@ export default function App() {
                   datalearners.xxv
                   <span className="ig-verified-badge" title="Verified Class Profile">✓</span>
                 </h1>
-                <button 
-                  type="button" 
+                <a
+                  href={getInstagramProfileUrl("datalearners.xxv")}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="ig-follow-btn"
-                  onClick={() => {
-                    setIsFollowing(!isFollowing)
-                    showToast(isFollowing ? "Berhenti mengikuti @datalearners.xxv" : "Terima kasih sudah mengikuti @datalearners.xxv! ✨")
-                  }}
+                  aria-label="Follow datalearners.xxv di Instagram"
                 >
-                  {isFollowing ? "Mengikuti ✓" : "Follow"}
-                </button>
+                  Follow
+                </a>
               </div>
 
               <div className="ig-stats-row">
@@ -2048,7 +2046,7 @@ export default function App() {
                   <strong>{members.length}</strong> posts
                 </span>
                 <span className="ig-stat">
-                  <strong>{2025 + (isFollowing ? 1 : 0)}</strong> followers
+                  <strong>2025</strong> followers
                 </span>
                 <span className="ig-stat">
                   <strong>1</strong> following
