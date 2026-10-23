@@ -4723,58 +4723,13 @@ a {
   }
 
   .ig-grid-container {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3px;
   }
 
   .ig-grid-item {
-    aspect-ratio: 4 / 5;
-    border-radius: 14px;
-  }
-
-  .ig-grid-item img {
-    object-position: center 30%;
-  }
-
-  .ig-grid-overlay {
-    inset: auto 0 0;
-    min-height: 32%;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: 3px;
-    padding: 6px;
-    opacity: 1;
-    background: linear-gradient(transparent, rgba(0, 15, 35, 0.88));
-    backdrop-filter: none;
-  }
-
-  .ig-overlay-role {
-    max-width: 100%;
-    padding: 3px 7px;
-    font-size: 8px;
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .ig-overlay-name {
-    display: -webkit-box;
-    width: 100%;
-    overflow: hidden;
-    font-size: clamp(10px, 3.2vw, 13px);
-    line-height: 1.15;
-    text-align: left;
-    overflow-wrap: anywhere;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
-
-  .ig-overlay-stats {
-    display: flex;
-    gap: 10px;
-    margin-top: 2px;
-    font-size: 10px;
+    aspect-ratio: 1 / 1;
+    border-radius: 5px;
   }
 
   .ig-feed-container {
