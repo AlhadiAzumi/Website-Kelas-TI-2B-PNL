@@ -628,6 +628,10 @@ function ShareIcon() {
   )
 }
 
+function getInstagramProfileUrl(handle: string) {
+  return `https://www.instagram.com/${handle.replace(/^@/, "")}/`
+}
+
 function BookmarkIcon({ filled = false }: { filled?: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -2156,14 +2160,15 @@ export default function App() {
                         >
                           <CommentIcon />
                         </button>
-                        <button
-                          type="button"
+                        <a
                           className="ig-action-btn"
-                          onClick={() => void copyToClipboard(member.handle, `Handle ${member.handle}`)}
-                          aria-label="Share"
+                          href={getInstagramProfileUrl(member.handle)}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Buka profil Instagram ${member.handle}`}
                         >
                           <ShareIcon />
-                        </button>
+                        </a>
                       </div>
 
                       <button
@@ -2305,14 +2310,15 @@ export default function App() {
                         <button type="button" className="ig-action-btn" onClick={() => showToast(`Komentar untuk ${selectedMember.name} segera hadir! 💬`)}>
                           <CommentIcon />
                         </button>
-                        <button
-                          type="button" 
+                        <a
                           className="ig-action-btn"
-                          aria-label={`Salin handle ${selectedMember.handle}`}
-                          onClick={() => void copyToClipboard(selectedMember.handle, `Handle ${selectedMember.handle}`)}
+                          href={getInstagramProfileUrl(selectedMember.handle)}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Buka profil Instagram ${selectedMember.handle}`}
                         >
                           <ShareIcon />
-                        </button>
+                        </a>
                       </div>
                       <button
                         type="button"
@@ -2416,14 +2422,15 @@ export default function App() {
                     >
                       <HeartIcon filled={likedPosts[selectedMember.name]} />
                     </button>
-                    <button
-                      type="button"
+                    <a
                       className="ig-action-btn"
-                      aria-label="Salin handle"
-                      onClick={() => void copyToClipboard(selectedMember.handle, `Handle ${selectedMember.handle}`)}
+                      href={getInstagramProfileUrl(selectedMember.handle)}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Buka profil Instagram ${selectedMember.handle}`}
                     >
                       <ShareIcon />
-                    </button>
+                    </a>
                   </div>
                   <span className="ig-card-likes">
                     {(getMemberLikeCount(selectedMember) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
