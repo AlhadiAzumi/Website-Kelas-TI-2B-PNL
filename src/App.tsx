@@ -223,12 +223,12 @@ const members: Member[] = [
   },
   {
     name: "Syarifah tsalisa nur meutia",
-    interest: "System Analyst",
-    handle: "@tsalisa.xxv",
+    interest: "Backend Developer",
+    handle: "@liss_ca0",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/tsalitsa.jpg",
     accent: "accent-teal",
-    caption: "Halo semuanya! Saya Syarifah tsalisa nur meutia dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "uwuww",
   },
   {
     name: "Teuku Zaky Farhani",
