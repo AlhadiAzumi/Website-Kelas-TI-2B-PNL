@@ -106,12 +106,12 @@ const members: Member[] = [
   },
   {
     name: "Muhammad Farhan",
-    interest: "Graphic Designer",
-    handle: "@farhan.xxv",
+    interest: "AI Engineer",
+    handle: "@farhan_csc",
     image:
-      "/images/personal/s.jpeg",
+      "/images/personal/farhan.jpeg",
     accent: "accent-violet",
-    caption: "Halo semuanya! Saya Muhammad Farhan dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "Informatics Engineering Student at Politeknik Negeri Lhokseumawe | Aspiring AI Engineer & Software Developer | Student Developer Life",
   },
   {
     name: "Muhammad Ghifari Maulidan",
