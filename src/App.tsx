@@ -1935,7 +1935,7 @@ export default function App() {
                 Transforming Raw Data into <span>Future Stories.</span>
               </h1>
               <p className="about-page-tagline">
-                We are <strong>datalearners.xxv,</strong>bukan sekadar tempat
+                We are <strong>datalearners.xxv, </strong>bukan sekadar tempat
                 ngumpul, tapi wadah buat belajar, ngolah ide, dan berkembang bareng.
               </p>
               <div className="about-page-stats">
