@@ -3658,17 +3658,16 @@ a {
     display: flex;
     flex-direction: column;
     width: min(100%, 460px);
-    height: auto;
+    height: min(92dvh, 820px);
     max-height: calc(100dvh - 24px);
     border-radius: 20px;
-    overflow-y: auto;
+    overflow: hidden;
     overscroll-behavior: contain;
-    scrollbar-width: thin;
   }
 
   .ig-modal-photo {
     flex: 0 0 auto;
-    height: clamp(340px, 70dvh, 600px);
+    height: clamp(190px, 32dvh, 280px);
   }
 
   .ig-modal-photo img {
@@ -3677,9 +3676,12 @@ a {
   }
 
   .ig-modal-side {
+    flex: 1 1 auto;
     min-height: 0;
     padding: 16px 18px 18px;
-    overflow: visible;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
   }
 
   .ig-modal-side .ig-card-header {

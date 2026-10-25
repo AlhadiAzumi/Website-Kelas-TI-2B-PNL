@@ -124,12 +124,12 @@ const members: Member[] = [
   },
   {
     name: "Muhammad Irham Fahri",
-    interest: "Game Developer",
-    handle: "@irham.xxv",
+    interest: "Front-End Developer",
+    handle: "@Irhm_fhri",
     image:
-      "/images/personal/s.jpeg",
+      "/images/personal/irham.JPG",
     accent: "accent-cyan",
-    caption: "Halo semuanya! Saya Muhammad Irham Fahri dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: ".",
   },
   {
     name: "Muhammad Khairul Azmi",
@@ -178,12 +178,12 @@ const members: Member[] = [
   },
   {
     name: "Nurul fazillah",
-    interest: "Quality Assurance",
-    handle: "@nurul.xxv",
+    interest: "Front-End Developer",
+    handle: "@nrlfzllh_06",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/fazilla.jpg",
     accent: "accent-violet",
-    caption: "Halo semuanya! Saya Nurul fazillah dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "simply me. Error, panik, googling.",
   },
   {
     name: "Rahmat Naufal",
