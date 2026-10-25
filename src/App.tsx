@@ -192,13 +192,13 @@ const members: Member[] = [
   },
   {
     name: "Rahmat Naufal",
-    interest: "Back-End Developer",
-    handle: "@naufal.xxv",
+    interest: "Security Analyst",
+    handle: "@rht.l_",
     github: "RahmatNaufal",
     image:
-      "/images/personal/s.jpeg",
+      "/images/personal/rahmat.jpeg",
     accent: "accent-teal",
-    caption: "Halo semuanya! Saya Rahmat Naufal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "you are not a great person but you can",
   },
   {
     name: "Riska Ayu Nauli",
