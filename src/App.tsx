@@ -341,7 +341,7 @@ const galleryItems: GalleryItem[] = [
     id: 5,
     title: "We On Revoltik 2025",
     category: "Events",
-    image: "/images/galeri/revoltik.png",
+    image: "/images/galeri/revoltik.jpeg",
     caption: "We On Revoltik 2025, Revolution Leadership of TIK",
   },
   {
