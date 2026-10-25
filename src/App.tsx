@@ -5,6 +5,7 @@ type Member = {
   interest: string
   classPosition?: "Komisaris"
   handle: string
+  github?: string
   image: string
   accent: string
   quote?: string
@@ -27,6 +28,7 @@ const members: Member[] = [
     interest: "Backend Developer",
     classPosition: "Komisaris",
     handle: "@ahmadfairuzy29",
+    github: "ahmadfairuzy29-code",
     image:
       "/images/personal/fairuz.JPG",
     accent: "accent-blue",
@@ -36,6 +38,7 @@ const members: Member[] = [
     name: "Alhadi Azumi",
     interest: "AI Engineering",
     handle: "@alhdzm",
+    github: "AlhadiAzumi",
     image:
       "/images/personal/hadi.JPG",
     accent: "accent-violet",
@@ -72,6 +75,7 @@ const members: Member[] = [
     name: "Fadhlul Hadi",
     interest: "Cybersecurity",
     handle: "@fadhlul.xxv",
+    github: "fadlll",
     image:
       "/images/personal/s.jpeg",
     accent: "accent-violet",
@@ -108,6 +112,7 @@ const members: Member[] = [
     name: "Muhammad Farhan",
     interest: "AI Engineer",
     handle: "@farhan_csc",
+    github: "farhan-csc",
     image:
       "/images/personal/farhan.jpeg",
     accent: "accent-violet",
@@ -189,6 +194,7 @@ const members: Member[] = [
     name: "Rahmat Naufal",
     interest: "Back-End Developer",
     handle: "@naufal.xxv",
+    github: "RahmatNaufal",
     image:
       "/images/personal/s.jpeg",
     accent: "accent-teal",
@@ -222,7 +228,7 @@ const members: Member[] = [
     caption: "Halo semuanya! Saya Silvia Iqlima dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
   },
   {
-    name: "Syarifah tsalisa nur meutia",
+    name: "Syarifah Tsalisa Nur Meutia",
     interest: "Backend Developer",
     handle: "@liss_ca0",
     image:
@@ -234,6 +240,7 @@ const members: Member[] = [
     name: "Teuku Zaky Farhani",
     interest: "Web Developer",
     handle: "@tuvwxyzaky_",
+    github: "teukuzakyfarhani-design",
     image:
       "/images/personal/zaky.jpeg",
     accent: "accent-cyan",
@@ -626,6 +633,14 @@ function ShareIcon() {
   )
 }
 
+function GithubIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.68-3.75-1.32-3.75-1.32-.51-1.29-1.24-1.63-1.24-1.63-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.71 2.61 1.22 3.25.93.1-.72.39-1.22.71-1.5-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.14a10.6 10.6 0 0 1 5.55 0c2.11-1.44 3.05-1.14 3.05-1.14.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.61 5.23-5.1 5.51.4.35.76 1.03.76 2.08v3.06c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z" />
+    </svg>
+  )
+}
+
 function getInstagramProfileUrl(handle: string) {
   return `https://www.instagram.com/${handle.replace(/^@/, "")}/`
 }
@@ -728,11 +743,24 @@ export default function App() {
   useEffect(() => {
     if (currentPage !== "home") return
 
-    const rotation = window.setInterval(() => {
-      setFloatingProfilesIndex((index) => (index + 1) % members.length)
-    }, 3500)
+    const hero = document.querySelector<HTMLElement>(".hero")
+    if (!hero) return
 
-    return () => window.clearInterval(rotation)
+    let isHeroVisible = false
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isHeroVisible = entry.isIntersecting
+    })
+    visibilityObserver.observe(hero)
+
+    const rotation = window.setInterval(() => {
+      if (!isHeroVisible || document.hidden) return
+      setFloatingProfilesIndex((index) => (index + 1) % members.length)
+    }, 2800)
+
+    return () => {
+      window.clearInterval(rotation)
+      visibilityObserver.disconnect()
+    }
   }, [currentPage])
 
   useEffect(() => {
@@ -749,6 +777,11 @@ export default function App() {
     let activeMemberIndex = 0
     let lastInteractionAt = 0
     let initialized = false
+    let isTrackVisible = false
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isTrackVisible = entry.isIntersecting
+    }, { threshold: 0.15 })
+    visibilityObserver.observe(track)
 
     const centeredScrollLeft = (card: HTMLElement) => {
       const cardRect = card.getBoundingClientRect()
@@ -835,6 +868,7 @@ export default function App() {
     const autoplay = window.setInterval(() => {
       if (
         !track.clientWidth ||
+        !isTrackVisible ||
         document.hidden ||
         window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
         Date.now() - lastInteractionAt < 5000
@@ -852,7 +886,7 @@ export default function App() {
       } else {
         goToMember(nextIndex, "smooth")
       }
-    }, 6500)
+    }, 4500)
 
     track.addEventListener("scroll", onScroll, { passive: true })
     track.addEventListener("pointerdown", onInteraction, { passive: true })
@@ -862,6 +896,7 @@ export default function App() {
 
     return () => {
       window.clearInterval(autoplay)
+      visibilityObserver.disconnect()
       track.removeEventListener("scroll", onScroll)
       track.removeEventListener("pointerdown", onInteraction)
       track.removeEventListener("wheel", onInteraction)
@@ -887,6 +922,11 @@ export default function App() {
 
       let activeIndex = 0
       let lastInteractionAt = 0
+      let isTrackVisible = false
+      const visibilityObserver = new IntersectionObserver(([entry]) => {
+        isTrackVisible = entry.isIntersecting
+      }, { threshold: 0.15 })
+      visibilityObserver.observe(track)
 
       const centeredScrollLeft = (card: HTMLElement) => {
         const cardRect = card.getBoundingClientRect()
@@ -931,6 +971,7 @@ export default function App() {
       const autoplay = window.setInterval(() => {
         if (
           !track.clientWidth ||
+          !isTrackVisible ||
           !window.matchMedia("(max-width: 768px)").matches ||
           document.hidden ||
           window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
@@ -941,7 +982,7 @@ export default function App() {
 
         activeIndex = (activeIndex + 1) % cards.length
         goToCard(activeIndex, "smooth")
-      }, 6500)
+      }, 4500)
 
       track.addEventListener("scroll", onScroll, { passive: true })
       track.addEventListener("pointerdown", onInteraction, { passive: true })
@@ -951,6 +992,7 @@ export default function App() {
 
       return () => {
         window.clearInterval(autoplay)
+        visibilityObserver.disconnect()
         track.removeEventListener("scroll", onScroll)
         track.removeEventListener("pointerdown", onInteraction)
         track.removeEventListener("wheel", onInteraction)
@@ -1109,7 +1151,6 @@ export default function App() {
       <div className="background-grid" aria-hidden="true" />
       <div className="glow glow-one" aria-hidden="true" />
       <div className="glow glow-two" aria-hidden="true" />
-
       {/* Sticky Glassmorphism Header */}
       <header className={`navbar-wrap ${isScrolled ? "scrolled" : ""}`}>
         <nav className="navbar" aria-label="Main navigation">
@@ -1457,11 +1498,6 @@ export default function App() {
                   isClone
                 />
               </div>
-              <p className="member-swipe-hint">
-                Otomatis berputar · geser untuk lihat {members.length} anggota
-                <span aria-hidden="true">→</span>
-              </p>
-
               <button
                 className="carousel-control next"
                 type="button"
@@ -1496,7 +1532,7 @@ export default function App() {
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
-                Buka Instagram Feed Kelas (27 Members) →
+                Buka Instagram Feed Kelas →
               </button>
             </div>
           </section>
@@ -1597,7 +1633,7 @@ export default function App() {
                 </h2>
               </div>
               <p>
-                Bukan cuma tugas sekolah. Ini tempat ide kecil berubah jadi sesuatu
+                Bukan cuma tugas kuliah. Ini tempat ide kecil berubah jadi sesuatu
                 yang bisa diklik, dilihat, dan dibanggakan.
               </p>
             </header>
@@ -1896,12 +1932,13 @@ export default function App() {
                     <span className="project-team-author">
                       Karya: <strong>{p.author}</strong>
                     </span>
-                    <button 
+                    <button
                       type="button"
-                      style={{ background: "transparent", border: "none", color: "var(--cyan-bright)", display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, cursor: "pointer" }}
+                      className="project-explanation-button"
                       onClick={() => setSelectedProject(p)}
                     >
-                      Lihat Penjelasan Project <ArrowIcon />
+                      <span>Lihat Penjelasan Project</span>
+                      <ArrowIcon />
                     </button>
                   </div>
                 </div>
@@ -2318,6 +2355,18 @@ export default function App() {
                         >
                           <ShareIcon />
                         </a>
+                        {selectedMember.github && (
+                          <a
+                            className="ig-action-btn"
+                            href={`https://github.com/${selectedMember.github}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`Buka profil GitHub ${selectedMember.name}`}
+                            title={`GitHub: ${selectedMember.github}`}
+                          >
+                            <GithubIcon />
+                          </a>
+                        )}
                       </div>
                       <button
                         type="button"
@@ -2430,6 +2479,18 @@ export default function App() {
                     >
                       <ShareIcon />
                     </a>
+                    {selectedMember.github && (
+                      <a
+                        className="ig-action-btn"
+                        href={`https://github.com/${selectedMember.github}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Buka profil GitHub ${selectedMember.name}`}
+                        title={`GitHub: ${selectedMember.github}`}
+                      >
+                        <GithubIcon />
+                      </a>
+                    )}
                   </div>
                   <span className="ig-card-likes">
                     {(getMemberLikeCount(selectedMember) + (likedPosts[selectedMember.name] ? 1 : 0)).toLocaleString()} suka
@@ -2561,6 +2622,12 @@ export default function App() {
               className={`gallery-lightbox-image-wrap ${galleryImageAspect?.src === selectedGalleryItem.image ? "is-landscape" : ""}`}
               style={galleryImageAspect?.src === selectedGalleryItem.image ? { aspectRatio: galleryImageAspect.ratio } : undefined}
             >
+              <img
+                className="gallery-lightbox-image-backdrop"
+                src={selectedGalleryItem.image}
+                alt=""
+                aria-hidden="true"
+              />
               <img
                 src={selectedGalleryItem.image}
                 alt={selectedGalleryItem.title}

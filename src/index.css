@@ -1166,6 +1166,7 @@ a {
   overflow: hidden;
   background:
     radial-gradient(circle at 86% 78%, rgba(0, 186, 239, 0.18), transparent 24%),
+    linear-gradient(180deg, #001e3d 0%, rgba(0, 30, 61, 0.72) 190px, transparent 360px),
     linear-gradient(150deg, #00548e 0%, #00355f 48%, #001e3d 100%);
 }
 
@@ -1395,7 +1396,7 @@ a {
   padding-top: 120px;
   padding-bottom: 120px;
   background:
-    linear-gradient(rgba(0, 30, 61, 0.94), rgba(0, 30, 61, 0.94)),
+    linear-gradient(180deg, rgba(0, 30, 61, 0.94) 0%, rgba(0, 30, 61, 0.94) 68%, rgba(0, 22, 47, 0.98) 100%),
     radial-gradient(circle, var(--cyan) 1px, transparent 1.5px);
   background-size:
     auto,
@@ -3253,6 +3254,42 @@ a {
   color: var(--cyan-bright);
 }
 
+.project-explanation-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(91, 220, 255, 0.24);
+  border-radius: 10px;
+  background: rgba(0, 186, 239, 0.08);
+  color: var(--cyan-bright);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.project-explanation-button:hover {
+  background: rgba(0, 186, 239, 0.17);
+  border-color: rgba(91, 220, 255, 0.5);
+  transform: translateX(2px);
+}
+
+.project-explanation-button svg {
+  display: block;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .project-tags {
   display: flex;
   gap: 6px;
@@ -4043,6 +4080,13 @@ a {
   object-fit: contain;
   object-position: center;
   display: block;
+}
+
+.gallery-lightbox-image-wrap .gallery-lightbox-image-backdrop {
+  object-fit: cover;
+  filter: blur(24px) saturate(0.75);
+  opacity: 0.42;
+  transform: scale(1.08);
 }
 
 .gallery-lightbox-nav {
@@ -4848,6 +4892,10 @@ a {
     object-position: center;
   }
 
+  .gallery-lightbox-image-wrap .gallery-lightbox-image-backdrop {
+    display: none;
+  }
+
   .gallery-lightbox-image-wrap img {
     object-fit: cover;
     object-position: center;
@@ -4876,7 +4924,13 @@ a {
   .project-team-row {
     align-items: flex-start;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .project-explanation-button {
+    align-self: flex-start;
+    max-width: 100%;
+    white-space: normal;
   }
 }
 
