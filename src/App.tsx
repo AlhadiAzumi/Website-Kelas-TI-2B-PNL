@@ -64,12 +64,12 @@ const members: Member[] = [
   },
   {
     name: "Cut Nanda Asy-Syifa",
-    interest: "Data Analyst",
+    interest: "UI/UX Designer",
     handle: "@pocutnandaa",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/pocut.jpeg",
     accent: "accent-blue",
-    caption: "Halo semuanya! Saya Cut Nanda Asy-Syifa dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "But if you never try, you'll never know.",
   },
   {
     name: "Fadhlul Hadi",
@@ -220,12 +220,12 @@ const members: Member[] = [
   },
   {
     name: "Silvia Iqlima",
-    interest: "Database Administrator",
-    handle: "@silvia.xxv",
+    interest: "Data Analyst System",
+    handle: "@silviaiqlm_",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/silvia.jpg",
     accent: "accent-violet",
-    caption: "Halo semuanya! Saya Silvia Iqlima dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "-- Your path is as long as your intention --",
   },
   {
     name: "Syarifah Tsalisa Nur Meutia",
