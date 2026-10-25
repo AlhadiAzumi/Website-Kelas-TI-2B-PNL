@@ -42,7 +42,7 @@ const members: Member[] = [
     image:
       "/images/personal/hadi.JPG",
     accent: "accent-violet",
-    caption: "everyone can be anything what them want, except me:3",
+    caption: "everyone can be anything what they want, except me:3",
   },
   {
     name: "Anzirwan Ramadhan",
@@ -272,7 +272,7 @@ const memberLikeCounts: Record<string, number> = {
   "Alhadi Azumi": 1201,
   "Anzirwan Ramadhan": 455,
   "Ayla Azzura": 464,
-  "Cut Nanda Asy-Syifa": 473,
+  "Cut Nanda Asy-Syifa": 512,
   "Fadhlul Hadi": 700,
   "Fatia Azahara": 491,
   "Hassila Zuhra": 400,
@@ -290,7 +290,7 @@ const memberLikeCounts: Record<string, number> = {
   "Riska Ayu Nauli": 508,
   "Said Fachrian Jamaal": 517,
   "Silvia Iqlima": 526,
-  "Syarifah tsalisa nur meutia": 535,
+  "Syarifah Tsalisa Nur Meutia": 535,
   "Teuku Zaky Farhani": 544,
   "Wahyu Haiqal": 553,
   "Zaskya Adindazahra": 562,
