@@ -286,7 +286,7 @@ const memberLikeCounts: Record<string, number> = {
   "Nabila Syifa": 472,
   "Nazwa Syaqilla Putri": 481,
   "Nurul fazillah": 490,
-  "Rahmat Naufal": 499,
+  "Rahmat Naufal": 711,
   "Riska Ayu Nauli": 508,
   "Said Fachrian Jamaal": 517,
   "Silvia Iqlima": 526,
