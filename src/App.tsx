@@ -55,12 +55,13 @@ const members: Member[] = [
   },
   {
     name: "Ayla Azzura",
-    interest: "UI/UX Designer",
-    handle: "@ayla.xxv",
+    interest: "Front-End Developer",
+    handle: "@aylaazzraa",
+    github: "aylaazzura0407-afk",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/ayla.jpeg",
     accent: "accent-cyan",
-    caption: "Halo semuanya! Saya Ayla Azzura dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "i love my smilee",
   },
   {
     name: "Cut Nanda Asy-Syifa",
