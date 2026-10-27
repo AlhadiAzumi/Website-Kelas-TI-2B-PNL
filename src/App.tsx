@@ -167,12 +167,12 @@ const members: Member[] = [
   },
   {
     name: "Nabila Syifa",
-    interest: "Front-End Developer",
-    handle: "@nabilasyifa.xxv",
+    interest: "Social Media Specialist",
+    handle: "@nblsyfa._",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/nabila.jpeg",
     accent: "accent-cyan",
-    caption: "Halo semuanya! Saya Nabila Syifa dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "nothing caption, just vibe.",
   },
   {
     name: "Nazwa Syaqilla Putri",
@@ -433,22 +433,22 @@ const projectItems: ProjectItem[] = [
   },
   {
     id: 3,
-    index: "03 / UI DESIGN",
-    category: "UI DESIGN",
-    title: "Class Digital Yearbook XXV",
-    description: "Konsep UI/UX buku tahunan interaktif berbasis web dengan nuansa futuristik cyber & neon glass.",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=88",
+    index: "03 / WEB",
+    category: "WEB",
+    title: "Pseudonym",
+    description: "Website ala Secreto/NGL: siapa pun bisa kirim pesan rahasia ke akun terdaftar tanpa perlu daftar, sedangkan untuk menerima pesan harus login pakai Google. Semua pesan + balasan pemilik bisa dibaca publik, tapi hanya pemilik akun yang bisa membalas.",
+    image: "/images/projek/pseudonym.png",
     status: "COMPLETED",
-    author: "Tim UI/UX Designers",
-    techStack: ["Figma", "Design System", "Prototyping"],
-    explanation: "Desain sistem antarmuka buku tahunan digital untuk mengabadikan profil seluruh mahasiswa angkatan 2025/2026. Mengusung konsep Glassmorphism, Micro-interactions, dan layout grid bergaya modern aesthetic.",
+    author: "Alhadi Azumi",
+    techStack: ["Native PHP", "Supabase", "Google OAuth", "TailwindCSS"],
+    explanation: "Pseudonym adalah platform web pesan anonim yang dirancang untuk memfasilitasi komunikasi dan umpan balik secara jujur tanpa mengungkapkan identitas pengirim. Menggabungkan kemudahan login melalui Google OAuth 2.0 bagi penerima pesan, platform ini didukung oleh Native PHP, Supabase (PostgreSQL) sebagai basis data cloud, serta arsitektur serverless deployment di Vercel untuk menjaga performa yang cepat dan responsif.",
     features: [
-      "Desain Komponen Modular & Reusable",
-      "Interaksi Animasi Transisi Halus (Smart Animate)",
-      "Tampilan Profil & Story Highlight Mahasiswa",
-      "Optimasi Tampilan Layar Desktop & Mobile"
+      "Penerima pesan dapat membuat dan mengelola akun dengan mudah dan aman menggunakan Google OAuth 2.0.",
+      "Setiap pengguna mendapatkan link profil kustom untuk dibagikan di media sosial.",
+      "Antarmuka pesan masuk yang intuitif untuk membaca dan mengelola tanggapan anonim.",
+      "Penyimpanan data yang terstruktur dan responsif menggunakan PostgreSQL via Supabase."
     ],
-    githubUrl: "https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL",
+    githubUrl: "https://github.com/AlhadiAzumi/pseudonym",
   },
   {
     id: 4,
