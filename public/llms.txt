@@ -1,18 +1,17 @@
-# DATALEARNERS.XXV - Kelas TI 2B Politeknik Negeri Lhokseumawe
+# DATALEARNERS.XXV - TI 2B Politeknik Negeri Lhokseumawe
 
-> Website resmi dan direktori profil mahasiswa kelas TI 2B (Teknik Informatika) Politeknik Negeri Lhokseumawe (PNL), Angkatan 2026.
+> Direktori resmi profil mahasiswa kelas TI 2B (Teknik Informatika) Politeknik Negeri Lhokseumawe angkatan 2026.
 
-## Ringkasan Kelas
-- **Nama Kelas**: DATALEARNERS.XXV (TI 2B)
-- **Institusi**: Politeknik Negeri Lhokseumawe (PNL), Jurusan TIK
-- **Jumlah Mahasiswa**: 27 Mahasiswa aktif
-- **Fokus Minat**: Data Science, AI Engineering, Full-Stack Development, Mobile App Development, UI/UX Design, Cybersecurity, Backend & Cloud.
-- **Website Resmi**: https://datalearnersxxv.vercel.app/
-- **Repository**: https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL
+Website portofolio resmi yang menampilkan 27 profil mahasiswa, showcase karya dan proyek teknologi, serta dokumentasi galeri kegiatan perkuliahan.
 
-## Struktur Halaman
-- `/` atau `#home`: Hero section, pengenalan kelas, highlight anggota, sekilas galeri kegiatan, dan ringkasan proyek.
-- `#people`: Direktori interaktif 27 anggota kelas dengan format Instagram profile, bio, role, keahlian, dan tautan sosial media / GitHub.
-- `#gallery`: Dokumentasi foto momen kelas, kegiatan semester, event kampus (Batik Day, Revoltik, bakar-bakar rayap).
-- `#projects`: Showcase proyek mandiri dan tugas kelompok mahasiswa (Website Kelas, Sistem Informasi, Web GIS, dsb).
-- `#about`: Informasi visi, profil kepengurusan kelas (Komisaris), dan filosofi Datalearners.XXV.
+## Pages and Sections
+
+- [Beranda](https://datalearnersxxv.vercel.app/#home): Halaman utama kelas TI 2B Politeknik Negeri Lhokseumawe.
+- [Daftar Anggota Kelas](https://datalearnersxxv.vercel.app/#people): Direktori interaktif 27 mahasiswa beserta profil keahlian, minat, dan tautan media sosial / GitHub.
+- [Galeri Dokumentasi](https://datalearnersxxv.vercel.app/#gallery): Galeri foto kegiatan kelas, perkuliahan, dan event kampus (Batik Day, Revoltik, kumpul santai).
+- [Showcase Tugas & Proyek](https://datalearnersxxv.vercel.app/#projects): Portofolio tugas dan proyek pemrograman mahasiswa (Web App, Mobile, GIS, AI).
+- [Tentang Kelas](https://datalearnersxxv.vercel.app/#about): Visi kelas, struktur kepengurusan kelas (Komisaris), dan filosofi Datalearners.XXV.
+
+## Optional
+
+- [Source Code Repository](https://github.com/AlhadiAzumi/Website-Kelas-TI-2B-PNL): Repositori kode sumber terbuka website kelas di GitHub.

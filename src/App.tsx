@@ -1391,7 +1391,16 @@ export default function App() {
               <div 
                 className="student-count" 
                 style={{ cursor: "pointer" }}
+                role="button"
+                tabIndex={0}
+                aria-label="Buka feed 27 profil anggota kelas Datalearners"
                 onClick={() => navigateTo("people")}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    navigateTo("people")
+                  }
+                }}
                 title="Buka Instagram Feed Anggota"
               >
                 <div className="avatar-stack">
@@ -1562,7 +1571,20 @@ export default function App() {
             </div>
 
             <div className="gallery-grid" ref={mobileGalleryTrackRef}>
-              <figure className="gallery-card gallery-main" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[0])}>
+              <figure 
+                className="gallery-card gallery-main" 
+                style={{ cursor: "pointer" }} 
+                role="button"
+                tabIndex={0}
+                aria-label={`Buka foto momen ${galleryItems[0].title}`}
+                onClick={() => setSelectedGalleryItem(galleryItems[0])}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    setSelectedGalleryItem(galleryItems[0])
+                  }
+                }}
+              >
                 <img
                   src="/images/galeri/batikday26.jpg"
                   alt="Batik Day 2026"
@@ -1582,7 +1604,20 @@ export default function App() {
                 </figcaption>
               </figure>
 
-              <figure className="gallery-card gallery-top" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[1])}>
+              <figure 
+                className="gallery-card gallery-top" 
+                style={{ cursor: "pointer" }} 
+                role="button"
+                tabIndex={0}
+                aria-label={`Buka foto momen ${galleryItems[1].title}`}
+                onClick={() => setSelectedGalleryItem(galleryItems[1])}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    setSelectedGalleryItem(galleryItems[1])
+                  }
+                }}
+              >
                 <img
                   src="/images/galeri/sem3.jpg"
                   alt="Students focusing during a classroom session"
@@ -1599,7 +1634,20 @@ export default function App() {
                 </figcaption>
               </figure>
 
-              <figure className="gallery-card gallery-bottom" style={{ cursor: "pointer" }} onClick={() => setSelectedGalleryItem(galleryItems[2])}>
+              <figure 
+                className="gallery-card gallery-bottom" 
+                style={{ cursor: "pointer" }} 
+                role="button"
+                tabIndex={0}
+                aria-label={`Buka foto momen ${galleryItems[2].title}`}
+                onClick={() => setSelectedGalleryItem(galleryItems[2])}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    setSelectedGalleryItem(galleryItems[2])
+                  }
+                }}
+              >
                 <img
                   src="/images/galeri/lastclasem2.jpg"
                   alt="Last Class On Second Semester"
