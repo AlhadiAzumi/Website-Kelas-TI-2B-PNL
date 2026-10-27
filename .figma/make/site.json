@@ -1,11 +1,15 @@
 {
-  "title": "DATALEARNERS.XXV ✦ Class Portfolio",
-  "description": "Showcases a vibrant, interactive class website featuring member profiles, project highlights, and easy navigation to connect and engage students.",
+  "title": "DATALEARNERS.XXV ✦ Kelas TI 2B Politeknik Negeri Lhokseumawe",
+  "description": "Website Resmi Kelas TI 2B Politeknik Negeri Lhokseumawe (Datalearners.XXV) - Angkatan 2026. Menampilkan profil 27 mahasiswa, galeri dokumentasi kegiatan, dan showcase portofolio proyek teknologi informasi.",
+  "language": "id",
   "icons": {
     "icon": "/datalearners-logo.png"
   },
   "robots": {
-    "index": false
+    "index": true
+  },
+  "openGraph": {
+    "image": "/datalearners-logo.png"
   },
   "accessibility": {
     "addBypassLinks": false,

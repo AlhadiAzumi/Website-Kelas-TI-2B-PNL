@@ -536,7 +536,7 @@ function Spark({ className = "" }: { className?: string }) {
 function Logo() {
   return (
     <div className="brand-mark">
-      <img src="/datalearners-logo.png" alt="" />
+      <img src="/datalearners-logo.png" alt="Logo Datalearners.XXV" width="40" height="40" decoding="async" />
     </div>
   )
 }
@@ -550,7 +550,7 @@ function FloatingProfile({
 }) {
   return (
     <div key={member.name} className={`floating-profile ${className}`}>
-      <img src={member.image} alt="" />
+      <img src={member.image} alt={member.name} width="40" height="40" decoding="async" />
       <div>
         <strong>{member.handle}</strong>
         <span>{member.interest}</span>
@@ -1145,7 +1145,7 @@ export default function App() {
     <main className="site-shell">
       <div className="intro-screen" aria-hidden="true">
         <div className="intro-screen-mark">
-          <img src="/datalearners-logo.png" alt="" />
+          <img src="/datalearners-logo.png" alt="Datalearners Logo" width="62" height="62" />
         </div>
         <span className="intro-screen-label">DATALEARNERS.XXV</span>
         <div className="intro-screen-progress" />
@@ -1396,7 +1396,7 @@ export default function App() {
               >
                 <div className="avatar-stack">
                   {members.slice(0, 3).map((member) => (
-                    <img key={member.name} src={member.image} alt="" />
+                    <img key={member.name} src={member.image} alt={member.name} width="32" height="32" decoding="async" />
                   ))}
                 </div>
                 <div>
@@ -1566,6 +1566,10 @@ export default function App() {
                 <img
                   src="/images/galeri/batikday26.jpg"
                   alt="Batik Day 2026"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="450"
                 />
                 <figcaption>
                   <div>
@@ -1582,6 +1586,10 @@ export default function App() {
                 <img
                   src="/images/galeri/sem3.jpg"
                   alt="Students focusing during a classroom session"
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="300"
                 />
                 <figcaption>
                   <div>
@@ -1595,6 +1603,10 @@ export default function App() {
                 <img
                   src="/images/galeri/lastclasem2.jpg"
                   alt="Last Class On Second Semester"
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="300"
                 />
                 <figcaption>
                   <div>
