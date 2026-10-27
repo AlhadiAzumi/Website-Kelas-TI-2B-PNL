@@ -1716,7 +1716,7 @@ export default function App() {
                 }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
-                <div className="project-index">01 / WEB</div>
+                <div className="project-index">{projectItems[0].index}</div>
                 <div className="project-visual">
                   <img
                     className="project-cover-image"
@@ -1724,18 +1724,30 @@ export default function App() {
                     alt={projectItems[0].title}
                     loading="lazy"
                   />
+                  <span className="project-cat-badge">{projectItems[0].category}</span>
+                  <span className="project-status-badge completed">{projectItems[0].status}</span>
                 </div>
                 <div className="project-info">
-                  <span className="project-status">COMPLETED</span>
-                  <h3>Deteksi kematangan buah tomat berbasis pengolahan citra digital</h3>
-                  <p>
-                    Project ini dikembangkan untuk mempermudah mengetahui sebuah tomat itu matang atau tidak, dengan menggunakan teknologi pengolahan citra digital. Sistem menganalisa gambar bisa dengan mengupload file ataupun melalui kamera.
-                  </p>
+                  <span className="project-status">{projectItems[0].status}</span>
+                  <h3>{projectItems[0].title}</h3>
+                  <p>{projectItems[0].description}</p>
                   <div className="tech-list">
-                    <span>Python</span>
-                    <span>Flask</span>
-                    <span>Scikit-learn</span>
-                    <span>OpenCV</span>
+                    {projectItems[0].techStack.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: "18px" }}>
+                    <button
+                      type="button"
+                      className="project-explanation-button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setSelectedProject(projectItems[0])
+                      }}
+                    >
+                      <span>Lihat Penjelasan Project</span>
+                      <ArrowIcon />
+                    </button>
                   </div>
                 </div>
               </article>
@@ -1755,14 +1767,37 @@ export default function App() {
                 }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
-                <div className="project-index">02 / WEB</div>
-                <div className="mini-project-icon">Cat</div>
+                <div className="project-index">{projectItems[1].index}</div>
+                <div className="project-banner-preview" style={{ borderRadius: "14px", height: "175px", margin: "14px 0 16px", border: "1px solid rgba(91, 220, 255, 0.22)" }}>
+                  <img
+                    src={projectItems[1].image}
+                    alt={projectItems[1].title}
+                    loading="lazy"
+                  />
+                  <span className="project-cat-badge">{projectItems[1].category}</span>
+                  <span className="project-status-badge completed">{projectItems[1].status}</span>
+                </div>
                 <div className="project-info">
-                  <span className="project-status">COMPLETED</span>
-                  <h3>Meow Cat Hotel & Grooming</h3>
-                  <p>Website layanan penitipan dan Grooming kucing yang dilengkapi informasi layanan, galeri, testimoni, kontak, dan fitur booking dengan desain yang menarik dan mudah digunakan. Proyek ini akan terus dikembangkan.</p>
-                  <div className="progress-track">
-                    <span />
+                  <span className="project-status">{projectItems[1].status}</span>
+                  <h3>{projectItems[1].title}</h3>
+                  <p>{projectItems[1].description}</p>
+                  <div className="tech-list" style={{ marginTop: "12px" }}>
+                    {projectItems[1].techStack.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: "18px" }}>
+                    <button
+                      type="button"
+                      className="project-explanation-button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setSelectedProject(projectItems[1])
+                      }}
+                    >
+                      <span>Lihat Penjelasan Project</span>
+                      <ArrowIcon />
+                    </button>
                   </div>
                 </div>
               </article>
@@ -1782,15 +1817,38 @@ export default function App() {
                 }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
-                <div className="project-index">03 / WEB</div>
-                <div className="mini-project-icon">PSDNYM</div>
+                <div className="project-index">{projectItems[2].index}</div>
+                <div className="project-banner-preview" style={{ borderRadius: "14px", height: "175px", margin: "14px 0 16px", border: "1px solid rgba(91, 220, 255, 0.22)" }}>
+                  <img
+                    src={projectItems[2].image}
+                    alt={projectItems[2].title}
+                    loading="lazy"
+                  />
+                  <span className="project-cat-badge">{projectItems[2].category}</span>
+                  <span className="project-status-badge completed">{projectItems[2].status}</span>
+                </div>
                 <div className="project-info">
-                  <span className="project-status">COMPLETED</span>
-                  <h3>Pseudonym</h3>
-                  <p>Platform web pesan anonim untuk komunikasi jujur tanpa mengungkapkan identitas.</p>
-                  <span style={{ color: "var(--cyan-bright)", fontSize: "11px", fontWeight: 700, display: "inline-flex", alignItems: "center", gap: "6px" }}>
-                    DETAIL PENJELASAN <ArrowIcon />
-                  </span>
+                  <span className="project-status">{projectItems[2].status}</span>
+                  <h3>{projectItems[2].title}</h3>
+                  <p>{projectItems[2].description}</p>
+                  <div className="tech-list" style={{ marginTop: "12px" }}>
+                    {projectItems[2].techStack.map((tech) => (
+                      <span key={tech}>{tech}</span>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: "18px" }}>
+                    <button
+                      type="button"
+                      className="project-explanation-button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setSelectedProject(projectItems[2])
+                      }}
+                    >
+                      <span>Lihat Penjelasan Project</span>
+                      <ArrowIcon />
+                    </button>
+                  </div>
                 </div>
               </article>
             </div>
