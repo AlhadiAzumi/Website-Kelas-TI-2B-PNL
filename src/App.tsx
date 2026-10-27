@@ -1695,12 +1695,12 @@ export default function App() {
                 }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
-                <div className="project-index">02 / DATA</div>
-                <div className="mini-project-icon">01</div>
+                <div className="project-index">02 / WEB</div>
+                <div className="mini-project-icon">Cat</div>
                 <div className="project-info">
-                  <span className="project-status">IN PROGRESS</span>
-                  <h3>Data Cuaca Harian</h3>
-                  <p>Mengolah data sederhana menjadi cerita visual.</p>
+                  <span className="project-status">COMPLETED</span>
+                  <h3>Meow Cat Hotel & Grooming</h3>
+                  <p>Website layanan penitipan dan Grooming kucing yang dilengkapi informasi layanan, galeri, testimoni, kontak, dan fitur booking dengan desain yang menarik dan mudah digunakan. Proyek ini akan terus dikembangkan.</p>
                   <div className="progress-track">
                     <span />
                   </div>
@@ -1722,12 +1722,12 @@ export default function App() {
                 }}
                 title="Klik untuk melihat penjelasan lengkap"
               >
-                <div className="project-index">03 / UI DESIGN</div>
-                <div className="mini-project-icon">Aa</div>
+                <div className="project-index">03 / WEB</div>
+                <div className="mini-project-icon">PSDNYM</div>
                 <div className="project-info">
-                  <span className="project-status">CONCEPT</span>
-                  <h3>Class Digital Yearbook</h3>
-                  <p>Arsip digital untuk menyimpan cerita kelas TI 2B.</p>
+                  <span className="project-status">COMPLETED</span>
+                  <h3>Pseudonym</h3>
+                  <p>Platform web pesan anonim untuk komunikasi jujur tanpa mengungkapkan identitas.</p>
                   <span style={{ color: "var(--cyan-bright)", fontSize: "11px", fontWeight: 700, display: "inline-flex", alignItems: "center", gap: "6px" }}>
                     DETAIL PENJELASAN <ArrowIcon />
                   </span>
