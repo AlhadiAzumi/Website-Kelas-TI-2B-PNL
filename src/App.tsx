@@ -131,11 +131,11 @@ const members: Member[] = [
   {
     name: "Muhammad Irham Fahri",
     interest: "Front-End Developer",
-    handle: "@Irhm_fhri",
+    handle: "@irhm_fhri",
     image:
       "/images/personal/irham.JPG",
     accent: "accent-cyan",
-    caption: ".",
+    caption: "sayangi tubuhmu",
   },
   {
     name: "Muhammad Khairul Azmi",
@@ -258,12 +258,12 @@ const members: Member[] = [
   },
   {
     name: "Zaskya Adindazahra",
-    interest: "UI/UX Designer",
-    handle: "@zaskya.xxv",
+    interest: "Web Designer",
+    handle: "@z.adnda_",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/dinda.jpg",
     accent: "accent-violet",
-    caption: "Halo semuanya! Saya Zaskya Adindazahra dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "Tidak perlu cepat, cukup tepat.",
   },
 ]
 
