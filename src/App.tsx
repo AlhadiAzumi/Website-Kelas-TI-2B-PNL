@@ -169,6 +169,7 @@ const members: Member[] = [
     name: "Nabila Syifa",
     interest: "Social Media Specialist",
     handle: "@nblsyfa._",
+    github: "nabilasyifa2025-hue",
     image:
       "/images/personal/nabila.jpeg",
     accent: "accent-cyan",
@@ -185,12 +186,13 @@ const members: Member[] = [
   },
   {
     name: "Nurul fazillah",
-    interest: "Front-End Developer",
+    interest: "Digital Image Processing",
     handle: "@nrlfzllh_06",
+    github: "nurulfazillah08-desain",
     image:
       "/images/personal/fazilla.jpg",
     accent: "accent-violet",
-    caption: "simply me. Error, panik, googling.",
+    caption: "sweet pea",
   },
   {
     name: "Rahmat Naufal",
