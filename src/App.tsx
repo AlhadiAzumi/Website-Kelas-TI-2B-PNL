@@ -204,12 +204,13 @@ const members: Member[] = [
   },
   {
     name: "Riska Ayu Nauli",
-    interest: "Digital Marketing",
-    handle: "@riska.xxv",
+    interest: "Database Developer",
+    handle: "@rizkaayunauly",
+    github: "NAULI12",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/riska.jpeg",
     accent: "accent-cyan",
-    caption: "Halo semuanya! Saya Riska Ayu Nauli dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "🚀Dari Rasa Penasaran Menjadi Sebuah Keahlian!💻✨  Dunia teknologi terus berkembang, dan setiap baris kode adalah langkah kecil menuju inovasi besar. Belajar IT bukan hanya tentang memahami teknologi, tetapi juga tentang menciptakan solusi, mengembangkan kreativitas, dan menghadapi tantangan di era digital. Keep Learning, Keep Growing, and Never Stop Innovating!🌐🔥",
   },
   {
     name: "Said Fachrian Jamaal",
