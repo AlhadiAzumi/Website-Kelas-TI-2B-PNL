@@ -122,7 +122,7 @@ const members: Member[] = [
   {
     name: "Muhammad Ghifari Maulidan",
     interest: "Network Engineer",
-    handle: "@ghifari.xxv",
+    handle: "@mghifari",
     image:
       "/images/personal/s.jpeg",
     accent: "accent-teal",
