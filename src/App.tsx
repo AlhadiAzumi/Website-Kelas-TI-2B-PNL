@@ -75,7 +75,7 @@ const members: Member[] = [
   {
     name: "Fadhlul Hadi",
     interest: "Cybersecurity",
-    handle: "@fadhlul.xxv",
+    handle: "@fdhlulhd",
     github: "fadlll",
     image:
       "/images/personal/s.jpeg",
