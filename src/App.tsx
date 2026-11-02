@@ -57,7 +57,7 @@ const members: Member[] = [
     name: "Ayla Azzura",
     interest: "Front-End Developer",
     handle: "@aylaazzraa",
-    github: "aylaazzura0407-afk",
+    github: "aylazzura",
     image:
       "/images/personal/ayla.jpeg",
     accent: "accent-cyan",
