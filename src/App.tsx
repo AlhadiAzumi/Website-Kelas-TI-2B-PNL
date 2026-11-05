@@ -84,12 +84,12 @@ const members: Member[] = [
   },
   {
     name: "Fatia Azahara",
-    interest: "Mobile App Developer",
-    handle: "@fatia.xxv",
+    interest: "Front-End Developer",
+    handle: "@_ftiazhrraa",
     image:
-      "/images/personal/siluetce.jpeg",
+      "/images/personal/fatia.jpg",
     accent: "accent-teal",
-    caption: "Halo semuanya! Saya Fatia Azahara dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "yang penting sistem jalan, bukan omongan.",
   },
   {
     name: "Hassila Zuhra",
