@@ -158,12 +158,12 @@ const members: Member[] = [
   },
   {
     name: "Muhammad Zakin Nizar",
-    interest: "Product Designer",
-    handle: "@zakin.xxv",
+    interest: "Cyber Security",
+    handle: "@mzknzrq",
     image:
-      "/images/personal/s.jpeg",
+      "/images/personal/zakin.JPG",
     accent: "accent-teal",
-    caption: "Halo semuanya! Saya Muhammad Zakin Nizar dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "javanism",
   },
   {
     name: "Nabila Syifa",
