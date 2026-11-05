@@ -2106,7 +2106,7 @@ a {
     margin-inline: -20px;
     padding: 12px 24px 22px;
     scrollbar-width: none;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -2196,7 +2196,7 @@ a {
     margin-inline: -20px;
     padding: 12px 0 22px;
     scrollbar-width: none;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -2231,7 +2231,7 @@ a {
     margin-inline: -20px;
     padding: 12px 0 22px;
     scrollbar-width: none;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     -webkit-overflow-scrolling: touch;
   }
 
