@@ -97,7 +97,7 @@ const members: Member[] = [
     handle: "@hsslzuhra_",
     github: "HassilaZuhra",
     image:
-      "/images/personal/hassila.jpeg",
+      "/images/personal/hassila.jpg",
     accent: "accent-cyan",
     caption: "Observing, Never Absorbing ",
   },
