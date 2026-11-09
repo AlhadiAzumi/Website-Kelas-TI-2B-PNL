@@ -141,12 +141,13 @@ const members: Member[] = [
   },
   {
     name: "Muhammad Khairul Azmi",
-    interest: "Cloud Computing",
-    handle: "@khairul.xxv",
+    interest: "Front-end Developer",
+    handle: "@mhdkhairulazmi10",
+    github: "khairulazmi-hue",
     image:
-      "/images/personal/s.jpeg",
+      "/images/personal/azmi.JPG",
     accent: "accent-blue",
-    caption: "Halo semuanya! Saya Muhammad Khairul Azmi dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "Ga takut disuruh ngoding, cuma aga deg-degan aja kalau disuruh Live Coding ama Dosen",
   },
   {
     name: "Muhammad Reza Fahlevi",
@@ -255,12 +256,13 @@ const members: Member[] = [
   },
   {
     name: "Wahyu Haiqal",
-    interest: "AI Engineer",
-    handle: "@wahyu.xxv",
+    interest: "Backend Developer",
+    handle: "@angga_haiqal1",
+    github: "wahyuhaiqal",
     image:
-      "/images/personal/s.jpeg",
+      "/images/personal/wahyu.JPG",
     accent: "accent-blue",
-    caption: "Halo semuanya! Saya Wahyu Haiqal dari kelas Datalearners.XXV. Siap eksplorasi data & teknologi bareng! 🚀",
+    caption: "Still Somewhere ",
   },
   {
     name: "Zaskya Adindazahra",
